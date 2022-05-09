@@ -1,0 +1,39 @@
+@import "../../../styles/variables.module.scss";
+.item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $unit;
+  h3 {
+    margin-top: $unit;
+    margin-bottom: calc(2 * #{$unit});
+  }
+  .table {
+    .table-header,
+    .table-row {
+      .data-cell {
+        &:last-child {
+          text-align: right;
+          max-width: 100%;
+          p {
+            justify-content: start;
+          }
+        }
+      }
+    }
+  }
+  .table-programare {
+    .table-header,
+    .table-row {
+      .data-cell {
+        &:last-child {
+          text-align: right;
+          max-width: 100%;
+          p {
+            justify-content: end;
+          }
+        }
+      }
+    }
+  }
+}

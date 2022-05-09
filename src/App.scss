@@ -1,0 +1,232 @@
+@import "../src//styles/reset.scss";
+@import "../src/styles/typography.scss";
+@import "../src/styles/layouts.scss";
+@import "../src/styles/colors.scss";
+
+#root{
+  height: 100vh;
+  width: 100%;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  background-color: $backgroundLight;
+  position: relative;
+  overflow: hidden;
+}
+
+.container-fluid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  height: auto;
+  @media (min-width: 800px) {
+    width: 752px;
+    display: grid;
+    grid-template-columns: repeat(8, 80px);
+    gap: $unit;
+  }
+  @media (min-width: $xxl) {
+    width: 1180px;
+    grid-template-columns: repeat(12, 80px);
+    gap: calc(1.25 * #{$unit});
+  }
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.select-atom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: $unit;
+  font-family: "Montserrat", sans-serif;
+  p {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  label {
+    width: 100%;
+    color: $textDark;
+    padding: calc(0.5 * #{$unit}) 0px;
+    text-transform: capitalize;
+    p {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+  }
+  select {
+    width: 100%;
+    padding: calc(0.5 * #{$unit});
+    font-size: 0.875rem;
+    color: $textDark;
+    font-size: 0.875rem;
+    text-transform: capitalize;
+    border: 1px solid $border;
+    font-family: "Montserrat", sans-serif;
+    background-color: $primaryColorExtraLight;
+    &::placeholder {
+      font-size: 0.875rem;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 0 4px $primaryColor;
+    }
+  }
+  option {
+    width: 100%;
+    background-color: $primaryColorExtraLight;
+    padding: calc(0.5 * #{$unit});
+    font-size: 0.875rem;
+    color: $textDark;
+    text-transform: capitalize;
+  }
+  button {
+    background-color: $primaryColor;
+    color: $textLight;
+    width: 100%;
+    padding: calc(0.5 * #{$unit});
+    border-radius: 4px;
+    margin-top: 4px;
+    @media (min-width: 800px) {
+      background-color: transparent;
+      max-width: 60px;
+      margin-top: 0px;
+      color: $primaryColor;
+    }
+    &:hover {
+      opacity: 0.75;
+      cursor: pointer;
+    }
+  }
+}
+.table-select {
+  display: flex;
+  max-width: 480px;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: $unit;
+  font-family: "Montserrat", sans-serif;
+  label {
+    width: 100%;
+    color: $textDark;
+    padding: calc(0.5 * #{$unit}) 0px;
+    text-transform: capitalize;
+    p {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+  }
+  p.info-message {
+    color: $textDark;
+    margin-top: $unit;
+    font-weight: 500;
+  }
+  p.warning-message {
+    color: $warning;
+    margin-top: $unit;
+    font-weight: 500;
+  }
+  p.start-end-time {
+    margin-top: calc(1.5 * #{$unit});
+    color: $primaryColor;
+    font-weight: 500;
+  }
+  .select-atom {
+    margin-top: 8px;
+  }
+  p {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .react-datepicker-wrapper {
+    .react-datepicker__input-container {
+      input {
+        width: 100%;
+        border: 1px solid $border;
+        padding: calc(0.5 * #{$unit});
+        font-size: 0.875rem;
+        color: $textDark;
+        background-color: $primaryColorExtraLight;
+      }
+    }
+  }
+  .react-datepicker {
+    background-color: $backgroundLight !important;
+    color: $textDark;
+    border-color: $border;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    .react-datepicker__day-name,
+    .react-datepicker__day,
+    .react-datepicker__time-name {
+      color: $textDark;
+    }
+    .react-datepicker__month-container {
+      margin: auto;
+      .react-datepicker__header {
+        background-color: $backgroundLight;
+        border-color: $border;
+        .react-datepicker__current-month {
+          color: $textDark;
+          .react-datepicker__day-names {
+            .react-datepicker__day-name {
+              color: $textDark;
+            }
+          }
+        }
+      }
+      .react-datepicker__month {
+        .react-datepicker__week {
+          .active-calendar {
+            color: $textDark;
+          }
+          .active-programare {
+            color: $primaryColor;
+          }
+          .innactive {
+            color: $grayLight;
+            pointer-events: none;
+          }
+          .open-calendar {
+            color: $grayLight;
+          }
+          .react-datepicker__day--selected {
+            background-color: $primaryColor;
+            color: $textLight;
+          }
+        }
+      }
+    }
+    .react-datepicker__time-container {
+      .react-datepicker__time-list-item--selected {
+        background-color: $primaryColor;
+        color: $textLight;
+      }
+    }
+  }
+}

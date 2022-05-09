@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "route": "specializari"
+  },
+  {
+    "id": 2,
+    "route": "zone"
+  },
+  {
+    "id": 3,
+    "route": "servicii"
+  },
+  {
+    "id": 4,
+    "route": "terapeuti"
+  },
+  {
+    "id": 5,
+    "route": "comenzi"
+  },
+  {
+    "id": 6,
+    "route": "emails"
+  },
+  {
+    "id": 7,
+    "route": "admin"
+  },
+  {
+    "id": 8,
+    "route": "log out"
+  }
+]

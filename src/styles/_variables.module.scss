@@ -1,0 +1,26 @@
+@import "./colors.scss";
+@import "./layouts.scss";
+
+:export {
+  //colors
+  primaryColor: $primaryColor;
+  primaryColorLight: $primaryColorLight;
+  primaryColorExtraLight: $primaryColorExtraLight;
+  textLight: $textLight;
+  textDark: $textDark;
+  success: $succes;
+  pending: $pending;
+  warning: $warning;
+  grayLight: $grayLight;
+  backgroundLight: $backgroundLight;
+  border: $border;
+  //breakingpoints
+  xs: $xs;
+  sm: $sm;
+  md: $md;
+  lg: $lg;
+  xl: $xl;
+  xxl: $xxl;
+  //unit
+  unit: $unit;
+}

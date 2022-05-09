@@ -1,0 +1,29 @@
+$primaryColor: #42a5f5;
+$primaryColorLight: #f2f9ff;
+$primaryColorExtraLight: #fbfbfb;
+
+$textLight: #eeeeee;
+$textDark: #757575;
+
+$succes: #30c53f;
+$pending: #ff8d06;
+$warning: #ff5c5c;
+
+$grayLight: #d6d6d6;
+$backgroundLight: #fdfdfd;
+
+$border: #e2e2e2;
+
+:export {
+  primaryColor: $primaryColor;
+  primaryColorLight: $primaryColorLight;
+  primaryColorExtraLight: $primaryColorExtraLight;
+  textLight: $textLight;
+  textDark: $textDark;
+  success: $succes;
+  pending: $pending;
+  warning: $warning;
+  grayLight: $grayLight;
+  backgroundLight: $backgroundLight;
+  border: $border;
+}

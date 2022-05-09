@@ -1,0 +1,21 @@
+@import "../../../../styles/variables.module.scss";
+button.btn-admin-confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primaryColor;
+  color: $textLight;
+  padding: calc(0.5 * #{$unit}) $unit;
+  border: none;
+  border-radius: calc(0.25 * #{$unit});
+  p {
+    font-weight: 600;
+    font-size: calc(0.625 * #{$unit});
+    text-transform: uppercase;
+    color: $textLight;
+  }
+  &:hover {
+    opacity: 0.75;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,10 @@
+@import "../../../../styles/variables.module.scss";
+
+svg.logo {
+  height: calc(2 * #{$unit});
+  width: auto;
+  @media (min-width: 800px) {
+    height: calc(3.5 * #{$unit});
+    width: auto;
+  }
+}

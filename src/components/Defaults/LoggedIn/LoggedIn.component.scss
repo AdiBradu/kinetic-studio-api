@@ -1,0 +1,23 @@
+@import "../../../styles/variables.module.scss";
+.logged-in {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: calc(1.5 * #{$unit});
+  p {
+    font-size: calc(0.75 * #{$unit});
+    font-weight: 500;
+    margin-right: calc(0.25 * #{$unit});
+    color: $primaryColor;
+    &:last-of-type {
+      margin-right: calc(0.5 * #{$unit});
+    }
+    &:hover {
+      opacity: 0.75;
+      cursor: pointer;
+    }
+  }
+  @media (min-width: $xxl) {
+    margin-right: 0px;
+  }
+}

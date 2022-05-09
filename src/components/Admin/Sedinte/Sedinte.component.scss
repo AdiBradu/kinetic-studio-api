@@ -1,0 +1,18 @@
+.table-programare,
+.card-programare {
+  margin-top: 32px;
+  .table-header {
+    .data-cell {
+      &:last-child {
+        min-width: 160px;
+      }
+    }
+  }
+  .table-row {
+    .data-cell {
+      &:last-child {
+        min-width: 160px;
+      }
+    }
+  }
+}

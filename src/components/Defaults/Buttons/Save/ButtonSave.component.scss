@@ -1,0 +1,28 @@
+@import "../../../../styles/variables.module.scss";
+
+button.btn-admin-save {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(0.5 * #{$unit});
+  background-color: $primaryColor;
+  color: $textLight;
+  padding: calc(0.5 * #{$unit}) $unit;
+  border: none;
+  border-radius: calc(0.25 * #{$unit});
+  svg {
+    height: $unit;
+    width: auto;
+  }
+  p {
+    font-weight: 600;
+    font-size: calc(0.625 * #{$unit});
+    text-transform: uppercase;
+    color: $textLight;
+  }
+  &:hover {
+    opacity: 0.75;
+    cursor: pointer;
+  }
+}

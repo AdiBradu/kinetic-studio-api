@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "data": "2022/04/22",
+    "numar": 102342,
+    "nume": "john",
+    "prenume": "james",
+    "telefon": "0745898663",
+    "email": "nume@gmail.com",
+    "judet": "bucuresti",
+    "localitate": "bucuresti",
+    "strada": "calea vitan",
+    "nr": "34",
+    "serviciu": "relaxare long",
+    "sedinte": "1",
+    "specializare": "relaxare",
+    "achitat": true,
+    "programari": [
+      {
+        "sedinta": 1,
+        "terapeut": 3,
+        "timeSlotStart": 1651644000000,
+        "timeSlotEnd": 1651672800000
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "data": "2022/04/22",
+    "numar": 102343,
+    "nume": "john",
+    "prenume": "james",
+    "telefon": "0745898663",
+    "email": "nume@gmail.com",
+    "judet": "bucuresti",
+    "localitate": "bucuresti",
+    "strada": "calea vitan",
+    "nr": "34",
+    "serviciu": "terapeutic long 4s",
+    "sedinte": "4",
+    "specializare": "terapeutic",
+    "achitat": false,
+    "programari": [
+      {
+        "sedinta": 1,
+        "terapeut": 2,
+        "timeSlotStart": 1651644000000,
+        "timeSlotEnd": 1651672800000
+      },
+      {
+        "sedinta": 2,
+        "terapeut": 2,
+        "timeSlotStart": 1651654800000,
+        "timeSlotEnd": 1651658400000
+      },
+      {
+        "sedinta": 3,
+        "terapeut": 2,
+        "timeSlotStart": 1651644000000,
+        "timeSlotEnd": 1651672800000
+      },
+      {
+        "sedinta": 4,
+        "terapeut": 2,
+        "timeSlotStart": 1652256000000,
+        "timeSlotEnd": 1652265000000
+      }
+    ]
+  }
+]

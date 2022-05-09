@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "denumire": "bucuresti",
+    "tarif": 0
+  },
+  {
+    "id": 2,
+    "denumire": "ilfov",
+    "tarif": 30
+  }
+]

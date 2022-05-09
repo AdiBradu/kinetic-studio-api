@@ -1,0 +1,29 @@
+//Breakpoints
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+//Singularity
+$unit: 16px;
+
+.full-vh {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.full-layout-view {
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: calc(var(--sh, 1vh) * 100);
+}
+
+:export {
+  xs: $xs;
+  sm: $sm;
+  md: $md;
+  lg: $lg;
+  xl: $xl;
+  xxl: $xxl;
+  unit: $unit;
+}

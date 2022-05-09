@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "./layouts.scss";
+@import "./variables.module.scss";
+
+p,
+input,
+textarea {
+  font-family: "Montserrat", sans-serif;
+  line-height: 150%;
+  color: $textDark;
+}
+h1,
+h2,
+h3,
+.display1,
+.display2,
+.display3 {
+  font-family: "Montserrat", sans-serif;
+  line-height: 90%;
+  color: $textDark;
+}
+
+$fontSize: 1rem;
+
+p {
+  font-size: 1.125rem;
+}
+h1 {
+  font-size: 2.688rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.display1 {
+  font-size: 6.312rem;
+}
+.display2 {
+  font-size: 4.75rem;
+}
+.display3 {
+  font-size: 3.562rem;
+}
+.caption {
+  font-size: 0.875rem;
+  letter-spacing: calc(0.06 * #{$unit});
+  text-transform: uppercase;
+}
+.small {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+}
+.btn {
+  font-size: 1.125rem;
+  font-weight: bold;
+  letter-spacing: calc(0.03 * #{$unit});
+  text-transform: uppercase;
+}
+
+.navlink {
+  font-size: 0.75rem;
+  font-family: "Montserrat", sans-serif;
+  text-transform: capitalize;
+}
+
+@media (min-width: $xxl) {
+  p {
+    font-size: 1.25rem;
+  }
+  h1 {
+    font-size: 2.938rem;
+  }
+  h2 {
+    font-size: 2.25rem;
+  }
+  h3 {
+    font-size: 1.688rem;
+  }
+  .display1 {
+    font-size: 7rem;
+  }
+  .display2 {
+    font-size: 5.25rem;
+  }
+  .display3 {
+    font-size: 3.938rem;
+  }
+  .caption {
+    font-size: 0.938rem;
+  }
+  .small {
+    font-size: 0.688rem;
+    letter-spacing: 0.0688rem;
+  }
+  .btn {
+    font-size: 1.25rem;
+  }
+  .navlink {
+    font-size: 0.8125rem;
+  }
+}
