@@ -5,7 +5,7 @@ export default function ButtonSave() {
   return (
     <button className="btn-admin-save">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_308_11302)">
+        <g clipPath="url(#clip0_308_11302)">
           <path
             fillRule="evenodd"
             clipRule="evenodd"

@@ -11,29 +11,69 @@ import { AppContext } from "../../../AppContext";
 import { useLocation } from "react-router-dom";
 import "./DataPresentation.component.scss";
 import { processData } from "../../../utils";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_M_TYPES, GET_ALL_AREAS, GET_ALL_SERVICES, GET_ALL_PARTNERS, MY_DATA, GET_ALL_ORDERS, GET_ALL_EMAILS } from "../../../graphql/queries";
 
 export default function DataPresentation() {
-  const { isTablet } = useContext(AppContext);
-  const [data, setData] = useState(null);
-  const [dataP, setDataP] = useState(null);
+  const { isTablet } = useContext(AppContext);  
+  const [dataP, setDataP] = useState(null);  
   const location = useLocation();
   const navlink = location.state;
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/data/${navlink}.json`)
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, [navlink]);
+  let currentQuery;
+  let currentQueryAlias;
+  switch (navlink) {
+    case 'specializari':
+         currentQuery = GET_ALL_M_TYPES;
+         currentQueryAlias = 'getAllMTypes';
+      break;
+    
+    case 'zone':
+        currentQuery = GET_ALL_AREAS;
+        currentQueryAlias = 'getAllAreas';
+      break;
+    
+    case 'servicii':       
+        currentQuery = GET_ALL_SERVICES;
+        currentQueryAlias = 'getAllServices';
+      break; 
+    
+    case 'terapeuti':       
+        currentQuery = GET_ALL_PARTNERS;
+        currentQueryAlias = 'getAllPartners';
+      break; 
+    case 'comenzi':       
+        currentQuery = GET_ALL_ORDERS;
+        currentQueryAlias = 'getAllOrders';
+      break;    
+    case 'emails':       
+        currentQuery = GET_ALL_EMAILS;
+        currentQueryAlias = 'getAllEmails';
+      break;  
+    default:
+      currentQuery = MY_DATA;
+      currentQueryAlias = 'me';
+      break;
 
-  useEffect(() => {
-    const processedData = data && processData(data, navlink);
-    setDataP(processedData);
-  }, [data])
+  }
+  const currentQObj = useQuery(currentQuery);
+  const queryData = currentQObj?.data ? currentQObj.data[currentQueryAlias] : [];
   
+  useEffect(() => {   
+    if(queryData) {
+      const processedData  = processData(queryData, navlink);    
+      if(processedData.length){
+        setDataP(processedData);
+      } else {
+        setDataP(null);
+      }
+    }
+  }, [queryData, navlink])
+ 
   const { handleView, handleDelete, empty } = useDataPresentation(
     navlink
   );
-
+  
   return (
     <>
       {dataP && (

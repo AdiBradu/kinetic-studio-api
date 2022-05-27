@@ -88,8 +88,8 @@ export const checkIfPastDate = (sedinta) => {
 };
 
 export const processData = (data, navlink) => {
-  const dataP = []
-  if (data) {
+  const dataP = []   
+  if (data && data.length && navlink) {
     if (navlink === "terapeuti") {
       data.forEach((el) => {
         const objTerapeuti = {
@@ -114,11 +114,37 @@ export const processData = (data, navlink) => {
         };
         dataP.push(objComenzi);
       });
+    } else if (navlink === "zone") {
+      data.forEach((el) => {
+        const objZone = {
+          id: el.a_id,
+          denumire: el.a_name,
+          tarif: el.a_extra_charge,          
+        };
+        dataP.push(objZone);
+      });
+    } else if (navlink === "specializari") {
+      data.forEach((el) => {
+        const objZone = {
+          id: el.mt_id,
+          denumire: el.mt_name,          
+        };
+        dataP.push(objZone);
+      });
+    } else if (navlink === "servicii") {
+      data.forEach((el) => {
+        const objZone = {
+          id: el.s_id,
+          denumire: el.service_name,
+          specializare: el.m_type_id,          
+        };
+        dataP.push(objZone);
+      });
     } else {
       data.forEach((el) => {
         dataP.push(el);
       });
     }
-  }
+  }  
   return dataP
 }

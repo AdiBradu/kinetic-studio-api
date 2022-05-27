@@ -5,6 +5,7 @@ import Navbar from "./components/Defaults/Navbar/Navbar.component.jsx";
 import Dashboard from "./components/Admin/Pages/Dashboard/Dashboard.component.jsx";
 
 function App() {
+
   return (
     <div className="App container-fluid">
       <Navbar />

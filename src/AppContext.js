@@ -1,5 +1,7 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useQuery } from "@apollo/client";
+import { MY_DATA } from "./graphql/queries";
 
 export const AppContext = createContext();
 
@@ -10,14 +12,20 @@ export const AppProvider = (props) => {
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isLandscape = useMediaQuery({ query: "(orientation: landscape)" });
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isToggled, setIsToggled] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(null);
   const [item, setItem] = useState();
   const [createItem, setCreateItem] = useState({});
   const [deleteItem, setDeleteItem] = useState();
-  const [comanda, setComanda] = useState();
-
+  const [comanda, setComanda] = useState();    
+  const [isLoggedIn, setIsLoggedIn] = useState();
+  const { loading, error, data } = useQuery(MY_DATA);
+  useEffect(() => {
+    if (data?.me?.u_id) {
+      setIsLoggedIn(true);
+    }  
+  }, [data]);
+ 
   return (
     <AppContext.Provider
       value={{
