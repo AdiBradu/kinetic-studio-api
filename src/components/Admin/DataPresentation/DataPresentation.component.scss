@@ -1,47 +1,52 @@
 @import "../../../styles/variables.module.scss";
 
-.card {
-  border: 1px solid $border;
-  border-radius: calc(0.25 * #{$unit});
-  display: flex;
-  flex-direction: column;
+.card-list{
   width: 100%;
-  margin-bottom: $unit;
-  max-width: 480px;
-  .card-row {
-    width: 100%;
+  .card {
+    border: 1px solid $border;
+    border-radius: calc(0.25 * #{$unit});
     display: flex;
-    &:last-child {
-      .data-cell {
-        &:last-child {
-          p {
-            width: 100%;
-            a {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: $unit;
+    @media (min-width: $md) {
+      max-width: 50%;
+    }
+    .card-row {
+      width: 100%;
+      display: flex;
+      &:last-child {
+        .data-cell {
+          &:last-child {
+            p {
               width: 100%;
+              a {
+                width: 100%;
+              }
             }
           }
         }
       }
-    }
-    .data-cell {
-      a {
-        width: 100%;
-      }
-      &:first-child {
-        max-width: 100%;
-        background-color: $primaryColorLight;
-        p {
-          font-weight: 600;
+      .data-cell {
+        a {
+          width: 100%;
         }
-      }
-      &:last-child {
-        max-width: 100%;
-        justify-content: start;
+        &:first-child {
+          max-width: 100%;
+          background-color: $primaryColorLight;
+          p {
+            font-weight: 600;
+          }
+        }
+        &:last-child {
+          max-width: 100%;
+          justify-content: start;
+        }
       }
     }
   }
+  
 }
-
 .table {
   width: 100%;
   display: flex;

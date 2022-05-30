@@ -24,9 +24,9 @@ export default function Dashboard() {
   const matchItem = useMatch("/dashboard/:id/:id");
  
   return (
-    <div className="dashboard container-fluid">
+    <div className="dashboard" id="dashboard">
       {isLoggedIn ? (
-        <div className={isDesktop ? "dashboard-wrapper" : "container h100"}>
+        <div className="dashboard-wrapper">
           {isDesktop && <Sidebar />}
           <div className="dashboard-group">
             {state && <DashboardHeader state={state} item={item} />}
