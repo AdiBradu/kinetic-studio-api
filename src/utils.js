@@ -1,3 +1,34 @@
+export const getElementHeight = (input) => {
+  const element =  document.getElementById(input);
+  const offsetHeight = element.offsetHeight;
+  return offsetHeight
+}
+
+export const setElementHeight = (input, name, height) => {
+  const element =  document.getElementById(input);
+  element.style.setProperty(name, `${height}px`)
+}
+
+export const setDashboardHeight = () => {
+  const navbar = document.getElementById('navbar');
+  const navbarHeight = navbar.offsetHeight;
+  const dashboard = document.getElementById('dashboard');
+  dashboard.style.setProperty('--dashboard-height', `${window.innerHeight - navbarHeight}px`) 
+}
+
+export const documentHeight = () => {
+  const doc = document.documentElement;
+  doc.style.setProperty('--doc-height', `${window.innerHeight}px`);
+};
+
+export const resizeRadar = (input) => {
+  window.addEventListener('resize', input);
+};
+
+export const wathcResize = () => {
+  window.addEventListener('resize', documentHeight);
+};
+
 export const timestampToDate = (timestamp) => {
   const date = new Date(timestamp);
   return date.getDate();

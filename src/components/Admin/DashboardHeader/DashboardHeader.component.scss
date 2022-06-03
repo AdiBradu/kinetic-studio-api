@@ -1,20 +1,8 @@
 @import "../../../styles/variables.module.scss";
-
 .dashboard-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $unit 0px;
-  grid-column: 1 / 5;
   position: sticky;
   top: 0;
-  @media (min-width: 800px) {
-    grid-column: 1 / 9;
-    padding: calc(2 * #{$unit}) 0px;
-  }
-  @media (min-width: $xxl) {
-    width: 100%;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
 }

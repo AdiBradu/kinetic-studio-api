@@ -64,8 +64,8 @@ export default function DashboardHeader({ state, item }) {
   };
 
   return (
-    <div className={isDesktop ? "container-fluid" : "container"}>
-      <div className="dashboard-header">
+
+      <div className="dashboard-header padding">
         <h3>{state}</h3>
         {matchAdd ? (
           <Link 
@@ -92,6 +92,6 @@ export default function DashboardHeader({ state, item }) {
           )
         )}
       </div>
-    </div>
+
   );
 }

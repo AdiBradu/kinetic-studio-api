@@ -8,13 +8,19 @@ import LoggedIn from "../LoggedIn/LoggedIn.component";
 import { AppContext } from "../../../AppContext";
 
 export default function Navbar() {
-  const { isDesktop, isMenuOpenObj, isLoggedInObj } = useContext(AppContext);
+  const { isDesktop, isTablet, isMenuOpenObj, isLoggedInObj } = useContext(AppContext);
   const isMenuOpen = isMenuOpenObj[0];
   const [isLoggedIn, setIsLoggedIn] = isLoggedInObj;
   console.log('isLoggedIn', isLoggedIn);
   return (
-    <div className={isDesktop ? `container-fluid` : `container`}>
-      <div className="navbar">
+    <div className="navbar" id="navbar">
+      <div
+        className={
+          isTablet
+            ? 'container-fluid flex mx-auto space-between padding align-center'
+            : 'container flex mx-auto space-between padding align-center'
+        }
+      >
         <LogoKineticStudio color={variables.textDark} />
         {isLoggedIn && (
           <LoggedIn

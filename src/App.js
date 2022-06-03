@@ -1,14 +1,26 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Defaults/Navbar/Navbar.component.jsx";
 import Dashboard from "./components/Admin/Pages/Dashboard/Dashboard.component.jsx";
+<<<<<<< HEAD
 import Logout from "./components/Admin/Pages/Logout/Logout.component";
+=======
+import { documentHeight, setDashboardHeight, resizeRadar } from './utils.js';
+
+documentHeight();
+resizeRadar(documentHeight);
+>>>>>>> refs/remotes/origin/master
 
 function App() {
 
+  useEffect(() => {
+    setDashboardHeight();
+    resizeRadar(setDashboardHeight);
+  }, [])
+
   return (
-    <div className="App container-fluid">
+    <div className="App">
       <Navbar />
 
       <Routes>

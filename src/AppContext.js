@@ -7,7 +7,7 @@ export const AppContext = createContext();
 
 export const AppProvider = (props) => {
   const isMobile = useMediaQuery({ query: `(min-width: 0px)` });
-  const isTablet = useMediaQuery({ query: `(min-width: 800px)` });
+  const isTablet = useMediaQuery({ query: `(min-width: 768px)` });
   const isDesktop = useMediaQuery({ query: `(min-width: 1440px)` });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isLandscape = useMediaQuery({ query: "(orientation: landscape)" });
