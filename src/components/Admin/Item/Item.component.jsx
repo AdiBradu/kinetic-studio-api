@@ -53,7 +53,7 @@ export default function Item({ item }) {
     console.log(
       `Seteaza program terapeut cu datele: terapeut: ${item.id}, timeSlotStar: ${timeSlotStart}, timeSlotEnd: ${timeSlotEnd}`
     );        
-    let newPSchd = await createPSchd({variables: {id: parseFloat(item.id), startTime: parseFloat(timeSlotStart), endTime: parseFloat(timeSlotEnd)}, refetchQueries: [ { query: GET_PARTNER_CURRENT_SCHEDULE }]});      
+    let newPSchd = await createPSchd({variables: {id: parseFloat(item.id), startTime: parseFloat(timeSlotStart), endTime: parseFloat(timeSlotEnd)}, refetchQueries: [ { query: GET_PARTNER_CURRENT_SCHEDULE, variables: {id: parseFloat(item.id)} }]});      
     
     if(newPSchd.errors) {
       setTimeSlotError(true);

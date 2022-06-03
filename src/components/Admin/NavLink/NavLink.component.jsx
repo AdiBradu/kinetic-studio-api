@@ -24,6 +24,7 @@ export default function NavLink({ navlink }) {
   const [logoutUsr, logoutUsrObj] = useMutation(LOGOUT);
   const handleLogOut = () => {
     if ((navlink === "log out") && isLoggedIn) {
+      sessionStorage.removeItem('item');
       setIsLoggedIn(false);
       logoutUsr();
       client.clearStore();

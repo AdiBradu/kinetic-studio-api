@@ -12,13 +12,13 @@ const useFilterHours = (
   for (let i = 0; i < 48; i++) {
     options.push(i * 30);
   }
-
+  console.log(durataSedinta)
   useEffect(() => {
     const hoursAndMinutes = [];
     const startIntervalCalendar =
       (calendarTimeslotsForDate.start - startDate) / 60000;
     const endIntervalCalendar =
-      (calendarTimeslotsForDate.end - startDate) / 60000;
+      (calendarTimeslotsForDate.end - startDate) / 60000 - durataSedinta / 60000;
     const startIntervalProgramari =
       (programariTimeslotsForDate.start - startDate) / 60000;
     const endIntervalProgramari =

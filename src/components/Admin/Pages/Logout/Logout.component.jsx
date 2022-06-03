@@ -12,6 +12,7 @@ export default function Logout() {
   const [logoutUsr, logoutUsrObj] = useMutation(LOGOUT);
   
   if(isLoggedIn) {
+    sessionStorage.removeItem('item');
     setIsLoggedIn(false);
     logoutUsr();
     client.clearStore();

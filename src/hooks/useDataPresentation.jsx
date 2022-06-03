@@ -7,7 +7,7 @@ const useTableViewAndDelete = (navlink) => {
 
   const { itemObj } = useContext(AppContext);
   const [empty, setEmpty] = useState(false);
-  const [item, setItem] = itemObj;
+  const [item, itemReset] = itemObj;
 
   const [deleteArea, deleteAreaObj] = useMutation(DELETE_AREA);
   const [deleteMType, deleteMTypeObj] = useMutation(DELETE_M_TYPE);
@@ -16,7 +16,7 @@ const useTableViewAndDelete = (navlink) => {
   const [deleteOrder, deleteOrderObj] = useMutation(DELETE_ORDER);
 
   const handleView = (e) => {
-    setItem(e);
+    itemReset(e);
   };
 
   const handleDelete = async (e) => {

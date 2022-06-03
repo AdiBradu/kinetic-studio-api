@@ -19,6 +19,8 @@ export default function Dashboard() {
   const item = itemObj[0];
   const location = useLocation();
   const state = location.state;
+  console.log(state)
+  console.log('item',item)
 
   const isLoggedIn = isLoggedInObj[0];
   const matchList = useMatch("/dashboard/:id");

@@ -11,7 +11,7 @@ export default function Navbar() {
   const { isDesktop, isTablet, isMenuOpenObj, isLoggedInObj } = useContext(AppContext);
   const isMenuOpen = isMenuOpenObj[0];
   const [isLoggedIn, setIsLoggedIn] = isLoggedInObj;
-  console.log('isLoggedIn', isLoggedIn);
+
   return (
     <div className="navbar" id="navbar">
       <div
