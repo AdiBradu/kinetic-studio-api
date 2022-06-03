@@ -4,17 +4,42 @@ import App from "./App.js";
 import { AppProvider } from "./AppContext";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, from  } from "@apollo/client";
+import { offsetLimitPagination } from "@apollo/client/utilities";
+import { onError } from "@apollo/client/link/error";
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        getAllOrders: offsetLimitPagination()
+      },
+    },
+  },
+});
 const link = createHttpLink({
   uri: process.env.NODE_ENV !== 'production' ? 'http://localhost:4040/graphql' : 'http://localhost:4040/graphql',
   credentials: 'include'
 });
 
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path }) => {
+      if(message === 'Access denied!') {        
+        window.location = '/logout';
+      }
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      );
+    });
+  }  
+
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
 
 const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
+  link: from([errorLink, link]),
+  cache: cache,
 });
 
 ReactDOM.render(

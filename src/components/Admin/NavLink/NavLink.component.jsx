@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useApolloClient, useMutation } from '@apollo/client';
 import "./NavLink.component.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../../AppContext";
 import { useLocation } from "react-router";
+import { LOGOUT } from '../../../graphql/mutations';
 
 export default function NavLink({ navlink }) {
   const location = useLocation();
@@ -11,15 +13,21 @@ export default function NavLink({ navlink }) {
   const [isMenuOpen, setIsMenuOpen] = isMenuOpenObj;
   const [isLoggedIn, setIsLoggedIn] = isLoggedInObj;
   const [active, setActive] = useState(false);
+  let navigate = useNavigate();
+  const client = useApolloClient();
 
   const handleNavLinkClick = () => {
     !isDesktop && setIsMenuOpen(!isMenuOpen);
     handleLogOut();
   };
 
+  const [logoutUsr, logoutUsrObj] = useMutation(LOGOUT);
   const handleLogOut = () => {
-    if ((navlink === "log out") & isLoggedIn) {
+    if ((navlink === "log out") && isLoggedIn) {
       setIsLoggedIn(false);
+      logoutUsr();
+      client.clearStore();
+      navigate('/dashboard');
     }
   };
 

@@ -1,14 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import Input from "../../../Defaults/Input/Input.component.jsx";
-import Textarea from "../../../Defaults/Textarea/Textarea.component.jsx";
 import SelectImage from "../../../Defaults/SelectImage/SelectImage.component.jsx";
 import { AppContext } from "../../../../AppContext.js";
-import MultiServiciu from "../../../Defaults/Select/MultiServiciu/MultiServiciu.component.jsx";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_M_TYPES } from "../../../../graphql/queries.js";
-import { processMultiMTypes } from "../../../../utils.js";
 
-export default function InputsTerapeuti() {
+export default function InputsAdmin() {
   const { createItemObj } = useContext(AppContext);
   const setCreateItem = createItemObj[1];
   const [state, setState] = useState({
@@ -16,25 +11,9 @@ export default function InputsTerapeuti() {
     prenume: "",
     telefon: "",
     email: "",
-    profile_picture_url: "",
-    descriere: "",
-    specializari: "",
+    parola: "",
+    confirma: "",
   });
-
-  const [mTypes, setMYpes] = useState([]);
-  const mTypesQObj = useQuery(GET_ALL_M_TYPES);
-  const queryData = mTypesQObj?.data ? mTypesQObj.data['getAllMTypes'] : [];
-  
-  useEffect(() => {   
-    if(queryData) {
-      const processedData  = processMultiMTypes(queryData);    
-      if(processedData.length){
-        setMYpes(processedData);
-      } else {
-        setMYpes([]);
-      }
-    }
-  }, [queryData]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -44,29 +23,13 @@ export default function InputsTerapeuti() {
     });
   };
 
-  const handleSpecializari = value => {
-    setState({
-      ...state,
-      specializari: value
-    });
-  }
-  const photoUpload = (value) => {
-    setState({
-      ...state,
-      profile_picture_url: value,
-    });
-  }
   useEffect(() => {
     setCreateItem(state);
   }, [state]);
 
   return (
     <div>
-      <SelectImage 
-        id={"tat"}
-        handleChange={photoUpload} 
-        src={null}
-       />
+      <SelectImage id={"tat"} />
       <Input
         value={state.nume}
         handleChange={handleChange}
@@ -99,17 +62,21 @@ export default function InputsTerapeuti() {
         type={"email"}
         placeholder={"email"}
       />
-      <MultiServiciu 
-        label={"specializari"}
-        handleChange={handleSpecializari}
-        options={mTypes}
-      />
-      <Textarea
-        value={state.descriere}
+      <Input
+        value={state.parola}
         handleChange={handleChange}
-        name="descriere"
-        label={"descriere"}
-        placeholder={"descriere terapeut"}
+        name="parola"
+        label={"parola"}
+        type={"password"}
+        placeholder={"parola"}
+      />
+      <Input
+        value={state.confirma}
+        handleChange={handleChange}
+        name="confirma"
+        label={"confirma"}
+        type={"password"}
+        placeholder={"confirma parola"}
       />
     </div>
   );

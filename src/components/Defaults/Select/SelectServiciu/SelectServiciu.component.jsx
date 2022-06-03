@@ -18,7 +18,7 @@ export default function SelectServiciu({
           {<option disabled hidden></option>}
           {options &&
             options.map((option, index) => (
-              <option key={index} value={option.denumire}>
+              <option key={index} value={option.id}>
                 {option.denumire}
               </option>
             ))}

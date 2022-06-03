@@ -11,19 +11,19 @@ export default function Navbar() {
   const { isDesktop, isMenuOpenObj, isLoggedInObj } = useContext(AppContext);
   const isMenuOpen = isMenuOpenObj[0];
   const [isLoggedIn, setIsLoggedIn] = isLoggedInObj;
-
+  console.log('isLoggedIn', isLoggedIn);
   return (
     <div className={isDesktop ? `container-fluid` : `container`}>
       <div className="navbar">
         <LogoKineticStudio color={variables.textDark} />
         {isLoggedIn && (
           <LoggedIn
-            nume={"David"}
-            prenume={"Mihai"}
-            thumbnail={"/thumbnails/thmb01.jpg"}
+            nume={isLoggedIn.last_name}
+            prenume={isLoggedIn.first_name}
+            thumbnail={isLoggedIn?.profile_picture_url}
           />
         )}
-        {!isDesktop & isLoggedIn ? (
+        {!isDesktop & isLoggedIn !== false ? (
           <HamburgerMenu color={variables.textDark} />
         ) : (
           ""

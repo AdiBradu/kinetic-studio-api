@@ -3,6 +3,7 @@ import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Defaults/Navbar/Navbar.component.jsx";
 import Dashboard from "./components/Admin/Pages/Dashboard/Dashboard.component.jsx";
+import Logout from "./components/Admin/Pages/Logout/Logout.component";
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Dashboard />} />
-
+        <Route path="/logout" element={<Logout />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/dashboard/specializari" element={<Dashboard />} />

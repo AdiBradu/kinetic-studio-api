@@ -17,7 +17,7 @@ const useCreateProgramari = (startDate, terapeutId, timeSlotStart, sedinte) => {
           (parseInt(timeSlotStart, 10) + 60) * 60000,
       };
       programari.push(programareInitiala);
-      for (let i = 1; i < sedinte; i++) {
+      /* for (let i = 1; i < sedinte; i++) {
         const programare = {
           sedinta: i + 1,
           terapeut: "TBD",
@@ -25,7 +25,7 @@ const useCreateProgramari = (startDate, terapeutId, timeSlotStart, sedinte) => {
           timeSlotEnd: "TBD",
         };
         programari.push(programare);
-      }
+      } */
       setProgramari(programari);
     }
   }, [startDate, timeSlotStart]);

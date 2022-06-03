@@ -1,13 +1,14 @@
 import React from "react";
-import "./Input.component.scss";
+import "./InputEmails.component.scss";
 
-export default function Input({
+export default function InputEmails({
   label,
-  value,
+  value,  
   type,
+  name,
   placeholder,
   handleChange,
-}) {  
+}) { 
   return (
     <div className="input-atom">
       <label>
@@ -15,7 +16,7 @@ export default function Input({
       </label>
       <input
         value={value}
-        name={label}
+        name={name}
         type={type}
         placeholder={placeholder}
         onChange={handleChange}

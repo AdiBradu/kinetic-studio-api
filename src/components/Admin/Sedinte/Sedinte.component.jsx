@@ -7,11 +7,13 @@ import ButtonEdit from "../../Defaults/Buttons/Edit/ButtonEdit.component";
 import { Link } from "react-router-dom";
 import { checkIfPastDate } from "../../../utils";
 import useSetServiciuContext from "../../../hooks/useSetServiciuContext";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_ORDER_DETAILS } from "../../../graphql/queries";
+import { processOdets } from "../../../utils";
 
 export default function Sedinte({ navlink, item }) {
   const { isTablet, comandaObj } = useContext(AppContext);
-  const [comanda, setComanda] = comandaObj;
-  const [comenzi, setComenzi] = useState();
+  const [comanda, setComanda] = comandaObj;  
   const [comandaId, setComandaId] = useState();
   const [programari, setProgramari] = useState();
 
@@ -22,32 +24,25 @@ export default function Sedinte({ navlink, item }) {
       ...comanda,
       sedinta: e + 1,
       specializare: specializare,
+      terapeut: programari[0].terapeut,
     });
   };
+ 
+  const oDetsQObj = useQuery(GET_ALL_ORDER_DETAILS, {variables: {id: item.id}});
+  const queryData = oDetsQObj?.data ? oDetsQObj.data['getAllOrderDetails'] : [];
 
-  useEffect(() => {
-    if (comanda) {
-      setComandaId(comanda.id);
-      setProgramari(comanda.programari);
+  useEffect(() => {   
+    if(queryData) {
+      const processedODets  = processOdets(queryData);        
+      if(processedODets.length){
+        setComanda(item);
+        setComandaId(item.id);
+        setProgramari(processedODets);
+      } 
     }
-  }, [comanda]);
-
-  useEffect(() => {
-    navlink === "comenzi" &&
-      fetch(`http://localhost:3000/data/comenzi.json`)
-        .then((response) => response.json())
-        .then((data) => setComenzi(data));
-  }, []);
-
-  useEffect(() => {
-    comenzi &&
-      comenzi.forEach((el) => {
-        if (el.numar === item.numar) {
-          setComanda(el);
-        }
-      });
-  }, [comenzi]);
-
+    
+  }, [queryData]);
+  
   return (
     <>
       {comandaId && (
@@ -65,13 +60,15 @@ export default function Sedinte({ navlink, item }) {
               {programari.map((el, index) => (
                 <div className="table-row" key={index}>
                   <DataCell>{el.sedinta}</DataCell>
-                  <DataCell>{el.terapeut}</DataCell>
+                  <DataCell>{el.numeTerapeut}</DataCell>
                   <DataCell>
-                    {new Date(el.timeSlotStart).toLocaleDateString()}
+                    {el.timeSlotStart > 0 && new Date(el.timeSlotStart).toLocaleDateString()}
                   </DataCell>
                   <DataCell>
-                    {new Date(el.timeSlotStart).getHours()} :{" "}
-                    {new Date(el.timeSlotStart).getMinutes()}
+                    {el.timeSlotStart > 0 && 
+                        (new Date(el.timeSlotStart).getHours() + `: ` + new Date(el.timeSlotStart).getMinutes())
+                    }
+                    
                   </DataCell>
                   <DataCellActions>
                     {checkIfPastDate(el) && (
@@ -101,13 +98,14 @@ export default function Sedinte({ navlink, item }) {
                   </div>
                   <div className="card-row">
                     <DataCell>{"data"}</DataCell>
-                    <DataCell>{new Date(el.timeSlotStart).getMonth()}</DataCell>
+                    <DataCell>{el.timeSlotStart > 0 && new Date(el.timeSlotStart).getMonth()}</DataCell>
                   </div>
                   <div className="card-row">
                     <DataCell>{"ora"}</DataCell>
                     <DataCell>
-                      {new Date(el.timeSlotStart).getHours()} :{" "}
-                      {new Date(el.timeSlotStart).getMinutes()}
+                      {el.timeSlotStart > 0 && 
+                          (new Date(el.timeSlotStart).getHours() + `: ` + new Date(el.timeSlotStart).getMinutes())
+                      }
                     </DataCell>
                   </div>
                   <div className="card-row">

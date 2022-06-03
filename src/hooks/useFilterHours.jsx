@@ -22,7 +22,7 @@ const useFilterHours = (
     const startIntervalProgramari =
       (programariTimeslotsForDate.start - startDate) / 60000;
     const endIntervalProgramari =
-      (programariTimeslotsForDate.end - startDate) / 60000;
+      (programariTimeslotsForDate.end - startDate) / 60000;    
     if (durataSedinta) {
       options.forEach((option) => {
         if (
@@ -32,7 +32,7 @@ const useFilterHours = (
           if (startIntervalProgramari) {
             if (
               option <= startIntervalProgramari - durataSedinta / 60000 ||
-              option >= endIntervalProgramari
+              option >= endIntervalProgramari + 60
             ) {
               hoursAndMinutes.push(option);
             }

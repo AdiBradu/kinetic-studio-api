@@ -1,4 +1,8 @@
+import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
+import { GET_ALL_SERVICES } from "../graphql/queries";
+import { processServices } from "../utils";
+import useGetTerapeutCalendarAndProgramari from "./useGetTerapeutCalendarAndProgramari";
 
 const useSetServiciuContext = (serviciu) => {
 
@@ -7,26 +11,37 @@ const useSetServiciuContext = (serviciu) => {
   const [sedinte, setSedinte] = useState(0);
   const [durataSedinta, setDurataSedinta] = useState();
   const [terapeutId, setTerapeutId] = useState({ id: "" });
-  useEffect(() => {
-    fetch(`http://localhost:3000/data/servicii.json`)
-      .then((response) => response.json())
-      .then((data) => setServicii(data));
-  }, []);
+  
+  const servicesQObj = useQuery(GET_ALL_SERVICES);
+  const queryData = servicesQObj?.data ? servicesQObj.data['getAllServices'] : [];
+  
+  useEffect(() => {   
+    if(queryData) {
+      const processedServices  = processServices(queryData);    
+      if(processedServices.length){
+        setServicii(processedServices);
+      } 
+    }
+  }, [queryData])
 
-  useEffect(() => {
+  useEffect(() => {    
     if (servicii) {
       servicii.forEach((el) => {
-        if (serviciu === el.denumire) {
+        if (parseInt(serviciu) === el.id) {
           setSedinte(el.sedinte);
           setSpecializare(el.specializare);
           //Set terapeutId to nothing to repeat the process of selecting terapeut.
           //This leads to refreshing the checkIfProgramari and checkIfCalendar in Datepicker.
           setTerapeutId({ id: "" });
-          setDurataSedinta((el.durata + 60) * 60000); //milliseconds
+          setDurataSedinta(el.durata * 60000); //milliseconds
+          
         }
       });
     }
   }, [serviciu, servicii]);
+
+  const { terapeutCalendar, terapeutProgramari } =
+    useGetTerapeutCalendarAndProgramari(terapeutId);
 
   return {
     specializare,
@@ -35,6 +50,8 @@ const useSetServiciuContext = (serviciu) => {
     durataSedinta,
     terapeutId,
     setTerapeutId,
+    terapeutCalendar,
+    terapeutProgramari
   };
 };
 

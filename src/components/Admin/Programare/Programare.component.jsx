@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Programare.component.scss";
 import SelectTerapeut from "../../Defaults/Select/SelectTerapeut/SelectTerapeut.component.jsx";
 import SelectTimeSlot from "../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component.jsx";
@@ -16,17 +16,15 @@ import { Link } from "react-router-dom";
 
 export default function Programare() {
   const { comandaObj } = useContext(AppContext);
-  const comanda = comandaObj[0];
-  const [terapeutId, setTerapeutId] = useState({ id: "" });
+  const comanda = comandaObj[0]; 
   const [timeSlotStart, setTimeSlotStart] = useState();
-
   //Datepicker
   const [startDate, setStartDate] = useState();
-
-  const { durataSedinta } = useSetServiciuContext(comanda.serviciu);
+  const { durataSedinta, terapeutCalendar, terapeutProgramari, terapeutId, setTerapeutId } = useSetServiciuContext(comanda.idServiciu);
+  useEffect(() => {  setTerapeutId({ terapeut: comanda.terapeut }); },[]);
+ 
   const { filteredTerapeuti } = useFilterTerapeuti(comanda.specializare);
-  const { terapeutCalendar, terapeutProgramari } =
-    useGetTerapeutCalendarAndProgramari(terapeutId);
+  
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
     useGetTimeslotsForDateAndTerapeut(
       startDate,
@@ -57,7 +55,7 @@ export default function Programare() {
     console.log(
       "Programeaza cu datele: ",
       "comanda",
-      comanda.numar,
+      comanda.id,
       "sedinta",
       comanda.sedinta,
       "terapeut:",
@@ -67,11 +65,11 @@ export default function Programare() {
     );
   };
   //END
-
+  
   return (
     <div className="programare">
       <SelectTerapeut
-        value={terapeutId.terapeut}
+        value={terapeutId.id}
         handleChange={handleChange}
         name="terapeut"
         label={"terapeut"}

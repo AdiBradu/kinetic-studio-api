@@ -5,6 +5,7 @@ import InputsZone from "./Zone/InputsZone";
 import InputsServicii from "./Servicii/InputsServicii";
 import InputsTerapeuti from "./Terapeuti/InputsTerapeuti.component";
 import InputsComenzi from "./Comenzi/InputsComenzi.component";
+import InputsAdmin from "./Admin/InputsAdmin.component";
 
 export default function Inputs({ state }) {
   return (
@@ -19,6 +20,8 @@ export default function Inputs({ state }) {
         <InputsTerapeuti state={state} />
       ) : state === "comenzi" ? (
         <InputsComenzi navlink={state} />
+      ) : state === "admin" ? (
+        <InputsAdmin navlink={state} />
       ) : (
         ""
       )}

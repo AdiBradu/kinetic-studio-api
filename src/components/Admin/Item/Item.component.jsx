@@ -5,6 +5,7 @@ import Sedinte from "../Sedinte/Sedinte.component";
 import DataCell from "../DataCell/DataCell.component";
 import { useLocation } from "react-router";
 import DatePicker from "react-datepicker";
+import addMonths from 'addmonths';
 import {
   checkIfProgramari,
   checkIfCalendar,
@@ -17,35 +18,53 @@ import useFilterHours from "../../../hooks/useFilterHours";
 import SelectTimeSlot from "../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component.jsx";
 import ButtonCustom from "../../Defaults/Buttons/CustomButton/ButtonCustom.component.jsx";
 import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { CREATE_PARTNER_SCHEDULE } from "../../../graphql/mutations";
+import { GET_PARTNER_CURRENT_SCHEDULE } from "../../../graphql/queries";
+import User from "../User/User.component";
 
-export default function Item({ item }) {
-  console.log(item)
+export default function Item({ item }) {  
+ 
   const { isTablet } = useContext(AppContext);
   const location = useLocation();
   const navlink = location.state;
-
+ 
   //Datepicker
-  const [startDate, setStartDate] = useState();
+  const [startDate, setStartDate] = useState(new Date());
 
   const [timeSlotStart, setTimeSlotStart] = useState();
   const [timeSlotEnd, setTimeSlotEnd] = useState();
 
-  const handleChangeTimeSlotStart = (e) => {
+  const [timeSlotSuccess, setTimeSlotSuccess] = useState(false);
+  const [timeSlotError, setTimeSlotError] = useState(false);
+
+  const [createPSchd, createPSchdObj] = useMutation(CREATE_PARTNER_SCHEDULE);
+
+  const handleChangeTimeSlotStart = (e) => {    
     const value = minutesToTimestamp(e.target.value, startDate);
+    
     setTimeSlotStart(value);
   };
   const handleChangeTimeSlotEnd = (e) => {
     const value = minutesToTimestamp(e.target.value, startDate);
     setTimeSlotEnd(value);
   };
-  const handleAdaugaProgram = () => {
+  const handleAdaugaProgram = async () => {
     console.log(
       `Seteaza program terapeut cu datele: terapeut: ${item.id}, timeSlotStar: ${timeSlotStart}, timeSlotEnd: ${timeSlotEnd}`
-    );
+    );        
+    let newPSchd = await createPSchd({variables: {id: parseFloat(item.id), startTime: parseFloat(timeSlotStart), endTime: parseFloat(timeSlotEnd)}, refetchQueries: [ { query: GET_PARTNER_CURRENT_SCHEDULE }]});      
+    
+    if(newPSchd.errors) {
+      setTimeSlotError(true);
+    } else {
+      setTimeSlotEnd();
+      setTimeSlotSuccess(true);
+    }  
   };
 
   const { terapeutCalendar, terapeutProgramari } =
-    useGetTerapeutCalendarAndProgramari({ terapeut: item.id });
+    useGetTerapeutCalendarAndProgramari({ terapeut: item.id });   
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
     useGetTimeslotsForDateAndTerapeut(
       startDate,
@@ -88,6 +107,7 @@ export default function Item({ item }) {
             ))}
           </div>
           {navlink === "comenzi" && <Sedinte navlink={navlink} item={item} />}
+          
         </>
       )}
       {navlink === "terapeuti" && (
@@ -104,6 +124,8 @@ export default function Item({ item }) {
                 : "open-calendar"
             }
             minDate={new Date()}
+            maxDate={addMonths(new Date(), 3)}
+            showDisabledMonthNavigation
             inline
           />
           {!programariTimeslotsForDate.start ? (
@@ -115,12 +137,18 @@ export default function Item({ item }) {
                   calendarTimeslotsForDate.end
                 )}`}</p>
               )}
+              {timeSlotSuccess && (
+                <p className="info-message">{`Adaugat cu succes`}</p>
+              )}
+              {timeSlotError && (
+                <p className="warning-message">{`Eroare adaugare program`}</p>
+              )}
               <p className="start-end-time">Start time</p>
               <SelectTimeSlot
                 handleChange={handleChangeTimeSlotStart}
                 label={"timeSlotStart"}
                 placeholder="alege ora"
-                options={filteredHours}
+                options={filteredHours}                
               />
               <p className="start-end-time">End time</p>
               <SelectTimeSlot
@@ -142,6 +170,7 @@ export default function Item({ item }) {
               to={`/dashboard/terapeuti/${item.id}`}
               state={navlink}
               onClick={() => handleAdaugaProgram()}
+              item={item}
             >
               <ButtonCustom status={"adauga program"} />
             </Link>
@@ -150,6 +179,7 @@ export default function Item({ item }) {
           )}
         </div>
       )}
+      {navlink === "admin" && <User navlink={navlink} item={item} />}
     </div>
   );
 }

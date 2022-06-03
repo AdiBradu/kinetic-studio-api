@@ -1,0 +1,52 @@
+@import "../../../../styles/variables.module.scss";
+.input-atom {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin-bottom: $unit;
+  label {
+    width: 100%;
+    color: $textDark;
+    padding: calc(0.5 * #{$unit}) 0px;
+    text-transform: capitalize;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  input {
+    width: 100%;
+    background-color: $primaryColorExtraLight;
+    padding: calc(0.5 * #{$unit});
+    font-size: 0.875rem;
+    color: $textDark;
+    border: 1px solid $border;
+    &::placeholder {
+      font-size: 0.875rem;
+      color: $grayLight;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 0 8px $primaryColorLight;
+    }
+  }
+  p {
+    font-size: 0.875rem;
+  }
+  button {
+    background-color: $primaryColor;
+    color: $textLight;
+    width: 100%;
+    padding: calc(0.5 * #{$unit});
+    border-radius: 4px;
+    margin-top: 4px;
+    @media (min-width: 800px) {
+      background-color: transparent;
+      max-width: 60px;
+      margin-top: 0px;
+      color: $primaryColor;
+    }
+    &:hover {
+      opacity: 0.75;
+      cursor: pointer;
+    }
+  }
+}

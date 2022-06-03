@@ -80,7 +80,7 @@ export const checkIfCalendar = (calendar, date) => {
 
 export const checkIfPastDate = (sedinta) => {
   const currentDate = new Date().getTime();
-  if (currentDate > sedinta.timeSlotStart) {
+  if (currentDate > sedinta.timeSlotStart && sedinta.timeSlotStart > 0) {
     return false;
   } else {
     return true;
@@ -93,24 +93,23 @@ export const processData = (data, navlink) => {
     if (navlink === "terapeuti") {
       data.forEach((el) => {
         const objTerapeuti = {
-          id: el.id,
-          nume: el.nume,
-          prenume: el.prenume,
-          telefon: el.telefon,
-          specializare: el.specializare,
+          id: el.p_id,
+          nume: el.last_name,
+          prenume: el.first_name,
+          telefon: el.phone,         
         };
         dataP.push(objTerapeuti);
       });
     } else if (navlink === "comenzi") {
       data.forEach((el) => {
         const objComenzi = {
-          id: el.id,
-          data: el.data,
-          numar: el.numar,
-          nume: el.nume,
-          prenume: el.prenume,
-          telefon: el.telefon,
-          serviciu: el.serviciu,
+          id: el.o_id,
+          data:  new Date(el.created).toLocaleDateString(),          
+          nume: el.customer_last_name,
+          prenume: el.customer_first_name,
+          telefon: el.customer_phone,
+          serviciu: el.service_name,
+          idServiciu: el.service_id,
         };
         dataP.push(objComenzi);
       });
@@ -136,7 +135,21 @@ export const processData = (data, navlink) => {
         const objZone = {
           id: el.s_id,
           denumire: el.service_name,
-          specializare: el.m_type_id,          
+          specializare: el.mt_name, 
+          sedinte: el.appointments_number,
+          durata: el.appointment_duration,
+          tarif: el.service_cost,         
+        };
+        dataP.push(objZone);
+      });
+    } else if (navlink === "admin") {
+      data.forEach((el) => {
+        const objZone = {
+          id: el.u_id,
+          nume: el.last_name,
+          prenume: el.first_name,
+          telefon: el.phone,
+          email: el.email,         
         };
         dataP.push(objZone);
       });
@@ -147,4 +160,150 @@ export const processData = (data, navlink) => {
     }
   }  
   return dataP
+}
+
+
+export const processMTypes = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objZone = {
+        id: el.mt_id,
+        denumire: el.mt_name,          
+      };
+      dataP.push(objZone);
+    });  
+  } 
+  return dataP; 
+}
+
+export const processServices = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objZone = {
+        id: el.s_id,
+        denumire: el.service_name,
+        specializare: el.mt_name, 
+        sedinte: el.appointments_number,
+        durata: el.appointment_duration,
+        tarif: el.service_cost,         
+      };
+      dataP.push(objZone);
+    });
+  }
+  return dataP;
+}
+
+export const processPartners = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objTerapeuti = {
+        id: el.p_id,
+        nume: el.last_name,
+        prenume: el.first_name,
+        telefon: el.phone,         
+      };
+      dataP.push(objTerapeuti);
+    });
+  }
+  return dataP;
+}
+
+export const processFilterPartners = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objTerapeuti = {
+        id: el.p_id,
+        nume: el.last_name,
+        prenume: el.first_name,
+        telefon: el.phone,
+        specializare: el.m_types ? el.m_types.split(',') : [],          
+      };
+      dataP.push(objTerapeuti);
+    });
+  }
+  return dataP;
+}
+
+export const processPartnerSched = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objTerapeutiSched = {
+        timeSlotStart: el.schedule_start,
+        timeSlotEnd: el.schedule_end,
+      
+      };
+      dataP.push(objTerapeutiSched);
+    });
+  }
+  return dataP;
+}
+
+export const processUser = ( data ) => {
+  const dataP = []     
+  if (data) {
+    const objUser = {
+      id: data.u_id,
+      nume: (data.last_name !== null ? data.last_name : ""),
+      prenume: (data.first_name !== null ? data.first_name : ""),
+      telefon: (data.phone !== null ? data.phone : ""),         
+      email: data.email,
+      profile_picture_url: data.profile_picture_url,
+      parola: "",
+      confirma: "",
+    };
+    dataP.push(objUser);
+  }
+  return dataP;
+}
+
+export const processEmails = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objEmails = {
+        id: parseFloat(el.e_id),
+        subiect: el.email_subject,
+        emailBody: el.email_body,
+      
+      };
+      dataP.push(objEmails);
+    });
+  }
+  return dataP;
+}
+
+export const processOdets = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objODets = {
+        sedinta: el.appointment_order,
+        terapeut: el.partner_id,
+        numeTerapeut: el.partnerName,
+        timeSlotStart: el.appointment_start,
+        timeSlotEnd: el.appointment_end,
+      };
+      dataP.push(objODets);
+    });
+  }
+  return dataP;  
+}
+
+export const processMultiMTypes = ( data ) => {
+  const dataP = []   
+  if (data && data.length) {
+    data.forEach((el) => {
+      const objM = {
+        value: el.mt_name,
+        label: el.mt_name,          
+      };
+      dataP.push(objM);
+    });  
+  } 
+  return dataP; 
 }

@@ -6,8 +6,9 @@ const useGetTimeslotsForDateAndTerapeut = (
   terapeutCalendar,
   terapeutProgramari
 ) => {
+  
   const [calendarTimeslotsForDate, setCalendarTimeslotsForDate] = useState({});
-
+  
   useEffect(() => {
     if (startDate) {
       setCalendarTimeslotsForDate({});

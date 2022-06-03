@@ -4,6 +4,7 @@ import Input from "../../../Defaults/Input/Input.component.jsx";
 import SelectTerapeut from "../../../Defaults/Select/SelectTerapeut/SelectTerapeut.component";
 import { AppContext } from "../../../../AppContext.js";
 import DatePicker from "react-datepicker";
+import addMonths from 'addmonths';
 import SelectTimeSlot from "../../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component";
 import SelectServiciu from "../../../Defaults/Select/SelectServiciu/SelectServiciu.component";
 import { checkIfCalendar, checkIfProgramari } from "../../../../utils.js";
@@ -40,6 +41,8 @@ export default function InputsComenzi() {
     durataSedinta,
     terapeutId,
     setTerapeutId,
+    terapeutCalendar,
+    terapeutProgramari
   } = useSetServiciuContext(comanda.serviciu);
 
   const { filteredTerapeuti } = useFilterTerapeuti(specializare);
@@ -83,22 +86,23 @@ export default function InputsComenzi() {
     });
   };
   //END
-
-  const { terapeutCalendar, terapeutProgramari } =
-    useGetTerapeutCalendarAndProgramari(terapeutId);
+  
+  /* const { terapeutCalendar, terapeutProgramari } =
+    useGetTerapeutCalendarAndProgramari(terapeutId); */
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
     useGetTimeslotsForDateAndTerapeut(
       startDate,
       terapeutCalendar,
       terapeutProgramari
     );
+    
   const { filteredHours } = useFilterHours(
     calendarTimeslotsForDate,
     programariTimeslotsForDate,
     startDate,
     durataSedinta
   );
-
+  
   return (
     <>
       {servicii && (
@@ -201,6 +205,8 @@ export default function InputsComenzi() {
                       : "innactive"
                   }
                   minDate={new Date()}
+                  maxDate={addMonths(new Date(), 3)}
+                  showDisabledMonthNavigation
                   inline
                 />
               </div>

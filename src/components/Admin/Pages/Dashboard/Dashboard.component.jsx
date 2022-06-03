@@ -11,6 +11,8 @@ import { useLocation } from "react-router-dom";
 import DataPresentation from "../../DataPresentation/DataPresentation.component";
 import Programare from "../../Programare/Programare.component";
 import Login from "../../../Defaults/LogIn/Login.component";
+import User from "../../User/User.component";
+import Emails from "../../Emails/Emails.component";
 
 export default function Dashboard() {
   const { isDesktop, isLoggedInObj, itemObj } = useContext(AppContext);
@@ -34,6 +36,10 @@ export default function Dashboard() {
               <DataView>
                 <Programare item={item} />
               </DataView>
+            ) : state === "emails" ? (
+              <DataView>
+                <Emails item={item} />
+              </DataView>
             ) : matchList ? (
               <DataView>
                 <DataPresentation/>
@@ -43,9 +49,15 @@ export default function Dashboard() {
                 <Inputs state={state} />
               </DataView>
             ) : matchItem ? (
+              state === "admin" ? (
+                <DataView>
+                  <User item={item} />
+                </DataView>
+              ) : (
               <DataView>
                 <Item item={item} />
               </DataView>
+              )
             ) : (
               <DataView></DataView>
             )}

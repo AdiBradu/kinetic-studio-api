@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Thumbnail.component.scss";
 
 export default function Thumbnail({ thumbnail, id }) {
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(`/thumbnails/thmb00.jpg`);
   const [styles, setStyles] = useState();
   const customStyles = {
     width: "96px",
@@ -14,7 +14,10 @@ export default function Thumbnail({ thumbnail, id }) {
   }, [id]);
 
   useEffect(() => {
-    !thumbnail ? setImage("/thumbnails/thmb00.jpg") : setImage(thumbnail);
+    if(thumbnail?.length) {
+      /*  setImage("/thumbnails/thmb00.jpg") */ 
+      setImage(thumbnail);    
+    }     
   }, [thumbnail]);
 
   return (
