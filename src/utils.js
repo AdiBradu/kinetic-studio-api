@@ -293,17 +293,9 @@ export const processUser = ( data ) => {
 }
 
 export const processEmails = ( data ) => {
-  const dataP = []   
+  let dataP = {id1: parseFloat(0), id2: parseFloat(0), subiect1: "", emailBody1: "", subiect2: "", emailBody2: ""};   
   if (data && data.length) {
-    data.forEach((el) => {
-      const objEmails = {
-        id: parseFloat(el.e_id),
-        subiect: el.email_subject,
-        emailBody: el.email_body,
-      
-      };
-      dataP.push(objEmails);
-    });
+    dataP =  {id1: data[0]?.e_id ? parseFloat(data[0]?.e_id) : parseFloat(0), id2: data[1]?.e_id ? parseFloat(data[1]?.e_id) : parseFloat(0), subiect1: data[0]?.email_subject ? data[0]?.email_subject : "", emailBody1: data[0]?.email_body ? data[0]?.email_body : "", subiect2: data[1]?.email_subject ? data[1]?.email_subject : "", emailBody2: data[1]?.email_body ? data[1]?.email_body : "" }
   }
   return dataP;
 }

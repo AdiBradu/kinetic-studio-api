@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.component.scss";
 import variables from "../../../styles/_variables.module.scss";
 import LogoKineticStudio from "../Logos/KineticStudio/LogoKineticStudio.component.jsx";
@@ -11,7 +11,7 @@ export default function Navbar() {
   const { isDesktop, isTablet, isMenuOpenObj, isLoggedInObj } = useContext(AppContext);
   const isMenuOpen = isMenuOpenObj[0];
   const [isLoggedIn, setIsLoggedIn] = isLoggedInObj;
-
+  
   return (
     <div className="navbar" id="navbar">
       <div

@@ -10,6 +10,7 @@ export default function InputsAdmin() {
     nume: "",
     prenume: "",
     telefon: "",
+    profile_picture_url: "",     
     email: "",
     parola: "",
     confirma: "",
@@ -23,13 +24,23 @@ export default function InputsAdmin() {
     });
   };
 
+  const photoUpload = (value) => {
+    setState({
+      ...state,
+      profile_picture_url: value,
+    });
+  }
   useEffect(() => {
     setCreateItem(state);
   }, [state]);
 
   return (
     <div>
-      <SelectImage id={"tat"} />
+      <SelectImage 
+        id={"tat"} 
+        handleChange={photoUpload} 
+        src={null}
+      />
       <Input
         value={state.nume}
         handleChange={handleChange}

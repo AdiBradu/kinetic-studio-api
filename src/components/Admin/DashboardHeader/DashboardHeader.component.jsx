@@ -54,7 +54,7 @@ export default function DashboardHeader({ state, item }) {
           await createOrder({variables: {firstName: createItem.prenume, lastName: createItem.nume, phone: createItem.telefon, email: createItem.email, region: createItem.judet, city: createItem.localitate, street: createItem.strada, streetNumber: createItem.nr, serviceId: parseFloat(createItem.serviciu) , details: dets}, refetchQueries: [ { query: GET_ALL_ORDERS, variables: {offset: 0, limit: 50} }]});
       break; 
       case "admin":          
-          await createUser({variables: {firstName: createItem.prenume, lastName: createItem.nume, email: createItem.email, phone: createItem.telefon, newPassword: createItem.parola, confirmPassword: createItem.confirma}, refetchQueries: [ { query: GET_ALL_USERS }]});
+          await createUser({variables: {firstName: createItem.prenume, lastName: createItem.nume, email: createItem.email, phone: createItem.telefon, profile_picture_url: createItem.profile_picture_url, newPassword: createItem.parola, confirmPassword: createItem.confirma}, refetchQueries: [ { query: GET_ALL_USERS }]});
       break;
   
       default:

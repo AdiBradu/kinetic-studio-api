@@ -9,6 +9,7 @@ export const LOGIN = gql`
       last_name
       email
       phone
+      profile_picture_url
     }
   }
 `;

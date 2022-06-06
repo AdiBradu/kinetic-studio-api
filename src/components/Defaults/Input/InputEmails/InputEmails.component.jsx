@@ -3,12 +3,11 @@ import "./InputEmails.component.scss";
 
 export default function InputEmails({
   label,
-  value,  
+  value,
   type,
-  name,
   placeholder,
   handleChange,
-}) { 
+}) {  
   return (
     <div className="input-atom">
       <label>
@@ -16,7 +15,7 @@ export default function InputEmails({
       </label>
       <input
         value={value}
-        name={name}
+        name={label}
         type={type}
         placeholder={placeholder}
         onChange={handleChange}

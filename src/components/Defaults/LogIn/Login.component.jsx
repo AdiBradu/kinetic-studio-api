@@ -12,7 +12,7 @@ export default function Login() {
   const { isLoggedInObj } = useContext(AppContext);
   const setIsLoggedIn = isLoggedInObj[1];
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [loginUsr, {error}] = useMutation(LOGIN);
+  const [loginUsr, loginUsrObj] = useMutation(LOGIN);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -57,7 +57,7 @@ export default function Login() {
                   password: credentials.password
                 }
               });  
-              setIsLoggedIn(true);
+              setIsLoggedIn(loginUsrObj?.data?.login);
       }}>
         <ButtonLogin />
       </Link>
