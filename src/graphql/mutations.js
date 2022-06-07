@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const LOGIN = gql`
-  mutation Login($email: String!, $password: String!){ 
+  mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       u_id
       u_type
@@ -15,7 +15,7 @@ export const LOGIN = gql`
 `;
 
 export const LOGOUT = gql`
-  mutation Logout{ 
+  mutation Logout {
     logout {
       successful
       message
@@ -23,10 +23,25 @@ export const LOGOUT = gql`
   }
 `;
 
-
 export const CREATE_USER = gql`
-  mutation CreateUser($firstName: String, $lastName: String, $email: String!, $phone: String, $profile_picture_url: String, $newPassword: String!, $confirmPassword: String!){ 
-    createUser(firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, profile_picture_url: $profile_picture_url, newPassword: $newPassword, confirmPassword: $confirmPassword) {
+  mutation CreateUser(
+    $firstName: String
+    $lastName: String
+    $email: String!
+    $phone: String
+    $profile_picture_url: String
+    $newPassword: String!
+    $confirmPassword: String!
+  ) {
+    createUser(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      phone: $phone
+      profile_picture_url: $profile_picture_url
+      newPassword: $newPassword
+      confirmPassword: $confirmPassword
+    ) {
       successful
       message
     }
@@ -34,8 +49,26 @@ export const CREATE_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($id: Float!, $firstName: String, $lastName: String, $email: String!, $phone: String, $profile_picture_url: String, $newPassword: String, $confirmPassword: String){ 
-    updateUser(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, profile_picture_url: $profile_picture_url, newPassword: $newPassword, confirmPassword: $confirmPassword) {
+  mutation UpdateUser(
+    $id: Float!
+    $firstName: String
+    $lastName: String
+    $email: String!
+    $phone: String
+    $profile_picture_url: String
+    $newPassword: String
+    $confirmPassword: String
+  ) {
+    updateUser(
+      id: $id
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      phone: $phone
+      profile_picture_url: $profile_picture_url
+      newPassword: $newPassword
+      confirmPassword: $confirmPassword
+    ) {
       successful
       message
     }
@@ -43,232 +76,374 @@ export const UPDATE_USER = gql`
 `;
 
 export const CREATE_AREA = gql`
-  mutation CreateArea($name: String!, $extra_charge: Float!){ 
+  mutation CreateArea($name: String!, $extra_charge: Float!) {
     createArea(name: $name, extra_charge: $extra_charge) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_AREA = gql`
-  mutation UpdateArea($id: Float!, $name: String!, $extra_charge: Float!){ 
+  mutation UpdateArea($id: Float!, $name: String!, $extra_charge: Float!) {
     updateArea(id: $id, name: $name, extra_charge: $extra_charge) {
       successful
-      message  
+      message
     }
   }
 `;
 
 export const DELETE_AREA = gql`
-  mutation DeleteArea($id: Float!){ 
+  mutation DeleteArea($id: Float!) {
     deleteArea(id: $id) {
       successful
-      message  
+      message
     }
   }
 `;
 
 export const CREATE_M_TYPE = gql`
-  mutation CreateMType($name: String!){ 
+  mutation CreateMType($name: String!) {
     createMType(name: $name) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_M_TYPE = gql`
-  mutation UpdateMType($id: Float!, $name: String!){ 
+  mutation UpdateMType($id: Float!, $name: String!) {
     updateMType(id: $id, name: $name) {
       successful
-      message  
+      message
     }
   }
 `;
 
 export const DELETE_M_TYPE = gql`
-  mutation DeleteMType($id: Float!){ 
+  mutation DeleteMType($id: Float!) {
     deleteMType(id: $id) {
       successful
-      message  
+      message
     }
   }
 `;
 
 export const CREATE_SERVICE = gql`
-  mutation CreateService($service_name: String!, $type: Float!, $appointments_number: Int!, $appointment_duration: Int!, $service_cost: Float!){ 
-    createService(service_name: $service_name, type: $type, appointments_number: $appointments_number, appointment_duration: $appointment_duration, service_cost: $service_cost) {
+  mutation CreateService(
+    $service_name: String!
+    $type: Float!
+    $appointments_number: Int!
+    $appointment_duration: Int!
+    $service_cost: Float!
+    $profile_picture_url: String!
+  ) {
+    createService(
+      service_name: $service_name
+      type: $type
+      appointments_number: $appointments_number
+      appointment_duration: $appointment_duration
+      service_cost: $service_cost
+      profile_picture_url: $profile_picture_url
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_SERVICE = gql`
-  mutation UpdateService($id: Float!, $service_name: String!, $type: Float!, $appointments_number: Int!, $appointment_duration: Int!, $service_cost: Float!){ 
-    updateService(id: $id, service_name: $service_name, type: $type, appointments_number: $appointments_number, appointment_duration: $appointment_duration, service_cost: $service_cost) {
+  mutation CreateService(
+    $service_name: String!
+    $type: Float!
+    $appointments_number: Int!
+    $appointment_duration: Int!
+    $service_cost: Float!
+    $profile_picture_url: String!
+  ) {
+    createService(
+      service_name: $service_name
+      type: $type
+      appointments_number: $appointments_number
+      appointment_duration: $appointment_duration
+      service_cost: $service_cost
+      profile_picture_url: $profile_picture_url
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const DELETE_SERVICE = gql`
-  mutation DeleteService($id: Float!){ 
+  mutation DeleteService($id: Float!) {
     deleteService(id: $id) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const CREATE_EMAIL = gql`
-  mutation CreateEmail($email_subject: String!, $email_body: String!){ 
+  mutation CreateEmail($email_subject: String!, $email_body: String!) {
     createEmail(email_subject: $email_subject, email_body: $email_body) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_EMAIL = gql`
-  mutation UpdateEmail($id: ID!, $email_subject: String!, $email_body: String!){ 
-    updateEmail(id: $id, email_subject: $email_subject, email_body: $email_body) {
+  mutation UpdateEmail(
+    $id: ID!
+    $email_subject: String!
+    $email_body: String!
+  ) {
+    updateEmail(
+      id: $id
+      email_subject: $email_subject
+      email_body: $email_body
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const HANDLE_EMAILS = gql`
-  mutation HandleEmails($emails: [EmailInput]!){ 
+  mutation HandleEmails($emails: [EmailInput]!) {
     handleEmails(emails: $emails) {
       successful
-      message    
+      message
     }
   }
 `;
 
-
-
-
 export const DELETE_EMAIL = gql`
-  mutation DeleteEmail($id: Float!){ 
+  mutation DeleteEmail($id: Float!) {
     deleteEmail(id: $id) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const CREATE_PARTNER_SCHEDULE = gql`
-  mutation CreatePartnerSchedule($id: Float!, $startTime: Float!, $endTime: Float!){ 
+  mutation CreatePartnerSchedule(
+    $id: Float!
+    $startTime: Float!
+    $endTime: Float!
+  ) {
     createPartnerSchedule(id: $id, startTime: $startTime, endTime: $endTime) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_PARTNER_SCHEDULE = gql`
-  mutation UpdatePartnerSchedule($id: Float!, $startTime: Float!, $endTime: Float!){ 
+  mutation UpdatePartnerSchedule(
+    $id: Float!
+    $startTime: Float!
+    $endTime: Float!
+  ) {
     updatePartnerSchedule(id: $id, startTime: $startTime, endTime: $endTime) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const DELETE_PARTNER_SCHEDULE = gql`
-  mutation DeletePartnerSchedule($id: Float!){ 
+  mutation DeletePartnerSchedule($id: Float!) {
     deletePartnerSchedule(id: $id) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const CREATE_PARTNER = gql`
-  mutation CreatePartner($firstName: String!, $lastName: String!, $phone: String!, $email: String!, $profilePictureUrl: String, $description: String, $mTypes: String!){ 
-    createPartner(firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, profilePictureUrl: $profilePictureUrl, description: $description, mTypes: $mTypes) {
+  mutation CreatePartner(
+    $firstName: String!
+    $lastName: String!
+    $phone: String!
+    $email: String!
+    $profilePictureUrl: String
+    $description: String
+    $mTypes: String!
+  ) {
+    createPartner(
+      firstName: $firstName
+      lastName: $lastName
+      phone: $phone
+      email: $email
+      profilePictureUrl: $profilePictureUrl
+      description: $description
+      mTypes: $mTypes
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_PARTNER = gql`
-  mutation UpdatePartner($id: Float!, $firstName: String!, $lastName: String!, $phone: String!, $email: String!, $profilePictureUrl: String, $description: String, $mTypes: String!){ 
-    updatePartner(id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, profilePictureUrl: $profilePictureUrl, description: $description, mTypes: $mTypes) {
+  mutation UpdatePartner(
+    $id: Float!
+    $firstName: String!
+    $lastName: String!
+    $phone: String!
+    $email: String!
+    $profilePictureUrl: String
+    $description: String
+    $mTypes: String!
+  ) {
+    updatePartner(
+      id: $id
+      firstName: $firstName
+      lastName: $lastName
+      phone: $phone
+      email: $email
+      profilePictureUrl: $profilePictureUrl
+      description: $description
+      mTypes: $mTypes
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const DELETE_PARTNER = gql`
-  mutation DeletePartner($id: Float!){ 
+  mutation DeletePartner($id: Float!) {
     deletePartner(id: $id) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const CREATE_ORDER_DETAIL = gql`
-  mutation CreateOrderDetail($orderId: Float!, $partnerId: Float!, $startTime: Float!, $endTime: Float!, $scheduleOrder: Int!){ 
-    createOrderDetail(orderId: $orderId, partnerId: $partnerId, startTime: $startTime, endTime: $endTime, scheduleOrder: $scheduleOrder) {
+  mutation CreateOrderDetail(
+    $orderId: Float!
+    $partnerId: Float!
+    $startTime: Float!
+    $endTime: Float!
+    $scheduleOrder: Int!
+  ) {
+    createOrderDetail(
+      orderId: $orderId
+      partnerId: $partnerId
+      startTime: $startTime
+      endTime: $endTime
+      scheduleOrder: $scheduleOrder
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_ORDER_DETAIL = gql`
-  mutation UpdateOrderDetail($id: Float!, $orderId: Float!, $partnerId: Float!, $startTime: Float!, $endTime: Float!, $scheduleOrder: Int!){ 
-    updateOrderDetail(id: $id, orderId: $orderId, partnerId: $partnerId, startTime: $startTime, endTime: $endTime, scheduleOrder: $scheduleOrder) {
+  mutation UpdateOrderDetail(
+    $id: Float!
+    $orderId: Float!
+    $partnerId: Float!
+    $startTime: Float!
+    $endTime: Float!
+    $scheduleOrder: Int!
+  ) {
+    updateOrderDetail(
+      id: $id
+      orderId: $orderId
+      partnerId: $partnerId
+      startTime: $startTime
+      endTime: $endTime
+      scheduleOrder: $scheduleOrder
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const DELETE_ORDER_DETAIL = gql`
-  mutation DeleteOrderDetail($id: Float!){ 
+  mutation DeleteOrderDetail($id: Float!) {
     deleteOrderDetail(id: $id) {
       successful
-      message    
+      message
     }
   }
 `;
 
-
 export const CREATE_ORDER = gql`
-  mutation CreateOrder($firstName: String!, $lastName: String!, $phone: String!, $email: String!, $region: String!, $city: String!, $street: String!, $streetNumber: String!, $serviceId: Float!, $details: [OderDetailIn]){ 
-    createOrder(firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, region: $region, city: $city, street: $street, streetNumber: $streetNumber, serviceId: $serviceId, details: $details) {
+  mutation CreateOrder(
+    $firstName: String!
+    $lastName: String!
+    $phone: String!
+    $email: String!
+    $region: String!
+    $city: String!
+    $street: String!
+    $streetNumber: String!
+    $serviceId: Float!
+    $details: [OderDetailIn]
+  ) {
+    createOrder(
+      firstName: $firstName
+      lastName: $lastName
+      phone: $phone
+      email: $email
+      region: $region
+      city: $city
+      street: $street
+      streetNumber: $streetNumber
+      serviceId: $serviceId
+      details: $details
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const UPDATE_ORDER = gql`
-  mutation UpdateOrder($id: Float!, $firstName: String!, $lastName: String!, $phone: String!, $email: String!, $region: String!, $city: String!, $street: String!, $streetNumber: String!, $serviceId: Float!){ 
-    updateOrder(id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, email: $email, region: $region, city: $city, street: $street, streetNumber: $streetNumber, serviceId: $serviceId) {
+  mutation UpdateOrder(
+    $id: Float!
+    $firstName: String!
+    $lastName: String!
+    $phone: String!
+    $email: String!
+    $region: String!
+    $city: String!
+    $street: String!
+    $streetNumber: String!
+    $serviceId: Float!
+  ) {
+    updateOrder(
+      id: $id
+      firstName: $firstName
+      lastName: $lastName
+      phone: $phone
+      email: $email
+      region: $region
+      city: $city
+      street: $street
+      streetNumber: $streetNumber
+      serviceId: $serviceId
+    ) {
       successful
-      message    
+      message
     }
   }
 `;
 
 export const DELETE_ORDER = gql`
-  mutation DeleteOrder($id: Float!){ 
+  mutation DeleteOrder($id: Float!) {
     deleteOrder(id: $id) {
       successful
-      message    
+      message
     }
   }
 `;
-
-
