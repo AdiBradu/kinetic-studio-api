@@ -13,6 +13,9 @@ import useGetTimeslotsForDateAndTerapeut from "../../../hooks/useGetTimeslotsFor
 import useFilterHours from "../../../hooks/useFilterHours";
 import useSetServiciuContext from "../../../hooks/useSetServiciuContext";
 import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { UPDATE_ORDER_DETAIL } from "../../../graphql/mutations";
+import { GET_ALL_ORDER_DETAILS } from "../../../graphql/queries";
 
 export default function Programare() {
   const { comandaObj } = useContext(AppContext);
@@ -37,6 +40,9 @@ export default function Programare() {
     startDate,
     durataSedinta
   );
+  
+  const [updateOrderDetail, updateOrderDetailObj] = useMutation(UPDATE_ORDER_DETAIL);  
+
 
   //START
   //Actions selectors
@@ -51,18 +57,8 @@ export default function Programare() {
     setTimeSlotStart(e.target.value);
   };
 
-  const handleContinue = () => {
-    console.log(
-      "Programeaza cu datele: ",
-      "comanda",
-      comanda.id,
-      "sedinta",
-      comanda.sedinta,
-      "terapeut:",
-      terapeutId.terapeut,
-      "data si ora:",
-      startDate.setHours(0, 0, 0, 0) + parseInt(timeSlotStart, 10) * 60000
-    );
+  const handleContinue = async () => {
+    await updateOrderDetail({variables: {orderId: parseFloat(comanda.id), partnerId: parseFloat(terapeutId.terapeut), startTime: startDate.setHours(0, 0, 0, 0) + parseInt(timeSlotStart, 10) * 60000, endTime: startDate.setHours(0, 0, 0, 0) + parseInt(timeSlotStart, 10) * 60000 + durataSedinta, scheduleOrder: parseInt(comanda.sedinta)}, refetchQueries: [ { query: GET_ALL_ORDER_DETAILS, variables: {id: parseFloat(comanda.id)} }]});
   };
   //END
   

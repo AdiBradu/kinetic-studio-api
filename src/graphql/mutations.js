@@ -42,6 +42,15 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const DELETE_USER = gql`
+  mutation DeleteUser($id: Float!){ 
+    deleteUser(id: $id) {
+      successful
+      message  
+    }
+  }
+`;
+
 export const CREATE_AREA = gql`
   mutation CreateArea($name: String!, $extra_charge: Float!){ 
     createArea(name: $name, extra_charge: $extra_charge) {
@@ -226,8 +235,8 @@ export const CREATE_ORDER_DETAIL = gql`
 `;
 
 export const UPDATE_ORDER_DETAIL = gql`
-  mutation UpdateOrderDetail($id: Float!, $orderId: Float!, $partnerId: Float!, $startTime: Float!, $endTime: Float!, $scheduleOrder: Int!){ 
-    updateOrderDetail(id: $id, orderId: $orderId, partnerId: $partnerId, startTime: $startTime, endTime: $endTime, scheduleOrder: $scheduleOrder) {
+  mutation UpdateOrderDetail($orderId: Float!, $partnerId: Float!, $startTime: Float!, $endTime: Float!, $scheduleOrder: Int!){ 
+    updateOrderDetail(orderId: $orderId, partnerId: $partnerId, startTime: $startTime, endTime: $endTime, scheduleOrder: $scheduleOrder) {
       successful
       message    
     }

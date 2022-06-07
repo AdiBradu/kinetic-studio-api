@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../AppContext.js";
-import { DELETE_AREA, DELETE_M_TYPE, DELETE_SERVICE, DELETE_PARTNER, DELETE_ORDER } from "../graphql/mutations";
-import { GET_ALL_AREAS, GET_ALL_M_TYPES, GET_ALL_ORDERS, GET_ALL_PARTNERS, GET_ALL_SERVICES } from "../graphql/queries.js";
+import { DELETE_AREA, DELETE_M_TYPE, DELETE_SERVICE, DELETE_PARTNER, DELETE_ORDER, DELETE_USER } from "../graphql/mutations";
+import { GET_ALL_AREAS, GET_ALL_M_TYPES, GET_ALL_ORDERS, GET_ALL_PARTNERS, GET_ALL_SERVICES, GET_ALL_USERS } from "../graphql/queries.js";
 const useTableViewAndDelete = (navlink) => {
 
   const { itemObj } = useContext(AppContext);
@@ -14,6 +14,7 @@ const useTableViewAndDelete = (navlink) => {
   const [deleteService, deleteServiceObj] = useMutation(DELETE_SERVICE);
   const [deletePartner, deletePartnerObj] = useMutation(DELETE_PARTNER);
   const [deleteOrder, deleteOrderObj] = useMutation(DELETE_ORDER);
+  const [deleteUser, deleteUserObj] = useMutation(DELETE_USER);
 
   const handleView = (e) => {
     itemReset(e);
@@ -35,7 +36,10 @@ const useTableViewAndDelete = (navlink) => {
           await deletePartner({variables: {id: parseFloat(e.id)}, refetchQueries: [ { query: GET_ALL_PARTNERS }]}); 
       break;  
       case "comenzi":          
-          await deleteOrder({variables: {id: parseFloat(e.id)}, refetchQueries: [ { query: GET_ALL_ORDERS }]}); 
+          await deleteOrder({variables: {id: parseFloat(e.id)}, refetchQueries: [ { query: GET_ALL_ORDERS, variables: {offset: 0, limit: 50} }]}); 
+      break; 
+      case "admin":          
+          await deleteUser({variables: {id: parseFloat(e.id)}, refetchQueries: [ { query: GET_ALL_USERS }]}); 
       break; 
   
       default:
