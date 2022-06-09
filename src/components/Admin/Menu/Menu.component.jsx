@@ -1,7 +1,7 @@
-import React from "react";
-import "./Menu.component.scss";
-import NavLink from "../NavLink/NavLink.component";
-import navlinks from "../../../data/navlinks.json";
+import React from 'react';
+import './Menu.component.scss';
+import NavLink from '../NavLink/NavLink.component';
+import navlinks from '../../../data/navlinks.json';
 
 export default function Menu() {
   return (

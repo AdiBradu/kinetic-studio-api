@@ -1,5 +1,5 @@
-import React from "react";
-import "./DeleteIcon.component.scss";
+import React from 'react';
+import './DeleteIcon.component.scss';
 
 export default function DeleteIcon({ color, bgColor }) {
   return (

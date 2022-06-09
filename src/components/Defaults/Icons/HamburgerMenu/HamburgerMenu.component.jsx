@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import "./HamburgerMenu.component.scss";
-import { AppContext } from "../../../../AppContext";
+import React, { useContext } from 'react';
+import './HamburgerMenu.component.scss';
+import { AppContext } from '../../../../AppContext';
 
 export default function HamburgerMenu({ color }) {
   const { isToggledObj, isMenuOpenObj } = useContext(AppContext);

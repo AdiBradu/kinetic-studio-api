@@ -1,13 +1,14 @@
-@import "../src//styles/reset.scss";
-@import "../src/styles/typography.scss";
-@import "../src/styles/layouts.scss";
-@import "../src/styles/colors.scss";
+@import '../src//styles/reset.scss';
+@import '../src/styles/typography.scss';
+@import '../src/styles/layouts.scss';
+@import '../src/styles/colors.scss';
 
 #root {
   position: relative;
   width: 100%;
   height: 100vh; /* fallback for Js load */
   height: var(--doc-height);
+  overflow-y: hidden;
 }
 
 .App {
@@ -15,7 +16,7 @@
   height: 100%;
   background-color: $primaryColorExtraLight;
   position: relative;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .padding {
@@ -25,7 +26,7 @@
   }
 }
 
-.padding-y{
+.padding-y {
   padding-top: $unit;
   padding-bottom: $unit;
   @media (min-width: $xxl) {
@@ -34,7 +35,7 @@
   }
 }
 
-.padding-x{
+.padding-x {
   padding-left: $unit;
   padding-right: $unit;
   @media (min-width: $xxl) {
@@ -217,7 +218,13 @@
   width: 100%;
   max-width: 480px;
   margin-bottom: $unit;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  @media (min-width: $md) {
+    max-width: 400px;
+  }
+  @media (min-width: $xxl) {
+    max-width: 480px;
+  }
   label {
     width: 100%;
     color: $textDark;
@@ -235,6 +242,11 @@
   }
   p.warning-message {
     color: $warning;
+    margin-top: $unit;
+    font-weight: 500;
+  }
+  p.success-message {
+    color: $succes;
     margin-top: $unit;
     font-weight: 500;
   }
@@ -269,6 +281,13 @@
     width: 100%;
     max-width: 480px;
     display: flex;
+    .react-datepicker__day--keyboard-selected:hover,
+    .react-datepicker__month-text--keyboard-selected:hover,
+    .react-datepicker__quarter-text--keyboard-selected:hover,
+    .react-datepicker__year-text--keyboard-selected:hover {
+      background-color: $primaryColor;
+      color: $textLight;
+    }
     .react-datepicker__day-name,
     .react-datepicker__day,
     .react-datepicker__time-name {
@@ -276,6 +295,7 @@
     }
     .react-datepicker__month-container {
       margin: auto;
+      width: 100%;
       .react-datepicker__header {
         background-color: $backgroundLight;
         border-color: $border;
@@ -293,9 +313,9 @@
           .active-calendar {
             color: $textDark;
           }
-          .active-programare {
-            color: $primaryColor;
-          }
+          // .active-programare {
+          //   color: $primaryColor;
+          // }
           .innactive {
             color: $grayLight;
             pointer-events: none;
@@ -307,6 +327,12 @@
             background-color: $primaryColor;
             color: $textLight;
           }
+          .react-datepicker__day--today {
+            border: 1px solid $primaryColor;
+            background-color: $primaryColorLight;
+            color: $primaryColor;
+            border-radius: 50%;
+          }
         }
       }
     }
@@ -315,6 +341,26 @@
         background-color: $primaryColor;
         color: $textLight;
       }
+    }
+    .react-datepicker__day--keyboard-selected,
+    .react-datepicker__month-text--keyboard-selected,
+    .react-datepicker__quarter-text--keyboard-selected,
+    .react-datepicker__year-text--keyboard-selected {
+      border-radius: 50%;
+    }
+    .react-datepicker__day--selected {
+      background-color: $primaryColor;
+      color: $textLight;
+      border-radius: 50%;
+    }
+    .calendar
+      .react-datepicker
+      .react-datepicker__month-container
+      .react-datepicker__month
+      .react-datepicker__week
+      .active-calendar {
+      background-color: $primaryColor;
+      color: $textLight;
     }
   }
 }

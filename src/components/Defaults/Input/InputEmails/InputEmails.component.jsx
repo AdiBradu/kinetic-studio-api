@@ -1,5 +1,5 @@
-import React from "react";
-import "./InputEmails.component.scss";
+import React from 'react';
+import './InputEmails.component.scss';
 
 export default function InputEmails({
   label,
@@ -7,7 +7,7 @@ export default function InputEmails({
   type,
   placeholder,
   handleChange,
-}) {  
+}) {
   return (
     <div className="input-atom">
       <label>

@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonCustom.component.scss";
+import React from 'react';
+import './ButtonCustom.component.scss';
 
 export default function ButtonCustom({ status }) {
   return (

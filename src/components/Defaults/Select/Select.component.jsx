@@ -1,5 +1,5 @@
-import React from "react";
-import "./Select.component.scss";
+import React from 'react';
+import './Select.component.scss';
 
 export default function Select({
   options,

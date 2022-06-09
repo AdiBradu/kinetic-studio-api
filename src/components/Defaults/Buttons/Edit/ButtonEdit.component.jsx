@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonEdit.component.scss";
+import React from 'react';
+import './ButtonEdit.component.scss';
 
 export default function ButtonEdit() {
   return (

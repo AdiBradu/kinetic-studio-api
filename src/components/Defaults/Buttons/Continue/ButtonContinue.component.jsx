@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonContinue.component.scss";
+import React from 'react';
+import './ButtonContinue.component.scss';
 
 export default function ButtonContinue() {
   return (

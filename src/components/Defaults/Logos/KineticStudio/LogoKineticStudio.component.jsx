@@ -1,6 +1,6 @@
-import React from "react";
-import "./LogoKineticStudio.componet.scss";
-import { Link } from "react-router-dom";
+import React from 'react';
+import './LogoKineticStudio.componet.scss';
+import { Link } from 'react-router-dom';
 
 export default function LogoKineticStudio({ color }) {
   return (

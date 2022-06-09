@@ -1,22 +1,16 @@
-@import "../../../styles/variables.module.scss";
+@import '../../../styles/variables.module.scss';
 
 .data-cell {
-  width: 100%;
-  padding: calc(0.5 * #{$unit}) calc(0.5 * #{$unit});
-  text-transform: capitalize;
   display: flex;
+  flex: 0 1 100%;
+  padding: calc(0.5 * #{$unit}) calc(0.5 * #{$unit});
   gap: 12px;
   align-items: center;
-  &:first-child {
-    max-width: calc(5 * #{$unit});
-  }
-  &:last-child {
-    max-width: calc(5 * #{$unit});
-  }
   p {
     font-size: 0.875rem;
     display: flex;
     gap: 12px;
     align-items: center;
+    word-break: break-all;
   }
 }

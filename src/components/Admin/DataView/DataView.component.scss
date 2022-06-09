@@ -1,4 +1,4 @@
-@import "../../../styles/variables.module.scss";
+@import '../../../styles/variables.module.scss';
 
 .data-view {
   width: 100%;
@@ -8,4 +8,5 @@
   gap: calc(2 * #{$unit});
   flex-direction: column;
   overflow-y: auto;
+  padding-bottom: calc(2 * #{$unit});
 }

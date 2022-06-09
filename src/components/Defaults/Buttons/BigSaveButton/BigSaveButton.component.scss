@@ -1,4 +1,4 @@
-@import "../../../../styles/variables.module.scss";
+@import '../../../../styles/variables.module.scss';
 
 button.btn-admin-continue {
   width: 100%;
@@ -8,10 +8,11 @@ button.btn-admin-continue {
   gap: calc(0.5 * #{$unit});
   background-color: $primaryColor;
   color: $textLight;
-  padding: calc(0.5 * #{$unit}) $unit;
+  padding: $unit;
   border: none;
   border-radius: calc(0.25 * #{$unit});
   margin-top: $unit;
+  max-width: 480px;
   svg {
     height: $unit;
     width: auto;

@@ -1,5 +1,5 @@
-import React from "react";
-import "./ViewIcon.component.scss";
+import React from 'react';
+import './ViewIcon.component.scss';
 
 export default function ViewIcon({ color, bgColor, data }) {
   return (

@@ -1,11 +1,11 @@
-import React from "react";
-import "./Modal.component.scss";
-import ButtonConfirm from "../../Defaults/Buttons/Confirm/ButtonConfirm.component.jsx";
-import { ReactComponent as Warning } from "../../../assets/Icons/Warning.svg";
+import React from 'react';
+import './Modal.component.scss';
+import ButtonConfirm from '../../Defaults/Buttons/Confirm/ButtonConfirm.component.jsx';
+import { ReactComponent as Warning } from '../../../assets/Icons/Warning.svg';
 
 export default function Modal() {
   const HandleConfirmation = () => {
-    console.log("Delete from db item");
+    console.log('Delete from db item');
   };
 
   return (

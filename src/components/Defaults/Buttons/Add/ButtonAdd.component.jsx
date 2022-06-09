@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonAdd.component.scss";
+import React from 'react';
+import './ButtonAdd.component.scss';
 
 export default function ButtonAdd() {
   return (

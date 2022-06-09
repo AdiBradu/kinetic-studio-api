@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonCalendar.component.scss";
+import React from 'react';
+import './ButtonCalendar.component.scss';
 
 export default function ButtonCalendar() {
   return (

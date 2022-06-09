@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonConfirm.component.scss";
+import React from 'react';
+import './ButtonConfirm.component.scss';
 
 export default function ButtonConfirm() {
   return (

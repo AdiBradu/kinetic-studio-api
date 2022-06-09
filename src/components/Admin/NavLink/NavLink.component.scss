@@ -1,4 +1,4 @@
-@import "../../../styles/variables.module.scss";
+@import '../../../styles/variables.module.scss';
 
 .navlink-admin {
   padding: calc(0.75 * #{$unit}) calc(2 * #{$unit});
@@ -11,7 +11,7 @@
   }
   p {
     font-size: 0.75rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: capitalize;
     letter-spacing: 0.0187rem;
     font-weight: 500;

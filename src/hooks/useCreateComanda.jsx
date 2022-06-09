@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useCreateComanda = (
   programari,
   sedinte,
   specializare,
   comanda,
-  setComanda
+  setComanda,
 ) => {
   useEffect(() => {
     setComanda({

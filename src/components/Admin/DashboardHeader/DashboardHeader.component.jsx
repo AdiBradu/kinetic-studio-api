@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './DashboardHeader.component.scss';
 import { AppContext } from '../../../AppContext.js';
 import { Link } from 'react-router-dom';
@@ -22,13 +22,25 @@ import {
   GET_ALL_SERVICES,
   GET_ALL_USERS,
 } from '../../../graphql/queries';
+import {
+  UPDATE_AREA,
+  UPDATE_M_TYPE,
+  UPDATE_SERVICE,
+  UPDATE_PARTNER,
+  UPDATE_ORDER,
+} from '../../../graphql/mutations';
 
-export default function DashboardHeader({ state, item }) {
-  const { isDesktop, createItemObj } = useContext(AppContext);
+export default function DashboardHeader({ state }) {
+  const { createItemObj, itemObj } = useContext(AppContext);
   const [createItem, setCreateItem] = createItemObj;
+  const item = itemObj[0];
   const matchDashboard = useMatch('/dashboard');
   const matchAdd = useMatch('/dashboard/:id/adauga');
+  const matchEdit = useMatch('/dashboard/:id/editeaza');
   const matchItem = useMatch('/dashboard/:id/:id');
+
+  const [valid, setValid] = useState(true);
+  console.log(valid);
 
   const [createArea, createAreaObj] = useMutation(CREATE_AREA);
   const [createMType, createMTypeObj] = useMutation(CREATE_M_TYPE);
@@ -36,6 +48,12 @@ export default function DashboardHeader({ state, item }) {
   const [createPartner, createPartnerObj] = useMutation(CREATE_PARTNER);
   const [createOrder, createOrderObj] = useMutation(CREATE_ORDER);
   const [createUser, createUserObj] = useMutation(CREATE_USER);
+
+  const [updateArea, updateAreaObj] = useMutation(UPDATE_AREA);
+  const [updateMType, updateMTypeObj] = useMutation(UPDATE_M_TYPE);
+  const [updateService, updateServiceObj] = useMutation(UPDATE_SERVICE);
+  const [updatePartner, updatePartnerObj] = useMutation(UPDATE_PARTNER);
+  const [updateOrder, updateOrderObj] = useMutation(UPDATE_ORDER);
 
   const handleSave = async () => {
     /* console.log("Create item", createItem, "to", state); */
@@ -134,6 +152,91 @@ export default function DashboardHeader({ state, item }) {
     setCreateItem({});
   };
 
+  useEffect(() => {
+    const arr = Object.values(createItem);
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === '') {
+        setValid(false);
+        break;
+      }
+      if (arr[i] !== '') {
+        setValid(true);
+      }
+    }
+  }, [createItem]);
+
+  const handleEdit = async (e) => {
+    switch (state) {
+      case 'zone':
+        await updateArea({
+          variables: {
+            id: parseFloat(e.id),
+            name: createItem.denumire,
+            extra_charge: parseFloat(createItem.tarif),
+          },
+          refetchQueries: [{ query: GET_ALL_AREAS }],
+        });
+        break;
+      case 'specializari':
+        await updateMType({
+          variables: { id: parseFloat(e.id), name: createItem.denumire },
+          refetchQueries: [{ query: GET_ALL_M_TYPES }],
+        });
+        break;
+      case 'servicii':
+        await updateService({
+          variables: {
+            id: parseFloat(e.id),
+            service_name: createItem.denumire,
+            type: parseFloat(createItem.specializare),
+            appointments_number: parseInt(createItem.sedinte),
+            appointment_duration: parseInt(createItem.durata),
+            service_cost: parseFloat(createItem.tarif),
+            profile_picture_url: createItem.profile_picture_url,
+          },
+          refetchQueries: [{ query: GET_ALL_SERVICES }],
+        });
+        break;
+      case 'terapeuti':
+        await updatePartner({
+          variables: {
+            id: parseFloat(e.id),
+            firstName: createItem.prenume,
+            lastName: createItem.nume,
+            phone: createItem.telefon,
+            email: createItem.email,
+            profilePictureUrl: createItem.profile_picture_url,
+            description: createItem.descriere,
+            mTypes: createItem.specializari,
+          },
+          refetchQueries: [{ query: GET_ALL_PARTNERS }],
+        });
+        break;
+      case 'comenzi':
+        await updateOrder({
+          variables: {
+            id: parseFloat(e.id),
+            firstName: createItem.prenume,
+            lastName: createItem.nume,
+            phone: createItem.telefon,
+            email: createItem.email,
+            region: createItem.judet,
+            city: createItem.localitate,
+            street: createItem.strada,
+            streetNumber: createItem.nr,
+            serviceId: parseFloat(createItem.serviciu),
+          },
+          refetchQueries: [
+            { query: GET_ALL_ORDERS, variables: { offset: 0, limit: 50 } },
+          ],
+        });
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="dashboard-header padding">
       <h3>{state}</h3>
@@ -144,6 +247,14 @@ export default function DashboardHeader({ state, item }) {
           state={state}
         >
           <ButtonSave />
+        </Link>
+      ) : matchEdit ? (
+        <Link
+          to={`/dashboard/${state}`}
+          onClick={() => handleEdit(item)}
+          state={state}
+        >
+          {valid ? <ButtonSave /> : ''}
         </Link>
       ) : matchItem ? (
         state !== 'admin' ? (

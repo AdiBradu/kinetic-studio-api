@@ -1,5 +1,5 @@
-import React from "react";
-import "./DataCell.component.scss";
+import React from 'react';
+import './DataCell.component.scss';
 
 export default function DataCell({ children }) {
   return (

@@ -1,5 +1,5 @@
-import React from "react";
-import "./Textarea.component.scss";
+import React from 'react';
+import './Textarea.component.scss';
 
 export default function Textarea({ value, handleChange, label, placeholder }) {
   return (

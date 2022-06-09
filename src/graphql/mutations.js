@@ -76,10 +76,10 @@ export const UPDATE_USER = gql`
 `;
 
 export const DELETE_USER = gql`
-  mutation DeleteUser($id: Float!){ 
+  mutation DeleteUser($id: Float!) {
     deleteUser(id: $id) {
       successful
-      message  
+      message
     }
   }
 `;
@@ -162,7 +162,8 @@ export const CREATE_SERVICE = gql`
 `;
 
 export const UPDATE_SERVICE = gql`
-  mutation CreateService(
+  mutation UpdateService(
+    $id: Float!
     $service_name: String!
     $type: Float!
     $appointments_number: Int!
@@ -170,7 +171,8 @@ export const UPDATE_SERVICE = gql`
     $service_cost: Float!
     $profile_picture_url: String!
   ) {
-    createService(
+    updateService(
+      id: $id
       service_name: $service_name
       type: $type
       appointments_number: $appointments_number
@@ -355,8 +357,20 @@ export const CREATE_ORDER_DETAIL = gql`
 `;
 
 export const UPDATE_ORDER_DETAIL = gql`
-  mutation UpdateOrderDetail($orderId: Float!, $partnerId: Float!, $startTime: Float!, $endTime: Float!, $scheduleOrder: Int!){ 
-    updateOrderDetail(orderId: $orderId, partnerId: $partnerId, startTime: $startTime, endTime: $endTime, scheduleOrder: $scheduleOrder) {
+  mutation UpdateOrderDetail(
+    $orderId: Float!
+    $partnerId: Float!
+    $startTime: Float!
+    $endTime: Float!
+    $scheduleOrder: Int!
+  ) {
+    updateOrderDetail(
+      orderId: $orderId
+      partnerId: $partnerId
+      startTime: $startTime
+      endTime: $endTime
+      scheduleOrder: $scheduleOrder
+    ) {
       successful
       message
     }

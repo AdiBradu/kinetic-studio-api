@@ -1,4 +1,4 @@
-@import "../../../styles/variables.module.scss";
+@import '../../../styles/variables.module.scss';
 .input-atom {
   display: flex;
   flex-direction: column;
@@ -26,8 +26,7 @@
       color: $grayLight;
     }
     &:focus {
-      outline: none;
-      box-shadow: inset 0 0 8px $primaryColorLight;
+      outline: 1px solid $primaryColor;
     }
   }
   p {

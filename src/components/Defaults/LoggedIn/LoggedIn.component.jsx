@@ -1,6 +1,6 @@
-import React from "react";
-import "./LoggedIn.component.scss";
-import Thumbnail from "../../Admin/Thumbnail/Thumbnail.component.jsx";
+import React from 'react';
+import './LoggedIn.component.scss';
+import Thumbnail from '../../Admin/Thumbnail/Thumbnail.component.jsx';
 
 export default function LoggedIn({ nume, prenume, thumbnail }) {
   return (

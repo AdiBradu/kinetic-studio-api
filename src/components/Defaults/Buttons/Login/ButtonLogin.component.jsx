@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonLogin.component.scss";
+import React from 'react';
+import './ButtonLogin.component.scss';
 
 export default function ButtonLogin() {
   return (

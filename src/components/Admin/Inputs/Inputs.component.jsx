@@ -1,29 +1,29 @@
-import React from "react";
-import "./Inputs.component.scss";
-import InputsSpecializari from "./Specializari/InputsSpecializari.jsx";
-import InputsZone from "./Zone/InputsZone";
-import InputsServicii from "./Servicii/InputsServicii";
-import InputsTerapeuti from "./Terapeuti/InputsTerapeuti.component";
-import InputsComenzi from "./Comenzi/InputsComenzi.component";
-import InputsAdmin from "./Admin/InputsAdmin.component";
+import React from 'react';
+import './Inputs.component.scss';
+import InputsSpecializari from './Specializari/InputsSpecializari.jsx';
+import InputsZone from './Zone/InputsZone';
+import InputsServicii from './Servicii/InputsServicii';
+import InputsTerapeuti from './Terapeuti/InputsTerapeuti.component';
+import InputsComenzi from './Comenzi/InputsComenzi.component';
+import InputsAdmin from './Admin/InputsAdmin.component';
 
 export default function Inputs({ state }) {
   return (
     <div className="inputs">
-      {state === "specializari" ? (
+      {state === 'specializari' ? (
         <InputsSpecializari state={state} />
-      ) : state === "zone" ? (
+      ) : state === 'zone' ? (
         <InputsZone state={state} />
-      ) : state === "servicii" ? (
+      ) : state === 'servicii' ? (
         <InputsServicii state={state} />
-      ) : state === "terapeuti" ? (
+      ) : state === 'terapeuti' ? (
         <InputsTerapeuti state={state} />
-      ) : state === "comenzi" ? (
+      ) : state === 'comenzi' ? (
         <InputsComenzi navlink={state} />
-      ) : state === "admin" ? (
+      ) : state === 'admin' ? (
         <InputsAdmin navlink={state} />
       ) : (
-        ""
+        ''
       )}
     </div>
   );

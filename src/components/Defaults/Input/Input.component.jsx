@@ -1,5 +1,6 @@
-import React from "react";
-import "./Input.component.scss";
+import React, { useRef } from 'react';
+import './Input.component.scss';
+import { checkIfActiveElement } from '../../../utils.js';
 
 export default function Input({
   label,
@@ -7,9 +8,12 @@ export default function Input({
   type,
   placeholder,
   handleChange,
-}) {  
+}) {
+  const inputRef = useRef(null);
+  checkIfActiveElement(inputRef);
+
   return (
-    <div className="input-atom">
+    <div className="input-atom" id={label}>
       <label>
         <p>{label}</p>
       </label>
@@ -20,6 +24,7 @@ export default function Input({
         placeholder={placeholder}
         onChange={handleChange}
         required
+        ref={inputRef}
       />
     </div>
   );

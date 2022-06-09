@@ -1,36 +1,35 @@
-import React, { useState, useEffect, useContext } from "react";
-import "./InputsComenzi.component.scss";
-import Input from "../../../Defaults/Input/Input.component.jsx";
-import SelectTerapeut from "../../../Defaults/Select/SelectTerapeut/SelectTerapeut.component";
-import { AppContext } from "../../../../AppContext.js";
-import DatePicker from "react-datepicker";
+import React, { useState, useEffect, useContext } from 'react';
+import './InputsComenzi.component.scss';
+import Input from '../../../Defaults/Input/Input.component.jsx';
+import SelectTerapeut from '../../../Defaults/Select/SelectTerapeut/SelectTerapeut.component';
+import { AppContext } from '../../../../AppContext.js';
+import DatePicker from 'react-datepicker';
 import addMonths from 'addmonths';
-import SelectTimeSlot from "../../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component";
-import SelectServiciu from "../../../Defaults/Select/SelectServiciu/SelectServiciu.component";
-import { checkIfCalendar, checkIfProgramari } from "../../../../utils.js";
-import useGetTerapeutCalendarAndProgramari from "../../../../hooks/useGetTerapeutCalendarAndProgramari";
-import useGetTimeslotsForDateAndTerapeut from "../../../../hooks/useGetTimeslotsForDateAndTerapeut";
-import useSetServiciuContext from "../../../../hooks/useSetServiciuContext";
-import useFilterTerapeuti from "../../../../hooks/useFilterTerapeuti";
-import useCreateProgramari from "../../../../hooks/useCreateProgramari";
-import useCreateComanda from "../../../../hooks/useCreateComanda";
-import useFilterHours from "../../../../hooks/useFilterHours";
+import SelectTimeSlot from '../../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component';
+import SelectServiciu from '../../../Defaults/Select/SelectServiciu/SelectServiciu.component';
+import { checkIfCalendar, checkIfProgramari } from '../../../../utils.js';
+import useGetTimeslotsForDateAndTerapeut from '../../../../hooks/useGetTimeslotsForDateAndTerapeut';
+import useSetServiciuContext from '../../../../hooks/useSetServiciuContext';
+import useFilterTerapeuti from '../../../../hooks/useFilterTerapeuti';
+import useCreateProgramari from '../../../../hooks/useCreateProgramari';
+import useCreateComanda from '../../../../hooks/useCreateComanda';
+import useFilterHours from '../../../../hooks/useFilterHours';
 
 export default function InputsComenzi() {
   const { createItemObj } = useContext(AppContext);
   const setCreateItem = createItemObj[1];
   const [comanda, setComanda] = useState({
-    nume: "",
-    prenume: "",
-    telefon: "",
-    email: "",
-    judet: "",
-    localitate: "",
-    strada: "",
-    nr: "",
-    serviciu: "",
-    sedinte: "",
-    specializare: "",
+    nume: '',
+    prenume: '',
+    telefon: '',
+    email: '',
+    judet: '',
+    localitate: '',
+    strada: '',
+    nr: '',
+    serviciu: '',
+    sedinte: '',
+    specializare: '',
     programari: [],
   });
 
@@ -42,7 +41,7 @@ export default function InputsComenzi() {
     terapeutId,
     setTerapeutId,
     terapeutCalendar,
-    terapeutProgramari
+    terapeutProgramari,
   } = useSetServiciuContext(comanda.serviciu);
 
   const { filteredTerapeuti } = useFilterTerapeuti(specializare);
@@ -56,7 +55,7 @@ export default function InputsComenzi() {
     startDate,
     terapeutId,
     timeSlotStart,
-    sedinte
+    sedinte,
   );
 
   useCreateComanda(programari, sedinte, specializare, comanda, setComanda);
@@ -86,23 +85,23 @@ export default function InputsComenzi() {
     });
   };
   //END
-  
+
   /* const { terapeutCalendar, terapeutProgramari } =
     useGetTerapeutCalendarAndProgramari(terapeutId); */
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
     useGetTimeslotsForDateAndTerapeut(
       startDate,
       terapeutCalendar,
-      terapeutProgramari
+      terapeutProgramari,
     );
-    
+
   const { filteredHours } = useFilterHours(
     calendarTimeslotsForDate,
     programariTimeslotsForDate,
     startDate,
-    durataSedinta
+    durataSedinta,
   );
-  
+
   return (
     <>
       {servicii && (
@@ -112,71 +111,71 @@ export default function InputsComenzi() {
               value={comanda.nume}
               handleChange={handleChange}
               name="nume"
-              label={"nume"}
-              type={"text"}
-              placeholder={"type"}
+              label={'nume'}
+              type={'text'}
+              placeholder={'type'}
             />
             <Input
               value={comanda.prenume}
               handleChange={handleChange}
               name="prenume"
-              label={"prenume"}
-              type={"text"}
-              placeholder={"type"}
+              label={'prenume'}
+              type={'text'}
+              placeholder={'type'}
             />
             <Input
               value={comanda.telefon}
               handleChange={handleChange}
               name="telefon"
-              label={"telefon"}
-              type={"text"}
-              placeholder={"type"}
+              label={'telefon'}
+              type={'text'}
+              placeholder={'type'}
             />
             <Input
               value={comanda.email}
               handleChange={handleChange}
               name="email"
-              label={"email"}
-              type={"email"}
-              placeholder={"email"}
+              label={'email'}
+              type={'email'}
+              placeholder={'email'}
             />
             <Input
               value={comanda.judet}
               handleChange={handleChange}
               name="judet"
-              label={"judet"}
-              type={"text"}
-              placeholder={"type"}
+              label={'judet'}
+              type={'text'}
+              placeholder={'type'}
             />
             <Input
               value={comanda.localitate}
               handleChange={handleChange}
               name="localitate"
-              label={"localitate"}
-              type={"text"}
-              placeholder={"type"}
+              label={'localitate'}
+              type={'text'}
+              placeholder={'type'}
             />
             <Input
               value={comanda.strada}
               handleChange={handleChange}
               name="strada"
-              label={"strada"}
-              type={"text"}
-              placeholder={"type"}
+              label={'strada'}
+              type={'text'}
+              placeholder={'type'}
             />
             <Input
               value={comanda.nr}
               handleChange={handleChange}
               name="nr"
-              label={"nr"}
-              type={"text"}
-              placeholder={"type"}
+              label={'nr'}
+              type={'text'}
+              placeholder={'type'}
             />
             <SelectServiciu
               value={comanda.serviciu}
               handleChange={handleChange}
               name="serviciu"
-              label={"serviciu"}
+              label={'serviciu'}
               options={servicii}
             />
             {comanda.serviciu && (
@@ -184,11 +183,11 @@ export default function InputsComenzi() {
                 value={terapeutId.id}
                 handleChange={handleChangeTerapeut}
                 name="terapeut"
-                label={"terapeut"}
+                label={'terapeut'}
                 options={filteredTerapeuti}
               />
             )}
-            {terapeutId.id !== "" && (
+            {terapeutId.id !== '' && (
               <div className="calendar">
                 <label>
                   <p>Alege data</p>
@@ -199,10 +198,10 @@ export default function InputsComenzi() {
                   startDate={startDate}
                   dayClassName={(date) =>
                     checkIfProgramari(terapeutProgramari, date)
-                      ? "active-programare"
+                      ? 'active-programare'
                       : checkIfCalendar(terapeutCalendar, date)
-                      ? "active-calendar"
-                      : "innactive"
+                      ? 'active-calendar'
+                      : 'innactive'
                   }
                   minDate={new Date()}
                   maxDate={addMonths(new Date(), 3)}
@@ -216,7 +215,7 @@ export default function InputsComenzi() {
                 value={timeSlotStart}
                 handleChange={handleChangeTime}
                 name="time"
-                label={"time"}
+                label={'time'}
                 options={filteredHours}
               />
             )}

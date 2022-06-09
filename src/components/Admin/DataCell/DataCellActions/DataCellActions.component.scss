@@ -1,17 +1,13 @@
-@import "../../../../styles/variables.module.scss";
+@import '../../../../styles/variables.module.scss';
 
 .data-cell {
-  width: 100%;
-  padding: calc(0.5 * #{$unit}) calc(0.5 * #{$unit});
-  text-transform: capitalize;
   display: flex;
+  flex: 0 1 100%;
+  padding: calc(0.5 * #{$unit}) calc(0.5 * #{$unit});
   gap: 12px;
   align-items: center;
-  &:first-child {
-    max-width: calc(5 * #{$unit});
-  }
+  flex-basis: 100%;
   &:last-child {
-    max-width: calc(5 * #{$unit});
     justify-content: end;
   }
 }

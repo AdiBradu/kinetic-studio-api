@@ -1,5 +1,5 @@
-import React from "react";
-import "./LoadMoreButton.component.scss";
+import React from 'react';
+import './LoadMoreButton.component.scss';
 
 export default function LoadMoreButton(props) {
   return (

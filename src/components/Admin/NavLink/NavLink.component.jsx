@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import { useApolloClient, useMutation } from '@apollo/client';
-import "./NavLink.component.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { AppContext } from "../../../AppContext";
-import { useLocation } from "react-router";
+import './NavLink.component.scss';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppContext } from '../../../AppContext';
+import { useLocation } from 'react-router';
 import { LOGOUT } from '../../../graphql/mutations';
 
 export default function NavLink({ navlink }) {
@@ -23,7 +23,7 @@ export default function NavLink({ navlink }) {
 
   const [logoutUsr, logoutUsrObj] = useMutation(LOGOUT);
   const handleLogOut = () => {
-    if ((navlink === "log out") && isLoggedIn) {
+    if (navlink === 'log out' && isLoggedIn) {
       sessionStorage.removeItem('item');
       setIsLoggedIn(false);
       logoutUsr();
@@ -38,11 +38,11 @@ export default function NavLink({ navlink }) {
 
   return (
     <Link
-      to={navlink === "log out" ? `/` : `/dashboard/${navlink}`}
+      to={navlink === 'log out' ? `/` : `/dashboard/${navlink}`}
       state={`${navlink}`}
       onClick={handleNavLinkClick}
     >
-      <div className={active ? "navlink-admin active" : "navlink-admin"}>
+      <div className={active ? 'navlink-admin active' : 'navlink-admin'}>
         <p>{navlink}</p>
       </div>
     </Link>

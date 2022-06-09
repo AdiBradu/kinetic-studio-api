@@ -1,5 +1,5 @@
-import React from "react";
-import "./ButtonSave.component.scss";
+import React from 'react';
+import './ButtonSave.component.scss';
 
 export default function ButtonSave() {
   return (

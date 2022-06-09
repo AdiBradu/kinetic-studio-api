@@ -1,34 +1,33 @@
-import React, { useContext, useState } from "react";
-import "./Item.component.scss";
-import { AppContext } from "../../../AppContext";
-import Sedinte from "../Sedinte/Sedinte.component";
-import DataCell from "../DataCell/DataCell.component";
-import { useLocation } from "react-router";
-import DatePicker from "react-datepicker";
+import React, { useContext, useState } from 'react';
+import './Item.component.scss';
+import { AppContext } from '../../../AppContext';
+import Sedinte from '../Sedinte/Sedinte.component';
+import DataCell from '../DataCell/DataCell.component';
+import { useLocation } from 'react-router';
+import DatePicker from 'react-datepicker';
 import addMonths from 'addmonths';
 import {
   checkIfProgramari,
   checkIfCalendar,
   minutesToTimestamp,
   timestampToHoursAndMinutes,
-} from "../../../utils.js";
-import useGetTerapeutCalendarAndProgramari from "../../../hooks/useGetTerapeutCalendarAndProgramari";
-import useGetTimeslotsForDateAndTerapeut from "../../../hooks/useGetTimeslotsForDateAndTerapeut";
-import useFilterHours from "../../../hooks/useFilterHours";
-import SelectTimeSlot from "../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component.jsx";
-import ButtonCustom from "../../Defaults/Buttons/CustomButton/ButtonCustom.component.jsx";
-import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { CREATE_PARTNER_SCHEDULE } from "../../../graphql/mutations";
-import { GET_PARTNER_CURRENT_SCHEDULE } from "../../../graphql/queries";
-import User from "../User/User.component";
+} from '../../../utils.js';
+import useGetTerapeutCalendarAndProgramari from '../../../hooks/useGetTerapeutCalendarAndProgramari';
+import useGetTimeslotsForDateAndTerapeut from '../../../hooks/useGetTimeslotsForDateAndTerapeut';
+import useFilterHours from '../../../hooks/useFilterHours';
+import SelectTimeSlot from '../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component.jsx';
+import ButtonCustom from '../../Defaults/Buttons/CustomButton/ButtonCustom.component.jsx';
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { CREATE_PARTNER_SCHEDULE } from '../../../graphql/mutations';
+import { GET_PARTNER_CURRENT_SCHEDULE } from '../../../graphql/queries';
+import User from '../User/User.component';
 
-export default function Item({ item }) {  
- 
+export default function Item({ item }) {
   const { isTablet } = useContext(AppContext);
   const location = useLocation();
   const navlink = location.state;
- 
+
   //Datepicker
   const [startDate, setStartDate] = useState(new Date());
 
@@ -40,41 +39,56 @@ export default function Item({ item }) {
 
   const [createPSchd, createPSchdObj] = useMutation(CREATE_PARTNER_SCHEDULE);
 
-  const handleChangeTimeSlotStart = (e) => {    
+  const handleChangeTimeSlotStart = (e) => {
     const value = minutesToTimestamp(e.target.value, startDate);
-    
     setTimeSlotStart(value);
   };
+
   const handleChangeTimeSlotEnd = (e) => {
     const value = minutesToTimestamp(e.target.value, startDate);
     setTimeSlotEnd(value);
   };
+
   const handleAdaugaProgram = async () => {
     console.log(
-      `Seteaza program terapeut cu datele: terapeut: ${item.id}, timeSlotStar: ${timeSlotStart}, timeSlotEnd: ${timeSlotEnd}`
-    );        
-    let newPSchd = await createPSchd({variables: {id: parseFloat(item.id), startTime: parseFloat(timeSlotStart), endTime: parseFloat(timeSlotEnd)}, refetchQueries: [ { query: GET_PARTNER_CURRENT_SCHEDULE, variables: {id: parseFloat(item.id)} }]});      
-    
-    if(newPSchd.errors) {
+      `Seteaza program terapeut cu datele: terapeut: ${item.id}, timeSlotStar: ${timeSlotStart}, timeSlotEnd: ${timeSlotEnd}`,
+    );
+    let newPSchd = await createPSchd({
+      variables: {
+        id: parseFloat(item.id),
+        startTime: parseFloat(timeSlotStart),
+        endTime: parseFloat(timeSlotEnd),
+      },
+      refetchQueries: [
+        {
+          query: GET_PARTNER_CURRENT_SCHEDULE,
+          variables: { id: parseFloat(item.id) },
+        },
+      ],
+    });
+
+    if (newPSchd.errors) {
       setTimeSlotError(true);
     } else {
-      setTimeSlotEnd();
       setTimeSlotSuccess(true);
-    }  
+      setTimeout(() => {
+        setTimeSlotSuccess(false);
+      }, 3000);
+    }
   };
 
   const { terapeutCalendar, terapeutProgramari } =
-    useGetTerapeutCalendarAndProgramari({ terapeut: item.id });   
+    useGetTerapeutCalendarAndProgramari({ terapeut: item.id });
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
     useGetTimeslotsForDateAndTerapeut(
       startDate,
       terapeutCalendar,
-      terapeutProgramari
+      terapeutProgramari,
     );
   const { filteredHours } = useFilterHours(
     calendarTimeslotsForDate,
     programariTimeslotsForDate,
-    startDate
+    startDate,
   );
 
   return (
@@ -93,24 +107,22 @@ export default function Item({ item }) {
               ))}
             </div>
           </div>
-          {navlink === "comenzi" && <Sedinte navlink={navlink} item={item} />}
+          {navlink === 'comenzi' && <Sedinte navlink={navlink} item={item} />}
         </>
       ) : (
         <>
           <div className="card">
             {Object.keys(item).map((key, index) => (
-  
               <div className="card-row">
                 <DataCell>{key}</DataCell>
                 <DataCell>{Object.values(item)[index]}</DataCell>
               </div>
             ))}
           </div>
-          {navlink === "comenzi" && <Sedinte navlink={navlink} item={item} />}
-          
+          {navlink === 'comenzi' && <Sedinte navlink={navlink} item={item} />}
         </>
       )}
-      {navlink === "terapeuti" && (
+      {navlink === 'terapeuti' && (
         <div className="calendar">
           <h3>Program terapeut</h3>
           <DatePicker
@@ -118,10 +130,10 @@ export default function Item({ item }) {
             startDate={startDate}
             dayClassName={(date) =>
               checkIfProgramari(terapeutProgramari, date)
-                ? "active-programare"
+                ? 'active-programare'
                 : checkIfCalendar(terapeutCalendar, date)
-                ? "active-calendar"
-                : "open-calendar"
+                ? 'active-calendar'
+                : 'open-calendar'
             }
             minDate={new Date()}
             maxDate={addMonths(new Date(), 3)}
@@ -132,37 +144,35 @@ export default function Item({ item }) {
             <>
               {calendarTimeslotsForDate.start && (
                 <p className="info-message">{`Exista un program stabilit pentru acesta zi. ${timestampToHoursAndMinutes(
-                  calendarTimeslotsForDate.start
+                  calendarTimeslotsForDate.start,
                 )} - ${timestampToHoursAndMinutes(
-                  calendarTimeslotsForDate.end
+                  calendarTimeslotsForDate.end,
                 )}`}</p>
               )}
               {timeSlotSuccess && (
-                <p className="info-message">{`Adaugat cu succes`}</p>
+                <p className="success-message">{`Adaugat cu succes`}</p>
               )}
               {timeSlotError && (
                 <p className="warning-message">{`Eroare adaugare program`}</p>
               )}
-              <p className="start-end-time">Start time</p>
               <SelectTimeSlot
                 handleChange={handleChangeTimeSlotStart}
-                label={"timeSlotStart"}
+                label={'start time'}
                 placeholder="alege ora"
-                options={filteredHours}                
+                options={filteredHours}
               />
-              <p className="start-end-time">End time</p>
               <SelectTimeSlot
                 handleChange={handleChangeTimeSlotEnd}
-                label={"timeSlotEnd"}
+                label={'end time'}
                 placeholder="alege ora"
                 options={filteredHours}
               />
             </>
           ) : (
             <p className="warning-message">{`Exista programari in acesta zi si nu poti modifica programul! ${timestampToHoursAndMinutes(
-              programariTimeslotsForDate.start
+              programariTimeslotsForDate.start,
             )} - ${timestampToHoursAndMinutes(
-              programariTimeslotsForDate.end
+              programariTimeslotsForDate.end,
             )}`}</p>
           )}
           {timeSlotStart & timeSlotEnd ? (
@@ -172,14 +182,14 @@ export default function Item({ item }) {
               onClick={() => handleAdaugaProgram()}
               item={item}
             >
-              <ButtonCustom status={"adauga program"} />
+              <ButtonCustom status={'adauga program'} />
             </Link>
           ) : (
-            ""
+            ''
           )}
         </div>
       )}
-      {navlink === "admin" && <User navlink={navlink} item={item} />}
+      {navlink === 'admin' && <User navlink={navlink} item={item} />}
     </div>
   );
 }

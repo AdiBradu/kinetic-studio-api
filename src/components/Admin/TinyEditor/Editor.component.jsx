@@ -1,4 +1,5 @@
 import { Editor } from '@tinymce/tinymce-react';
+import './Editor.component.scss';
 
 // TinyMCE so the global var exists
 // eslint-disable-next-line no-unused-vars
@@ -44,22 +45,25 @@ export default function TinyEditorComponent(props) {
   // loading process and is instead loaded as a string via content_style
   const handleUpdate = (event, editor) => {
     let data = editor.getContent();
-    props.changeHandler(data);    
+    props.changeHandler(data);
   };
-  
+
   return (
-    <Editor
-      initialValue={props.initialValue}
-      onChange={handleUpdate}
-      onKeyUp={handleUpdate}
-      onNodeChange={handleUpdate}
-      init={{
-        skin: false,
-        content_css: false,
-        content_style: [contentCss, contentUiCss].join('\n'),
-        toolbar: 'undo redo styles bold italic alignleft aligncenter alignright outdent indent code image table link',
-        plugins: 'code image table link',
-      }}
-    />
+    <div className="editor">
+      <Editor
+        initialValue={props.initialValue}
+        onChange={handleUpdate}
+        onKeyUp={handleUpdate}
+        onNodeChange={handleUpdate}
+        init={{
+          skin: false,
+          content_css: false,
+          content_style: [contentCss, contentUiCss].join('\n'),
+          toolbar:
+            'undo redo styles bold italic alignleft aligncenter alignright outdent indent code image table link',
+          plugins: 'code image table link',
+        }}
+      />
+    </div>
   );
 }
