@@ -16,7 +16,7 @@ export const setElementHeight = (input, name, height) => {
 };
 
 export const setDashboardHeight = () => {
-  const navbar = document.getElementById('navbar');
+  /* const navbar = document.getElementById('navbar');
   const navbarHeight = navbar.offsetHeight;
   const dashboard = document.getElementById('dashboard');
   dashboard.style.setProperty(
@@ -26,7 +26,7 @@ export const setDashboardHeight = () => {
   dashboard.style.setProperty(
     '--dashboard-login-padding-bottom',
     `${navbarHeight}px`,
-  );
+  ); */
 };
 
 export const documentHeight = () => {

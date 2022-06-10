@@ -7,12 +7,14 @@ import Admin from '../../../data/admin.json';
 import { Link } from 'react-router-dom';
 import { LOGIN } from '../../../graphql/mutations';
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router';
 
 export default function Login() {
   const { isLoggedInObj } = useContext(AppContext);
   const setIsLoggedIn = isLoggedInObj[1];
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loginUsr, loginUsrObj] = useMutation(LOGIN);
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -22,13 +24,14 @@ export default function Login() {
     });
   };
 
-  const handleLogin = () => {
-    loginUsr({
+  const handleLogin = async () => {
+    let asd = await loginUsr({
       variables: {
         email: credentials.email,
         password: credentials.password,
       },
     });
+    return asd;
   };
 
   return (
@@ -51,14 +54,16 @@ export default function Login() {
       />
       <Link
         to={`/dashboard`}
-        onClick={() => {
-          loginUsr({
+        onClick={async (e) => {
+          e.preventDefault();
+          let zzz = await loginUsr({
             variables: {
               email: credentials.email,
               password: credentials.password,
             },
-          });
-          setIsLoggedIn(loginUsrObj?.data?.login);
+          });          
+          setIsLoggedIn(zzz?.data?.login ? zzz?.data?.login : false);
+          navigate('/dashboard');
         }}
       >
         <ButtonLogin />

@@ -8,7 +8,7 @@ import { AppContext } from '../../../../AppContext';
 import Inputs from '../../Inputs/Inputs.component.jsx';
 import Edits from '../../Edits/Edits.component.jsx';
 import Item from '../../Item/Item.component.jsx';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 import DataPresentation from '../../DataPresentation/DataPresentation.component';
 import Programare from '../../Programare/Programare.component';
 import Login from '../../../Defaults/LogIn/Login.component';
@@ -26,10 +26,10 @@ export default function Dashboard() {
   const matchAdd = useMatch('/dashboard/:id/adauga');
   const matchEdit = useMatch('/dashboard/:id/editeaza');
   const matchItem = useMatch('/dashboard/:id/:id');
-
-  return (
+  console.log('isLoggedIn', isLoggedIn);
+  return isLoggedIn ? (
     <div className="dashboard" id="dashboard">
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? ( */}
         <div className="dashboard-wrapper">
           {isDesktop && <Sidebar />}
           <div className="dashboard-group">
@@ -69,9 +69,9 @@ export default function Dashboard() {
             )}
           </div>
         </div>
-      ) : (
-        <Login />
-      )}
+      {/* ) : (
+        <Navigate to="/login" />
+      )} */ }
     </div>
-  );
+  ) : (<Navigate to="/login" />);
 }

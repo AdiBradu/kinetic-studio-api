@@ -5,6 +5,7 @@ import Navbar from './components/Defaults/Navbar/Navbar.component.jsx';
 import Dashboard from './components/Admin/Pages/Dashboard/Dashboard.component.jsx';
 import Logout from './components/Admin/Pages/Logout/Logout.component';
 import { documentHeight, setDashboardHeight, resizeRadar } from './utils.js';
+import Login from './components/Defaults/LogIn/Login.component';
 
 documentHeight();
 resizeRadar(documentHeight);
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path='/login' element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/dashboard/specializari" element={<Dashboard />} />
