@@ -1,9 +1,16 @@
 @import '../../../styles/variables.module.scss';
 .login {
   width: 100%;
-  max-width: 480px;
-  margin: auto;
+  height: var(--dashboard-height);
   padding-left: $unit;
   padding-right: $unit;
   padding-bottom: var(--dashboard-login-padding-bottom);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  a {
+    width: 100%;
+    max-width: 480px;
+  }
 }

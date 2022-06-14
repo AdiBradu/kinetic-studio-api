@@ -25,9 +25,7 @@ export const AppProvider = (props) => {
   const [user, setUser] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState();
   const loginQObj = useQuery(MY_DATA);
-  const loginData = loginQObj?.data
-  ? loginQObj.data['me']
-  : [];
+  const loginData = loginQObj?.data ? loginQObj.data['me'] : [];
   const itemReset = (value) => {
     setItem(value);
     sessionStorage.setItem('item', JSON.stringify(value));

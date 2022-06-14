@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Login.component.scss';
 import Input from '../Input/Input.component';
 import ButtonLogin from '../Buttons/Login/ButtonLogin.component';
 import { AppContext } from '../../../AppContext';
-import Admin from '../../../data/admin.json';
 import { Link } from 'react-router-dom';
 import { LOGIN } from '../../../graphql/mutations';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router';
+import { setDashboardHeight, resizeRadar } from '../../../utils.js';
 
 export default function Login() {
   const { isLoggedInObj } = useContext(AppContext);
@@ -34,8 +34,13 @@ export default function Login() {
     return asd;
   };
 
+  useEffect(() => {
+    setDashboardHeight();
+    resizeRadar(setDashboardHeight);
+  }, []);
+
   return (
-    <div className="login">
+    <div className="login" id="login">
       <Input
         value={credentials.email}
         handleChange={handleChange}
@@ -61,7 +66,7 @@ export default function Login() {
               email: credentials.email,
               password: credentials.password,
             },
-          });          
+          });
           setIsLoggedIn(zzz?.data?.login ? zzz?.data?.login : false);
           navigate('/dashboard');
         }}

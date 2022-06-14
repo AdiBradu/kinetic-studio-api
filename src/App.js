@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.scss';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Defaults/Navbar/Navbar.component.jsx';
 import Dashboard from './components/Admin/Pages/Dashboard/Dashboard.component.jsx';
 import Logout from './components/Admin/Pages/Logout/Logout.component';
-import { documentHeight, setDashboardHeight, resizeRadar } from './utils.js';
+import { documentHeight } from './utils.js';
 import Login from './components/Defaults/LogIn/Login.component';
 
 documentHeight();
-resizeRadar(documentHeight);
 
 function App() {
-  useEffect(() => {
-    setDashboardHeight();
-    resizeRadar(setDashboardHeight);
-  }, []);
-
   return (
     <div className="App">
       <Navbar />
@@ -23,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path='/login' element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/dashboard/specializari" element={<Dashboard />} />

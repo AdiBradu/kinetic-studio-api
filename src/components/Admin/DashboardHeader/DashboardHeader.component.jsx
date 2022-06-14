@@ -56,7 +56,6 @@ export default function DashboardHeader({ state }) {
   const [updateOrder, updateOrderObj] = useMutation(UPDATE_ORDER);
 
   const handleSave = async () => {
-    /* console.log("Create item", createItem, "to", state); */
     switch (state) {
       case 'zone':
         await createArea({
@@ -154,6 +153,7 @@ export default function DashboardHeader({ state }) {
 
   useEffect(() => {
     const arr = Object.values(createItem);
+    console.log(arr);
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === '') {
         setValid(false);
@@ -224,7 +224,9 @@ export default function DashboardHeader({ state }) {
             city: createItem.localitate,
             street: createItem.strada,
             streetNumber: createItem.nr,
-            serviceId: parseFloat(createItem.serviciu),
+            serviceId: parseFloat(item.idServiciu),
+            subtotal: parseFloat(item.subtotal),
+            total: parseFloat(item.total),
           },
           refetchQueries: [
             { query: GET_ALL_ORDERS, variables: { offset: 0, limit: 50 } },

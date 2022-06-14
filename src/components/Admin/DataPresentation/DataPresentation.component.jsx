@@ -119,14 +119,14 @@ export default function DataPresentation({ state }) {
         <>
           {isDesktop ? (
             <div className="table">
-              <div className="table-header">
+              <div className="table-header table-header-comenzi">
                 {Object.keys(dataP[0]).map((key, index) => (
                   <DataCell key={index}>{key}</DataCell>
                 ))}
                 <DataCell>{'Actions'}</DataCell>
               </div>
               {dataP.map((el, index) => (
-                <div className="table-row" key={index}>
+                <div className="table-row table-row-comenzi" key={index}>
                   {Object.values(el).map((e, i) => (
                     <DataCell key={i}>{e}</DataCell>
                   ))}
@@ -196,7 +196,7 @@ export default function DataPresentation({ state }) {
                         >
                           <EditIcon
                             color={variables.primaryColor}
-                            bgColor={variables.primaryColorLight}
+                            bgColor={variables.primaryColorExtraLight}
                           />
                         </Link>
                       ) : (
@@ -209,7 +209,7 @@ export default function DataPresentation({ state }) {
                       >
                         <ViewIcon
                           color={variables.primaryColor}
-                          bgColor={variables.primaryColorLight}
+                          bgColor={variables.primaryColorExtraLight}
                         />
                       </Link>
                       <Link
@@ -219,7 +219,7 @@ export default function DataPresentation({ state }) {
                       >
                         <DeleteIcon
                           color={variables.primaryColor}
-                          bgColor={variables.primaryColorLight}
+                          bgColor={variables.primaryColorExtraLight}
                         />
                       </Link>
                     </DataCellActions>

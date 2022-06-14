@@ -33,12 +33,10 @@ const useTableViewAndDelete = (navlink) => {
   const [deleteUser, deleteUserObj] = useMutation(DELETE_USER);
 
   const handleView = (e) => {
-    console.log(e);
     itemReset(e);
   };
 
   const handleDelete = async (e) => {
-    /* console.log("Delete item", e, "from", navlink); */
     switch (navlink) {
       case 'specializari':
         await deleteMType({

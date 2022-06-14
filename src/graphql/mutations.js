@@ -306,8 +306,8 @@ export const UPDATE_PARTNER = gql`
     $lastName: String!
     $phone: String!
     $email: String!
-    $profilePictureUrl: String
-    $description: String
+    $profilePictureUrl: String!
+    $description: String!
     $mTypes: String!
   ) {
     updatePartner(
@@ -429,6 +429,8 @@ export const UPDATE_ORDER = gql`
     $street: String!
     $streetNumber: String!
     $serviceId: Float!
+    $subtotal: Float!
+    $total: Float!
   ) {
     updateOrder(
       id: $id
@@ -441,6 +443,8 @@ export const UPDATE_ORDER = gql`
       street: $street
       streetNumber: $streetNumber
       serviceId: $serviceId
+      subtotal: $subtotal
+      total: $total
     ) {
       successful
       message

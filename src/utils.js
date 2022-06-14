@@ -16,17 +16,30 @@ export const setElementHeight = (input, name, height) => {
 };
 
 export const setDashboardHeight = () => {
-  /* const navbar = document.getElementById('navbar');
+  const navbar = document.getElementById('navbar');
   const navbarHeight = navbar.offsetHeight;
   const dashboard = document.getElementById('dashboard');
-  dashboard.style.setProperty(
-    '--dashboard-height',
-    `${window.innerHeight - navbarHeight}px`,
-  );
-  dashboard.style.setProperty(
-    '--dashboard-login-padding-bottom',
-    `${navbarHeight}px`,
-  ); */
+  const login = document.getElementById('login');
+  if (dashboard) {
+    dashboard.style.setProperty(
+      '--dashboard-height',
+      `${window.innerHeight - navbarHeight}px`,
+    );
+    dashboard.style.setProperty(
+      '--dashboard-login-padding-bottom',
+      `${navbarHeight}px`,
+    );
+  }
+  if (login) {
+    login.style.setProperty(
+      '--dashboard-height',
+      `${window.innerHeight - navbarHeight}px`,
+    );
+    login.style.setProperty(
+      '--dashboard-login-padding-bottom',
+      `${navbarHeight}px`,
+    );
+  }
 };
 
 export const documentHeight = () => {
@@ -36,10 +49,6 @@ export const documentHeight = () => {
 
 export const resizeRadar = (input) => {
   window.addEventListener('resize', input);
-};
-
-export const wathcResize = () => {
-  window.addEventListener('resize', documentHeight);
 };
 
 export const timestampToDate = (timestamp) => {
@@ -136,7 +145,6 @@ export const toCapitalCase = (word) => {
 };
 
 export const processData = (data, navlink) => {
-  console.log(data);
   const dataP = [];
   if (data && data.length && navlink) {
     if (navlink === 'terapeuti') {
@@ -148,6 +156,7 @@ export const processData = (data, navlink) => {
           telefon: el.phone,
           email: el.email.toLowerCase(),
           specializari: toCapitalCase(el.m_types),
+          descriere: el.description,
         };
         dataP.push(objTerapeuti);
       });
@@ -164,8 +173,10 @@ export const processData = (data, navlink) => {
           localitate: toCapitalCase(el.customer_city),
           strada: toCapitalCase(el.customer_street),
           nr: el.customer_street_number.toUpperCase(),
-          // serviciu: el.service_name,
-          // idServiciu: el.service_id,
+          serviciu: el.service_name,
+          idServiciu: el.service_id,
+          subtotal: el.order_subtotal,
+          total: el.order_total,
         };
         dataP.push(objComenzi);
       });
