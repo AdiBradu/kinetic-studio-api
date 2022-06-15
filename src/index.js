@@ -27,7 +27,7 @@ const link = createHttpLink({
   uri:
     process.env.NODE_ENV !== 'production'
       ? 'http://localhost:4040/graphql'
-      : 'http://localhost:4040/graphql',
+      : 'https://endpoint.kineticstudio.ro/graphql',
   credentials: 'include',
 });
 
