@@ -1,0 +1,15 @@
+{
+  "short_name": "Kinetic Studio",
+  "name": "Kinetic Studio",
+  "description": "Masaj de realaxare si terapeutic la domiciliu",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "1080x1080"
+    }
+  ],
+  "start_url": ".",
+  "display": "fullscreen",
+  "background_color": "#42A5F5"
+}
