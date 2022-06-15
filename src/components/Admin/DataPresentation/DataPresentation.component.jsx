@@ -31,6 +31,29 @@ export default function DataPresentation({ state }) {
   const location = useLocation();
   const navlink = location.state;
   const [showMore, setShowMore] = useState(false);
+  const [displayClass, setDisplayClass] = useState();
+
+  useEffect(() => {
+    if (state === 'specializari'){
+      setDisplayClass('display-specializari')
+    }
+    if (state === 'zone'){
+      setDisplayClass('display-zone')
+    }
+    if (state === 'servicii'){
+      setDisplayClass('display-servicii')
+    }
+    if (state === 'terapeuti'){
+      setDisplayClass('display-terapeuti')
+    }
+    if (state === 'comenzi'){
+      setDisplayClass('display-comenzi')
+    }
+    if (state === 'admin'){
+      setDisplayClass('display-admin')
+    }
+  }, [state])
+  
 
   const qLimit = 50;
   let currentQuery;
@@ -119,14 +142,14 @@ export default function DataPresentation({ state }) {
         <>
           {isDesktop ? (
             <div className="table">
-              <div className="table-header table-header-comenzi">
+              <div className={`table-header ${displayClass}`}>
                 {Object.keys(dataP[0]).map((key, index) => (
                   <DataCell key={index}>{key}</DataCell>
                 ))}
                 <DataCell>{'Actions'}</DataCell>
               </div>
               {dataP.map((el, index) => (
-                <div className="table-row table-row-comenzi" key={index}>
+                <div className={`table-row ${displayClass}`} key={index}>
                   {Object.values(el).map((e, i) => (
                     <DataCell key={i}>{e}</DataCell>
                   ))}

@@ -28,7 +28,7 @@ export default function InputsComenzi() {
     localitate: item?.localitate || '',
     strada: item?.strada || '',
     nr: item?.nr || '',
-    serviciu: '',
+    serviciu: item?.serviciu || '',
     sedinte: item?.sedinte || '',
     specializare: '',
     programari: [],

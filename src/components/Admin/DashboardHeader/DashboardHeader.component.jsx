@@ -40,7 +40,6 @@ export default function DashboardHeader({ state }) {
   const matchItem = useMatch('/dashboard/:id/:id');
 
   const [valid, setValid] = useState(true);
-  console.log(valid);
 
   const [createArea, createAreaObj] = useMutation(CREATE_AREA);
   const [createMType, createMTypeObj] = useMutation(CREATE_M_TYPE);

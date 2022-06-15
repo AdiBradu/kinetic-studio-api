@@ -59,9 +59,9 @@
       width: 100%;
     }
     .data-cell {
-      &:first-of-type {
-        display: none;
-      }
+      // &:first-of-type {
+      //   display: none;
+      // }
       &:last-child {
         p {
           justify-content: end;
@@ -76,13 +76,62 @@
       text-transform: capitalize;
     }
   }
-  // .table-header-comenzi,
-  // .table-row-comenzi {
-  //   .data-cell {
-  //     &:nth-child(6) {
-  //       display: none;
-  //       background-color: red;
-  //     }
-  //   }
-  // }
+  .display-servicii {
+    .data-cell {
+      &:nth-child(1) {
+        display: none;
+      }
+      &:nth-child(2) {
+        min-width: 300px;
+      }
+    }
+  }
+  .display-specializari, .display-zone {
+    .data-cell {
+      &:nth-child(1) {
+        display: none;
+      }
+    }
+  }
+  .display-terapeuti {
+    .data-cell {
+      &:nth-child(1), &:nth-child(5), &:nth-child(7) {
+        display: none;
+      }
+    }
+  }
+  .display-comenzi {
+    .data-cell {
+      &:nth-child(1), 
+      &:nth-child(6), 
+      &:nth-child(7),
+      &:nth-child(9), 
+      &:nth-child(10),
+      &:nth-child(12) {
+        display: none;
+      }
+    }
+    .data-cell {
+      &:nth-child(11){
+        min-width: 192px;
+      }
+    }
+    .data-cell {
+      &:nth-child(13){
+        max-width: 96px;
+      }
+    }
+    .data-cell {
+      &:nth-child(14){
+        max-width: 64px;
+      }
+    }
+  }
+  .display-admin {
+    .data-cell {
+      &:nth-child(1){
+        display: none;
+      }
+    }
+  }
 }

@@ -2,11 +2,10 @@
 
 .data-cell {
   display: flex;
-  flex: 0 1 100%;
+  width: 100%;
   padding: calc(0.5 * #{$unit}) calc(0.5 * #{$unit});
   gap: 12px;
   align-items: center;
-  flex-basis: 100%;
   &:last-child {
     justify-content: end;
   }

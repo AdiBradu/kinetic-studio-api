@@ -8,6 +8,49 @@
     margin-top: $unit;
     margin-bottom: calc(2 * #{$unit});
   }
+  .card {
+    border: 1px solid $border;
+    border-radius: calc(0.25 * #{$unit});
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: $unit;
+    // @media (min-width: $md) {
+    //   max-width: 50%;
+    // }
+    .card-row {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      &:last-child {
+        .data-cell {
+          &:last-child {
+            p {
+              width: 100%;
+              a {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+      .data-cell {
+        a {
+          width: 100%;
+        }
+        &:first-child {
+          background-color: $primaryColorLight;
+          p {
+            font-weight: 600;
+            text-transform: capitalize;
+          }
+        }
+        &:last-child {
+          justify-content: start;
+        }
+      }
+    }
+  }
   .table {
     .table-header,
     .table-row {

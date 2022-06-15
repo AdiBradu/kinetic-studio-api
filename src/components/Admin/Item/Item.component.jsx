@@ -24,7 +24,7 @@ import { GET_PARTNER_CURRENT_SCHEDULE } from '../../../graphql/queries';
 import User from '../User/User.component';
 
 export default function Item({ item }) {
-  const { isTablet } = useContext(AppContext);
+  const { isTablet, isDesktop } = useContext(AppContext);
   const location = useLocation();
   const navlink = location.state;
 
@@ -93,7 +93,7 @@ export default function Item({ item }) {
 
   return (
     <div className="item">
-      {isTablet ? (
+      {/* {isDesktop ? (
         <>
           <div className="table">
             <div className="table-header">
@@ -121,7 +121,16 @@ export default function Item({ item }) {
           </div>
           {navlink === 'comenzi' && <Sedinte navlink={navlink} item={item} />}
         </>
-      )}
+      )} */}
+      <div className="card">
+        {Object.keys(item).map((key, index) => (
+          <div className="card-row">
+            <DataCell>{key}</DataCell>
+            <DataCell>{Object.values(item)[index]}</DataCell>
+          </div>
+        ))}
+      </div>
+      {navlink === 'comenzi' && <Sedinte navlink={navlink} item={item} />}
       {navlink === 'terapeuti' && (
         <div className="calendar">
           <h3>Program terapeut</h3>

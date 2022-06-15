@@ -2,7 +2,6 @@
 
 .data-cell {
   display: flex;
-  flex: 0 1 100%;
   padding: calc(0.5 * #{$unit}) calc(0.5 * #{$unit});
   gap: 12px;
   align-items: center;

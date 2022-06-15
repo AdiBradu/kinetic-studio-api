@@ -141,7 +141,9 @@ export const checkIfPastDate = (sedinta) => {
 };
 
 export const toCapitalCase = (word) => {
-  return word[0].toUpperCase() + word.slice(1).toLowerCase();
+  if(word) {
+    return word[0].toUpperCase() + word.slice(1).toLowerCase();
+  }
 };
 
 export const processData = (data, navlink) => {
