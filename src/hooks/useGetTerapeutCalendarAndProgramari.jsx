@@ -18,7 +18,9 @@ const useGetTerapeutCalendarAndProgramari = (terapeutId) => {
     : [];
 
   const partnerFilledTSlotsQObj = useQuery(GET_PARTNER_FILLED_TIME_SLOTS, {
+    fetchPolicy: 'network-only',
     variables: { id: parseFloat(terapeutId.terapeut) },
+
   });
   const queryFilledTSlotsData = partnerFilledTSlotsQObj?.data
     ? partnerFilledTSlotsQObj.data['getPartnerFilledTimeSlots']

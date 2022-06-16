@@ -15,7 +15,7 @@ import useSetServiciuContext from '../../../hooks/useSetServiciuContext';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { UPDATE_ORDER_DETAIL } from '../../../graphql/mutations';
-import { GET_ALL_ORDER_DETAILS } from '../../../graphql/queries';
+import { GET_ALL_ORDER_DETAILS, GET_PARTNER_FILLED_TIME_SLOTS } from '../../../graphql/queries';
 
 export default function Programare() {
   const { comandaObj } = useContext(AppContext);
@@ -83,6 +83,10 @@ export default function Programare() {
         {
           query: GET_ALL_ORDER_DETAILS,
           variables: { id: parseFloat(comanda.id) },
+        },
+        {
+          query: GET_PARTNER_FILLED_TIME_SLOTS,
+          variables: { id: parseFloat(terapeutId.terapeut) },
         },
       ],
     });
