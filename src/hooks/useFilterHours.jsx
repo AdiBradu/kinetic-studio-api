@@ -16,7 +16,7 @@ const useFilterHours = (
   useEffect(() => {
     const hoursAndMinutes = [];
     const startIntervalCalendar =
-      (calendarTimeslotsForDate.start - startDate) / 60000;
+      (calendarTimeslotsForDate.start - startDate) / 60000 + 60;
     const endIntervalCalendar =
       (calendarTimeslotsForDate.end - startDate) / 60000 -
       durataSedinta / 60000;
