@@ -150,9 +150,10 @@ export const processData = (data, navlink) => {
   const dataP = [];
   if (data && data.length && navlink) {
     if (navlink === 'terapeuti') {
-      data.forEach((el) => {
+      data.forEach((el, index) => {
         const objTerapeuti = {
           id: el.p_id,
+          item: index + 1,
           nume: toCapitalCase(el.last_name),
           prenume: toCapitalCase(el.first_name),
           telefon: el.phone,
@@ -163,9 +164,10 @@ export const processData = (data, navlink) => {
         dataP.push(objTerapeuti);
       });
     } else if (navlink === 'comenzi') {
-      data.forEach((el) => {
+      data.forEach((el, index) => {
         const objComenzi = {
           id: el.o_id,
+          item: index + 1,
           data: new Date(el.created).toLocaleDateString(),
           nume: toCapitalCase(el.customer_last_name),
           prenume: toCapitalCase(el.customer_first_name),
@@ -183,26 +185,29 @@ export const processData = (data, navlink) => {
         dataP.push(objComenzi);
       });
     } else if (navlink === 'zone') {
-      data.forEach((el) => {
+      data.forEach((el, index) => {
         const objZone = {
           id: el.a_id,
+          item: index + 1,
           denumire: toCapitalCase(el.a_name),
           tarif: el.a_extra_charge,
         };
         dataP.push(objZone);
       });
     } else if (navlink === 'specializari') {
-      data.forEach((el) => {
+      data.forEach((el, index) => {
         const objZone = {
           id: el.mt_id,
+          item: index + 1,
           denumire: toCapitalCase(el.mt_name),
         };
         dataP.push(objZone);
       });
     } else if (navlink === 'servicii') {
-      data.forEach((el) => {
+      data.forEach((el, index) => {
         const objZone = {
           id: el.s_id,
+          item: index + 1,
           denumire: toCapitalCase(el.service_name),
           specializare: toCapitalCase(el.mt_name),
           sedinte: el.appointments_number,
@@ -212,9 +217,10 @@ export const processData = (data, navlink) => {
         dataP.push(objZone);
       });
     } else if (navlink === 'admin') {
-      data.forEach((el) => {
+      data.forEach((el, index) => {
         const objZone = {
           id: el.u_id,
+          item: index + 1,
           nume: toCapitalCase(el.last_name),
           prenume: toCapitalCase(el.first_name),
           telefon: el.phone,
@@ -234,9 +240,10 @@ export const processData = (data, navlink) => {
 export const processMTypes = (data) => {
   const dataP = [];
   if (data && data.length) {
-    data.forEach((el) => {
+    data.forEach((el, index) => {
       const objZone = {
         id: el.mt_id,
+        item: index + 1,
         denumire: el.mt_name,
       };
       dataP.push(objZone);
@@ -248,9 +255,10 @@ export const processMTypes = (data) => {
 export const processServices = (data) => {
   const dataP = [];
   if (data && data.length) {
-    data.forEach((el) => {
+    data.forEach((el, index) => {
       const objZone = {
         id: el.s_id,
+        item: index + 1,
         denumire: el.service_name,
         specializare: el.mt_name,
         sedinte: el.appointments_number,
@@ -266,9 +274,10 @@ export const processServices = (data) => {
 export const processPartners = (data) => {
   const dataP = [];
   if (data && data.length) {
-    data.forEach((el) => {
+    data.forEach((el, index) => {
       const objTerapeuti = {
         id: el.p_id,
+        item: index + 1,
         nume: el.last_name,
         prenume: el.first_name,
         telefon: el.phone,
@@ -282,9 +291,10 @@ export const processPartners = (data) => {
 export const processFilterPartners = (data) => {
   const dataP = [];
   if (data && data.length) {
-    data.forEach((el) => {
+    data.forEach((el, index) => {
       const objTerapeuti = {
         id: el.p_id,
+        item: index + 1,
         nume: el.last_name,
         prenume: el.first_name,
         telefon: el.phone,
@@ -299,7 +309,7 @@ export const processFilterPartners = (data) => {
 export const processPartnerSched = (data) => {
   const dataP = [];
   if (data && data.length) {
-    data.forEach((el) => {
+    data.forEach((el, index) => {
       const objTerapeutiSched = {
         timeSlotStart: el.schedule_start,
         timeSlotEnd: el.schedule_end,
@@ -353,7 +363,7 @@ export const processEmails = (data) => {
 export const processOdets = (data) => {
   const dataP = [];
   if (data && data.length) {
-    data.forEach((el) => {
+    data.forEach((el, index) => {
       const objODets = {
         sedinta: el.appointment_order,
         terapeut: el.partner_id,
@@ -370,7 +380,7 @@ export const processOdets = (data) => {
 export const processMultiMTypes = (data) => {
   const dataP = [];
   if (data && data.length) {
-    data.forEach((el) => {
+    data.forEach((el, index) => {
       const objM = {
         value: el.mt_name,
         label: el.mt_name,

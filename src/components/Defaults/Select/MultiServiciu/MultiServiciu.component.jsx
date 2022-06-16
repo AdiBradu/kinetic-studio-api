@@ -8,7 +8,7 @@ export default function MultiServiciu({ options, label, handleChange }) {
     let value = '';
     if (e.length) {
       e.forEach((el) => {
-        value += el.value + ',';
+        value += el.value + ', ';
       });
     }
     value = value.replace(/,\s*$/, '');

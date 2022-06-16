@@ -9,7 +9,7 @@ import { checkIfPastDate } from '../../../utils';
 import useSetServiciuContext from '../../../hooks/useSetServiciuContext';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_ORDER_DETAILS } from '../../../graphql/queries';
-import { processOdets } from '../../../utils';
+import { processOdets, toCapitalCase } from '../../../utils';
 
 export default function Sedinte({ navlink, item }) {
   const { isTablet, comandaObj } = useContext(AppContext);
@@ -63,17 +63,21 @@ export default function Sedinte({ navlink, item }) {
                   <DataCell>{el.sedinta}</DataCell>
                   <DataCell>{el.numeTerapeut}</DataCell>
                   <DataCell>
-                    {el.timeSlotStart > 0 &&
-                      new Date(el.timeSlotStart).toLocaleDateString()}
+                    {el.timeSlotStart > 0 ?
+                      new Date(el.timeSlotStart).toLocaleDateString()
+                      : 'TBD'
+                    }
                   </DataCell>
                   <DataCell>
-                    {el.timeSlotStart > 0 &&
+                    {el.timeSlotStart > 0 ?
                       new Date(el.timeSlotStart).getHours() +
                         `: ` +
-                        new Date(el.timeSlotStart).getMinutes()}
+                        new Date(el.timeSlotStart).getMinutes()
+                      : 'TBD'
+                    }
                   </DataCell>
                   <DataCellActions>
-                    {checkIfPastDate(el) && (
+                    {checkIfPastDate(el) ? (
                       <Link
                         to={'/dashboard/programare'}
                         state={'programare'}
@@ -81,7 +85,7 @@ export default function Sedinte({ navlink, item }) {
                       >
                         <ButtonEdit />
                       </Link>
-                    )}
+                    ) : <p>Nepermis</p>}
                   </DataCellActions>
                 </div>
               ))}
@@ -96,28 +100,32 @@ export default function Sedinte({ navlink, item }) {
                   </div>
                   <div className="card-row">
                     <DataCell>{'terapeut'}</DataCell>
-                    <DataCell>{el.terapeut}</DataCell>
+                    <DataCell>{el.numeTerapeut}</DataCell>
                   </div>
                   <div className="card-row">
                     <DataCell>{'data'}</DataCell>
                     <DataCell>
-                      {el.timeSlotStart > 0 &&
-                        new Date(el.timeSlotStart).getMonth()}
+                    {el.timeSlotStart > 0 ?
+                      new Date(el.timeSlotStart).toLocaleDateString()
+                      : 'TBD'
+                    }
                     </DataCell>
                   </div>
                   <div className="card-row">
                     <DataCell>{'ora'}</DataCell>
                     <DataCell>
-                      {el.timeSlotStart > 0 &&
+                      {el.timeSlotStart > 0 ?
                         new Date(el.timeSlotStart).getHours() +
                           `: ` +
-                          new Date(el.timeSlotStart).getMinutes()}
+                          new Date(el.timeSlotStart).getMinutes()
+                        : 'TBD'
+                      }
                     </DataCell>
                   </div>
                   <div className="card-row">
                     <DataCell>{'actions'}</DataCell>
                     <DataCellActions>
-                      {checkIfPastDate(el) && (
+                      {checkIfPastDate(el) ? (
                         <Link
                           to={'/dashboard/programare'}
                           state={'programare'}
@@ -125,7 +133,7 @@ export default function Sedinte({ navlink, item }) {
                         >
                           <ButtonEdit />
                         </Link>
-                      )}
+                      ) : <p>Nepermis</p>}
                     </DataCellActions>
                   </div>
                 </div>

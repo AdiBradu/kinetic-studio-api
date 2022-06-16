@@ -1,6 +1,15 @@
 .table-programare,
 .card-programare {
   margin-top: 32px;
+  .card-row{
+    &:nth-child(2){
+      .data-cell{
+        &:last-child{
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
   .table-header {
     .data-cell {
       &:last-child {
@@ -12,6 +21,9 @@
     .data-cell {
       &:last-child {
         min-width: 160px;
+      }
+      &:nth-child(2) {
+        text-transform: capitalize;
       }
     }
   }

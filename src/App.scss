@@ -161,7 +161,7 @@
     max-width: 480px;
   }
   p {
-    font-size: 0.875rem;
+    // font-size: 0.875rem;
     font-weight: 600;
   }
   label {
@@ -176,17 +176,17 @@
   }
   select {
     width: 100%;
-    padding: calc(0.5 * #{$unit});
-    font-size: 0.875rem;
+    padding: calc(0.75 * #{$unit});
+    // font-size: 0.875rem;
     color: $textDark;
-    font-size: 0.875rem;
+    // font-size: 0.875rem;
     text-transform: capitalize;
     border: 1px solid $border;
     border-radius: calc(0.25 * #{$unit});
     font-family: 'Montserrat', sans-serif;
     background-color: $primaryColorExtraLight;
     &::placeholder {
-      font-size: 0.875rem;
+      // font-size: 0.875rem;
     }
     &:focus {
       outline: 1px solid $primaryColor;
@@ -195,7 +195,7 @@
       width: 100%;
       background-color: $primaryColorExtraLight;
       padding: calc(0.5 * #{$unit});
-      font-size: 0.875rem;
+      // font-size: 0.875rem;
       color: $textDark;
       text-transform: capitalize;
       &:checked,

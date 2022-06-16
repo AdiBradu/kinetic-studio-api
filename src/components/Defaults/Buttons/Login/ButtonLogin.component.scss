@@ -8,7 +8,8 @@ button.btn-admin-login {
   gap: calc(0.5 * #{$unit});
   background-color: $primaryColor;
   color: $textLight;
-  padding: calc(0.5 * #{$unit}) $unit;
+  padding: calc(0.75 * #{$unit}) $unit;
+  // padding: $unit;
   border: none;
   border-radius: calc(0.25 * #{$unit});
   margin-top: $unit;
@@ -18,7 +19,7 @@ button.btn-admin-login {
   }
   p {
     font-weight: 600;
-    font-size: 0.875rem;
+    // font-size: 0.875rem;
     text-transform: uppercase;
     color: $textLight;
   }

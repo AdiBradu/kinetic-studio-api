@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Item.component.scss';
 import { AppContext } from '../../../AppContext';
 import Sedinte from '../Sedinte/Sedinte.component';
@@ -27,6 +27,7 @@ export default function Item({ item }) {
   const { isTablet, isDesktop } = useContext(AppContext);
   const location = useLocation();
   const navlink = location.state;
+  const [displayClass, setDisplayClass] = useState();
 
   //Datepicker
   const [startDate, setStartDate] = useState(new Date());
@@ -91,6 +92,27 @@ export default function Item({ item }) {
     startDate,
   );
 
+  useEffect(() => {
+    if (navlink === 'specializari'){
+      setDisplayClass('display-specializari')
+    }
+    if (navlink === 'zone'){
+      setDisplayClass('display-zone')
+    }
+    if (navlink === 'servicii'){
+      setDisplayClass('display-servicii')
+    }
+    if (navlink === 'terapeuti'){
+      setDisplayClass('display-terapeuti')
+    }
+    if (navlink === 'comenzi'){
+      setDisplayClass('display-comenzi')
+    }
+    if (navlink === 'admin'){
+      setDisplayClass('display-admin')
+    }
+  }, [navlink])
+
   return (
     <div className="item">
       {/* {isDesktop ? (
@@ -124,7 +146,7 @@ export default function Item({ item }) {
       )} */}
       <div className="card">
         {Object.keys(item).map((key, index) => (
-          <div className="card-row">
+          <div className={`card-row ${displayClass}`}>
             <DataCell>{key}</DataCell>
             <DataCell>{Object.values(item)[index]}</DataCell>
           </div>

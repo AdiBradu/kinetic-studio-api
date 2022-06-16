@@ -201,12 +201,12 @@ export default function DataPresentation({ state }) {
               {dataP.map((el, index) => (
                 <div className="card" key={index}>
                   {Object.keys(el).map((key, i) => (
-                    <div className="card-row">
+                    <div className={`card-row ${displayClass}`}>
                       <DataCell>{key}</DataCell>
                       <DataCell>{Object.values(el)[i]}</DataCell>
                     </div>
                   ))}
-                  <div className="card-row">
+                  <div className={`card-row ${displayClass}`}>
                     <DataCell>{'actions'}</DataCell>
                     <DataCellActions>
                       {state !== 'admin' ? (
