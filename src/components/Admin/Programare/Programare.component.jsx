@@ -24,6 +24,7 @@ export default function Programare() {
   //Datepicker
   const [startDate, setStartDate] = useState();
   const {
+    specializare,
     durataSedinta,
     terapeutCalendar,
     terapeutProgramari,
@@ -34,7 +35,7 @@ export default function Programare() {
     setTerapeutId({ terapeut: comanda.terapeut });
   }, []);
 
-  const { filteredTerapeuti } = useFilterTerapeuti(comanda.specializare);
+  const { filteredTerapeuti } = useFilterTerapeuti(specializare);
 
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
     useGetTimeslotsForDateAndTerapeut(
