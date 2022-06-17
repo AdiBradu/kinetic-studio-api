@@ -192,6 +192,7 @@
     }
     .data-cell{
       &:nth-child(6) {
+        min-width: 192px;
         p{
           text-transform: lowercase;
         }
