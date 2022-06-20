@@ -152,7 +152,6 @@ export default function DashboardHeader({ state }) {
 
   useEffect(() => {
     const arr = Object.values(createItem);
-    console.log(arr);
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === '') {
         setValid(false);

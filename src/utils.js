@@ -141,7 +141,7 @@ export const checkIfPastDate = (sedinta) => {
 };
 
 export const toCapitalCase = (word) => {
-  if(word) {
+  if (word) {
     return word[0].toUpperCase() + word.slice(1).toLowerCase();
   }
 };
@@ -158,6 +158,7 @@ export const processData = (data, navlink) => {
           prenume: toCapitalCase(el.first_name),
           telefon: el.phone,
           email: el.email.toLowerCase(),
+          thumbnail: el.profile_picture_url,
           specializari: toCapitalCase(el.m_types),
           descriere: el.description,
         };
@@ -213,6 +214,7 @@ export const processData = (data, navlink) => {
           sedinte: el.appointments_number,
           durata: el.appointment_duration,
           tarif: el.service_cost,
+          thumbnail: el.profile_picture_url,
         };
         dataP.push(objZone);
       });

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, Suspense } from 'react';
 import './Dashboard.component.scss';
 import { useMatch } from 'react-router-dom';
 import DashboardHeader from '../../DashboardHeader/DashboardHeader.component.jsx';
@@ -14,6 +14,7 @@ import Programare from '../../Programare/Programare.component';
 import User from '../../User/User.component';
 import Emails from '../../Emails/Emails.component';
 import { setDashboardHeight, resizeRadar } from '../../../../utils.js';
+import Spinner from '../../../Defaults/Spinner/Spinner.component';
 
 export default function Dashboard() {
   const { isDesktop, isLoggedInObj, itemObj } = useContext(AppContext);
@@ -33,47 +34,49 @@ export default function Dashboard() {
   }, []);
 
   return isLoggedIn ? (
-    <div className="dashboard" id="dashboard">
-      <div className="dashboard-wrapper">
-        {isDesktop && <Sidebar />}
-        <div className="dashboard-group">
-          {state && <DashboardHeader state={state} item={item} />}
-          {state === 'programare' ? (
-            <DataView>
-              <Programare item={item} />
-            </DataView>
-          ) : state === 'emails' ? (
-            <DataView>
-              <Emails item={item} />
-            </DataView>
-          ) : matchList ? (
-            <DataView>
-              <DataPresentation state={state} />
-            </DataView>
-          ) : matchAdd ? (
-            <DataView>
-              <Inputs state={state} />
-            </DataView>
-          ) : matchEdit ? (
-            <DataView>
-              <Edits state={state} />
-            </DataView>
-          ) : matchItem ? (
-            state === 'admin' ? (
+    <Suspense fallback={<Spinner />}>
+      <div className="dashboard" id="dashboard">
+        <div className="dashboard-wrapper">
+          {isDesktop && <Sidebar />}
+          <div className="dashboard-group">
+            {state && <DashboardHeader state={state} item={item} />}
+            {state === 'programare' ? (
               <DataView>
-                <User item={item} />
+                <Programare item={item} />
               </DataView>
+            ) : state === 'emails' ? (
+              <DataView>
+                <Emails item={item} />
+              </DataView>
+            ) : matchList ? (
+              <DataView>
+                <DataPresentation state={state} />
+              </DataView>
+            ) : matchAdd ? (
+              <DataView>
+                <Inputs state={state} />
+              </DataView>
+            ) : matchEdit ? (
+              <DataView>
+                <Edits state={state} />
+              </DataView>
+            ) : matchItem ? (
+              state === 'admin' ? (
+                <DataView>
+                  <User item={item} />
+                </DataView>
+              ) : (
+                <DataView>
+                  <Item item={item} />
+                </DataView>
+              )
             ) : (
-              <DataView>
-                <Item item={item} />
-              </DataView>
-            )
-          ) : (
-            <DataView></DataView>
-          )}
+              <DataView></DataView>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Suspense>
   ) : (
     <Navigate to="/login" />
   );

@@ -17,7 +17,7 @@ export default function InputsTerapeuti() {
     prenume: item?.prenume || '',
     telefon: item?.telefon || '',
     email: item?.email || '',
-    profile_picture_url: item?.profile_picture_url || '',
+    thumbnail: item?.thumbnail || '',
     descriere: item?.descriere || '',
     specializari: item?.specializari || '',
   });
@@ -63,7 +63,7 @@ export default function InputsTerapeuti() {
 
   return (
     <div>
-      <SelectImage id={'tat'} handleChange={photoUpload} src={null} />
+      <SelectImage id={'tat'} handleChange={photoUpload} src={item.thumbnail} />
       <Input
         value={state.nume}
         handleChange={handleChange}
@@ -97,6 +97,7 @@ export default function InputsTerapeuti() {
         placeholder={'email'}
       />
       <MultiServiciu
+        value={item.specializari}
         label={'specializari'}
         handleChange={handleSpecializari}
         options={mTypes}

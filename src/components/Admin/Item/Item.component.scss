@@ -47,38 +47,43 @@
         }
       }
     }
-    .display-specializari, .display-zone, .display-servicii, .display-terapeuti, .display-comenzi, .display-admin {
+    .display-specializari,
+    .display-zone,
+    .display-servicii,
+    .display-terapeuti,
+    .display-comenzi,
+    .display-admin {
       &:nth-child(1) {
         display: none;
       }
       &:nth-child(2) {
-        .data-cell{
-          &:last-child{
-            p{
+        .data-cell {
+          &:last-child {
+            p {
               color: $primaryColor;
             }
           }
         }
       }
-      // &:nth-child(7) {
-      //   .data-cell{
-      //      &:last-child{
-      //       p{
-      //         text-transform: lowercase;
-      //       }
-      //      }
-      //   }
-      // }
     }
-    .display-terapeuti{
-      &:nth-child(6), &:nth-child(8) {
-        .data-cell{
-           &:last-child{
-            p{
+    .display-terapeuti {
+      &:nth-child(6),
+      &:nth-child(8) {
+        .data-cell {
+          &:last-child {
+            p {
               text-transform: lowercase;
             }
-           }
+          }
         }
+      }
+      &:nth-child(7) {
+        display: none;
+      }
+    }
+    .display-servicii {
+      &:nth-child(8) {
+        display: none;
       }
     }
   }

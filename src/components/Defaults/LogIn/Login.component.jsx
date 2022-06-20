@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, Suspense } from 'react';
 import './Login.component.scss';
 import Input from '../Input/Input.component';
 import ButtonLogin from '../Buttons/Login/ButtonLogin.component';
@@ -8,6 +8,7 @@ import { LOGIN } from '../../../graphql/mutations';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router';
 import { setDashboardHeight, resizeRadar } from '../../../utils.js';
+import Spinner from '../Spinner/Spinner.component';
 
 export default function Login() {
   const { isLoggedInObj } = useContext(AppContext);
@@ -40,39 +41,41 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="login" id="login">
-      <Input
-        value={credentials.email}
-        handleChange={handleChange}
-        name="email"
-        label={'email'}
-        type={'email'}
-        placeholder={'email'}
-      />
-      <Input
-        value={credentials.password}
-        handleChange={handleChange}
-        name="password"
-        label={'password'}
-        type={'password'}
-        placeholder={'password'}
-      />
-      <Link
-        to={`/dashboard`}
-        onClick={async (e) => {
-          e.preventDefault();
-          let zzz = await loginUsr({
-            variables: {
-              email: credentials.email,
-              password: credentials.password,
-            },
-          });
-          setIsLoggedIn(zzz?.data?.login ? zzz?.data?.login : false);
-          navigate('/dashboard');
-        }}
-      >
-        <ButtonLogin />
-      </Link>
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <div className="login" id="login">
+        <Input
+          value={credentials.email}
+          handleChange={handleChange}
+          name="email"
+          label={'email'}
+          type={'email'}
+          placeholder={'email'}
+        />
+        <Input
+          value={credentials.password}
+          handleChange={handleChange}
+          name="password"
+          label={'password'}
+          type={'password'}
+          placeholder={'password'}
+        />
+        <Link
+          to={`/dashboard`}
+          onClick={async (e) => {
+            e.preventDefault();
+            let zzz = await loginUsr({
+              variables: {
+                email: credentials.email,
+                password: credentials.password,
+              },
+            });
+            setIsLoggedIn(zzz?.data?.login ? zzz?.data?.login : false);
+            navigate('/dashboard');
+          }}
+        >
+          <ButtonLogin />
+        </Link>
+      </div>
+    </Suspense>
   );
 }

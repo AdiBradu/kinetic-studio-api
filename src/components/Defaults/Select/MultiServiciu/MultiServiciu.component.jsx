@@ -2,8 +2,9 @@ import React, { useRef } from 'react';
 import './MultiServiciu.component.scss';
 import Select from 'react-select';
 import { checkIfActiveElement } from '../../../../utils.js';
+import variables from '../../../../styles/_variables.module.scss';
 
-export default function MultiServiciu({ options, label, handleChange }) {
+export default function MultiServiciu({ options, label, value, handleChange }) {
   const handleTheChange = (e) => {
     let value = '';
     if (e.length) {
@@ -13,6 +14,14 @@ export default function MultiServiciu({ options, label, handleChange }) {
     }
     value = value.replace(/,\s*$/, '');
     handleChange(value);
+  };
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: variables.primaryColorExtraLight,
+      borderColor: variables.border,
+    }),
   };
 
   const inputRef = useRef(null);
@@ -29,6 +38,7 @@ export default function MultiServiciu({ options, label, handleChange }) {
           isMulti={true}
           onChange={handleTheChange}
           ref={inputRef}
+          styles={customStyles}
         />
       </div>
     </>

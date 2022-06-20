@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Slectimage.component.scss';
 import Thumbnail from '../../Admin/Thumbnail/Thumbnail.component';
 import { useDropzone } from 'react-dropzone';

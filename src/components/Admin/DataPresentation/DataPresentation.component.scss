@@ -45,19 +45,34 @@
         }
       }
     }
-    .display-specializari, .display-zone, .display-servicii, .display-terapeuti, .display-comenzi, .display-admin {
-        &:nth-child(1) {
-          display: none;
-        }
-        &:nth-child(2) {
-          .data-cell{
-            &:last-child{
-              p{
-                color: $primaryColor;
-              }
+    .display-specializari,
+    .display-zone,
+    .display-servicii,
+    .display-terapeuti,
+    .display-comenzi,
+    .display-admin {
+      &:nth-child(1) {
+        display: none;
+      }
+      &:nth-child(2) {
+        .data-cell {
+          &:last-child {
+            p {
+              color: $primaryColor;
             }
           }
         }
+      }
+    }
+    .display-servicii {
+      &:nth-child(8) {
+        display: none;
+      }
+    }
+    .display-terapeuti {
+      &:nth-child(7) {
+        display: none;
+      }
     }
   }
 }
@@ -87,10 +102,16 @@
       font-weight: 600;
       text-transform: capitalize;
     }
+    .data-cell {
+      p {
+        text-transform: capitalize !important;
+      }
+    }
   }
   .display-servicii {
     .data-cell {
-      &:nth-child(1) {
+      &:nth-child(1),
+      &:nth-child(8) {
         display: none;
       }
       &:nth-child(2) {
@@ -101,7 +122,8 @@
       }
     }
   }
-  .display-specializari, .display-zone {
+  .display-specializari,
+  .display-zone {
     .data-cell {
       &:nth-child(1) {
         display: none;
@@ -113,87 +135,91 @@
   }
   .display-terapeuti {
     .data-cell {
-      &:nth-child(1), &:nth-child(6) {
+      &:nth-child(1),
+      &:nth-child(6),
+      &:nth-child(7) {
         display: none;
       }
       &:nth-child(2) {
         max-width: 64px;
       }
-      &:nth-child(3), &:nth-child(4) {
+      &:nth-child(3),
+      &:nth-child(4) {
         max-width: 160px;
       }
       &:nth-child(6) {
-        p{
+        p {
           text-transform: lowercase;
         }
       }
       &:nth-child(8) {
-        p{
+        p {
           text-transform: lowercase;
         }
       }
-      &:last-child{
+      &:last-child {
         max-width: 112px;
       }
     }
   }
   .display-comenzi {
     .data-cell {
-      &:nth-child(1), 
+      &:nth-child(1),
       &:nth-child(7),
-      &:nth-child(8), 
+      &:nth-child(8),
       &:nth-child(10),
       &:nth-child(11),
-      &:nth-child(13){
+      &:nth-child(13) {
         display: none;
       }
     }
-    .data-cell{
+    .data-cell {
       &:nth-child(2) {
         max-width: 64px;
       }
     }
-    .data-cell{
+    .data-cell {
       &:nth-child(3) {
         max-width: 96px;
       }
     }
     .data-cell {
-      &:nth-child(11){
+      &:nth-child(11) {
         min-width: 192px;
       }
     }
     .data-cell {
-      &:nth-child(12){
+      &:nth-child(12) {
         min-width: 174px;
       }
     }
     .data-cell {
-      &:nth-child(14), &:nth-child(15){
+      &:nth-child(14),
+      &:nth-child(15) {
         max-width: 80px;
       }
     }
-    .data-cell{
-      &:last-child{
+    .data-cell {
+      &:last-child {
         max-width: 112px;
       }
     }
   }
   .display-admin {
     .data-cell {
-      &:nth-child(1){
+      &:nth-child(1) {
         display: none;
       }
     }
-    .data-cell{
+    .data-cell {
       &:nth-child(2) {
         max-width: 64px;
       }
     }
-    .data-cell{
+    .data-cell {
       &:nth-child(6) {
         min-width: 192px;
-        p{
+        p {
           text-transform: lowercase;
         }
       }

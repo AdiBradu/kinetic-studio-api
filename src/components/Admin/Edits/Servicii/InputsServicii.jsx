@@ -14,11 +14,11 @@ export default function InputsServicii() {
 
   const [state, setState] = useState({
     denumire: item?.denumire || '',
-    specializare: '',
+    specializare: item?.specializare || '',
     sedinte: item?.sedinte || '',
     durata: item?.durata || '',
     tarif: item?.tarif || '',
-    profile_picture_url: '',
+    thumbnail: item?.thumbnail || '',
   });
 
   const [mTypes, setMYpes] = useState([]);
@@ -57,7 +57,7 @@ export default function InputsServicii() {
 
   return (
     <div>
-      <SelectImage id={'tat'} handleChange={photoUpload} src={null} />
+      <SelectImage id={'tat'} handleChange={photoUpload} src={item.thumbnail} />
       <Input
         value={state.denumire}
         handleChange={handleChange}

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, Suspense } from 'react';
 import variables from '../../../styles/_variables.module.scss';
 import DeleteIcon from '../../Defaults/Icons/DeleteIcon/DeleteIcon.component.jsx';
 import ViewIcon from '../../Defaults/Icons/ViewIcon/ViewIcon.component';
@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 import './DataPresentation.component.scss';
 import { processData } from '../../../utils';
 import { useQuery } from '@apollo/client';
+import Spinner from '../../Defaults/Spinner/Spinner.component.jsx';
 import {
   GET_ALL_M_TYPES,
   GET_ALL_AREAS,
@@ -34,26 +35,25 @@ export default function DataPresentation({ state }) {
   const [displayClass, setDisplayClass] = useState();
 
   useEffect(() => {
-    if (state === 'specializari'){
-      setDisplayClass('display-specializari')
+    if (state === 'specializari') {
+      setDisplayClass('display-specializari');
     }
-    if (state === 'zone'){
-      setDisplayClass('display-zone')
+    if (state === 'zone') {
+      setDisplayClass('display-zone');
     }
-    if (state === 'servicii'){
-      setDisplayClass('display-servicii')
+    if (state === 'servicii') {
+      setDisplayClass('display-servicii');
     }
-    if (state === 'terapeuti'){
-      setDisplayClass('display-terapeuti')
+    if (state === 'terapeuti') {
+      setDisplayClass('display-terapeuti');
     }
-    if (state === 'comenzi'){
-      setDisplayClass('display-comenzi')
+    if (state === 'comenzi') {
+      setDisplayClass('display-comenzi');
     }
-    if (state === 'admin'){
-      setDisplayClass('display-admin')
+    if (state === 'admin') {
+      setDisplayClass('display-admin');
     }
-  }, [state])
-  
+  }, [state]);
 
   const qLimit = 50;
   let currentQuery;
@@ -137,7 +137,7 @@ export default function DataPresentation({ state }) {
   const { handleView, handleDelete, empty } = useDataPresentation(navlink);
 
   return (
-    <>
+    <Suspense fallback={<Spinner />}>
       {dataP && (
         <>
           {isDesktop ? (
@@ -201,7 +201,7 @@ export default function DataPresentation({ state }) {
               {dataP.map((el, index) => (
                 <div className="card" key={index}>
                   {Object.keys(el).map((key, i) => (
-                    <div className={`card-row ${displayClass}`}>
+                    <div className={`card-row ${displayClass}`} key={i}>
                       <DataCell>{key}</DataCell>
                       <DataCell>{Object.values(el)[i]}</DataCell>
                     </div>
@@ -255,6 +255,6 @@ export default function DataPresentation({ state }) {
           {showMore && <LoadMoreButton onClick={loadMore} />}
         </>
       )}
-    </>
+    </Suspense>
   );
 }
