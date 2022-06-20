@@ -1,16 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.00cec8e8.css",
-    "main.js": "/static/js/main.dd5f460d.js",
+    "main.css": "/static/css/main.e477498b.css",
+    "main.js": "/static/js/main.4e8a14fa.js",
     "static/js/787.fa63ae96.chunk.js": "/static/js/787.fa63ae96.chunk.js",
+    "static/media/iconAdmin.svg": "/static/media/iconAdmin.426ae2acaed62dc062741e901e79ecc7.svg",
+    "static/media/iconTerapeuti.svg": "/static/media/iconTerapeuti.923e2b07dd896dbc35b2d4cf1b711df1.svg",
+    "static/media/iconZone.svg": "/static/media/iconZone.7f15c2036fa47bae98cd74d1f724913f.svg",
+    "static/media/iconComenzi.svg": "/static/media/iconComenzi.0fe1da1bf5a5f03978693bcc18e69bb0.svg",
+    "static/media/iconSpecializari.svg": "/static/media/iconSpecializari.28b089b9ae51dddad08b125dca081054.svg",
+    "static/media/iconServicii.svg": "/static/media/iconServicii.45257263f6768ee0c0c2279296d1b135.svg",
     "static/media/Warning.svg": "/static/media/Warning.2834f6e5404964b4f8790ffde6263660.svg",
+    "static/media/iconEmails.svg": "/static/media/iconEmails.e4a076c5173766550d354a89e7f17252.svg",
+    "static/media/iconLogout.svg": "/static/media/iconLogout.0b2b24d9139d054ec2a9dace0b9d1ade.svg",
     "index.html": "/index.html",
-    "main.00cec8e8.css.map": "/static/css/main.00cec8e8.css.map",
-    "main.dd5f460d.js.map": "/static/js/main.dd5f460d.js.map",
+    "main.e477498b.css.map": "/static/css/main.e477498b.css.map",
+    "main.4e8a14fa.js.map": "/static/js/main.4e8a14fa.js.map",
     "787.fa63ae96.chunk.js.map": "/static/js/787.fa63ae96.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.00cec8e8.css",
-    "static/js/main.dd5f460d.js"
+    "static/css/main.e477498b.css",
+    "static/js/main.4e8a14fa.js"
   ]
 }

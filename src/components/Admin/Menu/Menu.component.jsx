@@ -7,7 +7,7 @@ export default function Menu() {
   return (
     <div className="menu-admin">
       {navlinks.map((navlink, index) => (
-        <NavLink key={index} navlink={navlink.route} />
+        <NavLink key={index} navlink={navlink.route} icon={navlink.icon} />
       ))}
     </div>
   );

@@ -1,34 +1,42 @@
 [
   {
     "id": 1,
-    "route": "specializari"
+    "route": "specializari",
+    "icon": "icons/iconSpecializari.svg"
   },
   {
     "id": 2,
-    "route": "zone"
+    "route": "zone",
+    "icon": "public/icons/iconAdmin.svg"
   },
   {
     "id": 3,
-    "route": "servicii"
+    "route": "servicii",
+    "icon": "../assets/Icons/iconServicii.svg"
   },
   {
     "id": 4,
-    "route": "terapeuti"
+    "route": "terapeuti",
+    "icon": "../assets/Icons/iconTerapeuti.svg"
   },
   {
     "id": 5,
-    "route": "comenzi"
+    "route": "comenzi",
+    "icon": "../assets/Icons/iconComenzi.svg"
   },
   {
     "id": 6,
-    "route": "emails"
+    "route": "emails",
+    "icon": "../assets/Icons/iconEmails.svg"
   },
   {
     "id": 7,
-    "route": "admin"
+    "route": "admin",
+    "icon": "../assets/Icons/iconAdmin.svg"
   },
   {
     "id": 8,
-    "route": "log out"
+    "route": "log out",
+    "icon": "../assets/Icons/iconLogout.svg"
   }
 ]

@@ -2,12 +2,19 @@
 
 .navlink-admin {
   padding: calc(0.75 * #{$unit}) $unit;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: $unit;
+  @media (min-width: $xl) {
+    flex-direction: row;
+  }
+  @media (min-width: $xxl) {
+    padding-left: calc(2 * #{$unit});
+    padding-right: calc(2 * #{$unit});
+  }
   &:hover {
     background-color: $primaryColorLight;
     cursor: pointer;
-    p {
-      color: $textDark;
-    }
   }
   p {
     font-size: 0.75rem;
@@ -26,5 +33,8 @@
   background-color: $primaryColor;
   p {
     color: $textLight;
+  }
+  &:hover {
+    background-color: $primaryColor;
   }
 }
