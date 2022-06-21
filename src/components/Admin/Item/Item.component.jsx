@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Item.component.scss';
-import { AppContext } from '../../../AppContext';
 import Sedinte from '../Sedinte/Sedinte.component';
 import DataCell from '../DataCell/DataCell.component';
 import { useLocation } from 'react-router';
@@ -24,13 +23,15 @@ import { GET_PARTNER_CURRENT_SCHEDULE } from '../../../graphql/queries';
 import User from '../User/User.component';
 
 export default function Item({ item }) {
-  const { isTablet, isDesktop } = useContext(AppContext);
   const location = useLocation();
   const navlink = location.state;
   const [displayClass, setDisplayClass] = useState();
 
   //Datepicker
   const [startDate, setStartDate] = useState(new Date());
+
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
 
   const [timeSlotStart, setTimeSlotStart] = useState();
   const [timeSlotEnd, setTimeSlotEnd] = useState();
@@ -41,19 +42,19 @@ export default function Item({ item }) {
   const [createPSchd, createPSchdObj] = useMutation(CREATE_PARTNER_SCHEDULE);
 
   const handleChangeTimeSlotStart = (e) => {
-    const value = minutesToTimestamp(e.target.value, startDate);
-    setTimeSlotStart(value);
+    setStartTime(e.target.value);
   };
 
   const handleChangeTimeSlotEnd = (e) => {
-    const value = minutesToTimestamp(e.target.value, startDate);
-    setTimeSlotEnd(value);
+    setEndTime(e.target.value);
   };
 
+  useEffect(() => {
+    setTimeSlotStart(minutesToTimestamp(startTime, startDate));
+    setTimeSlotEnd(minutesToTimestamp(endTime, startDate));
+  }, [startDate, startTime, endTime]);
+
   const handleAdaugaProgram = async () => {
-    console.log(
-      `Seteaza program terapeut cu datele: terapeut: ${item.id}, timeSlotStar: ${timeSlotStart}, timeSlotEnd: ${timeSlotEnd}`,
-    );
     let newPSchd = await createPSchd({
       variables: {
         id: parseFloat(item.id),
@@ -93,60 +94,31 @@ export default function Item({ item }) {
   );
 
   useEffect(() => {
-    if (navlink === 'specializari'){
-      setDisplayClass('display-specializari')
+    if (navlink === 'specializari') {
+      setDisplayClass('display-specializari');
     }
-    if (navlink === 'zone'){
-      setDisplayClass('display-zone')
+    if (navlink === 'zone') {
+      setDisplayClass('display-zone');
     }
-    if (navlink === 'servicii'){
-      setDisplayClass('display-servicii')
+    if (navlink === 'servicii') {
+      setDisplayClass('display-servicii');
     }
-    if (navlink === 'terapeuti'){
-      setDisplayClass('display-terapeuti')
+    if (navlink === 'terapeuti') {
+      setDisplayClass('display-terapeuti');
     }
-    if (navlink === 'comenzi'){
-      setDisplayClass('display-comenzi')
+    if (navlink === 'comenzi') {
+      setDisplayClass('display-comenzi');
     }
-    if (navlink === 'admin'){
-      setDisplayClass('display-admin')
+    if (navlink === 'admin') {
+      setDisplayClass('display-admin');
     }
-  }, [navlink])
+  }, [navlink]);
 
   return (
     <div className="item">
-      {/* {isDesktop ? (
-        <>
-          <div className="table">
-            <div className="table-header">
-              {Object.keys(item).map((key, index) => (
-                <DataCell key={index}>{key}</DataCell>
-              ))}
-            </div>
-            <div className="table-row">
-              {Object.values(item).map((value, index) => (
-                <DataCell key={index}>{value}</DataCell>
-              ))}
-            </div>
-          </div>
-          {navlink === 'comenzi' && <Sedinte navlink={navlink} item={item} />}
-        </>
-      ) : (
-        <>
-          <div className="card">
-            {Object.keys(item).map((key, index) => (
-              <div className="card-row">
-                <DataCell>{key}</DataCell>
-                <DataCell>{Object.values(item)[index]}</DataCell>
-              </div>
-            ))}
-          </div>
-          {navlink === 'comenzi' && <Sedinte navlink={navlink} item={item} />}
-        </>
-      )} */}
       <div className="card">
         {Object.keys(item).map((key, index) => (
-          <div className={`card-row ${displayClass}`}>
+          <div className={`card-row ${displayClass}`} key={index}>
             <DataCell>{key}</DataCell>
             <DataCell>{Object.values(item)[index]}</DataCell>
           </div>
@@ -174,7 +146,7 @@ export default function Item({ item }) {
           {!programariTimeslotsForDate.start ? (
             <>
               {calendarTimeslotsForDate.start && (
-                <p className="info-message">{`Exista un program stabilit pentru acesta zi. ${timestampToHoursAndMinutes(
+                <p className="info-message">{`Exista un program stabilit pentru aceasta zi. ${timestampToHoursAndMinutes(
                   calendarTimeslotsForDate.start,
                 )} - ${timestampToHoursAndMinutes(
                   calendarTimeslotsForDate.end,
@@ -206,18 +178,15 @@ export default function Item({ item }) {
               programariTimeslotsForDate.end,
             )}`}</p>
           )}
-          {timeSlotStart & timeSlotEnd ? (
-            <Link
-              to={`/dashboard/terapeuti/${item.id}`}
-              state={navlink}
-              onClick={() => handleAdaugaProgram()}
-              item={item}
-            >
-              <ButtonCustom status={'adauga program'} />
-            </Link>
-          ) : (
-            ''
-          )}
+
+          <Link
+            to={`/dashboard/terapeuti/${item.id}`}
+            state={navlink}
+            onClick={() => handleAdaugaProgram()}
+            item={item}
+          >
+            <ButtonCustom status={'adauga program'} />
+          </Link>
         </div>
       )}
       {navlink === 'admin' && <User navlink={navlink} item={item} />}

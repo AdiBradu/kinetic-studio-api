@@ -30,7 +30,7 @@ export default function NavLink({ navlink }) {
       setIsLoggedIn(false);
       logoutUsr();
       client.clearStore();
-      navigate('/dashboard');
+      navigate('/');
     }
   };
 

@@ -7,6 +7,7 @@ button.button-view {
   padding: 4px 0px;
   border: 1px solid transparent;
   border-radius: 4px;
+  background-color: $primaryColorLight;
   &:hover {
     opacity: 0.75;
     cursor: pointer;

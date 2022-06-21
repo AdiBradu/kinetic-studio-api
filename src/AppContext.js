@@ -17,9 +17,9 @@ export const AppProvider = (props) => {
   const [item, setItem] = useState(
     JSON.parse(sessionStorage.getItem('item')) || null,
   );
-  console.log('item', item);
+  // console.log('item', item);
   const [createItem, setCreateItem] = useState({});
-  console.log('createItem', createItem);
+  // console.log('createItem', createItem);
   const [deleteItem, setDeleteItem] = useState();
   const [comanda, setComanda] = useState();
   const [user, setUser] = useState();

@@ -219,7 +219,7 @@ export default function DataPresentation({ state }) {
                         >
                           <EditIcon
                             color={variables.primaryColor}
-                            bgColor={variables.primaryColorExtraLight}
+                            bgColor={variables.backgroundLight}
                           />
                         </Link>
                       ) : (
@@ -232,7 +232,7 @@ export default function DataPresentation({ state }) {
                       >
                         <ViewIcon
                           color={variables.primaryColor}
-                          bgColor={variables.primaryColorExtraLight}
+                          bgColor={variables.backgroundLight}
                         />
                       </Link>
                       <Link
@@ -242,7 +242,7 @@ export default function DataPresentation({ state }) {
                       >
                         <DeleteIcon
                           color={variables.primaryColor}
-                          bgColor={variables.primaryColorExtraLight}
+                          bgColor={variables.backgroundLight}
                         />
                       </Link>
                     </DataCellActions>

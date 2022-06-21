@@ -30,10 +30,10 @@ export default function Navbar() {
             thumbnail={isLoggedIn?.profile_picture_url}
           />
         )}
-        {!isDesktop & (isLoggedIn !== false) ? (
-          <HamburgerMenu color={variables.textDark} />
-        ) : (
+        {isLoggedIn === undefined || isLoggedIn === false || isDesktop ? (
           ''
+        ) : (
+          <HamburgerMenu color={variables.textDark} />
         )}
       </div>
       {isMenuOpen && <Menu />}
