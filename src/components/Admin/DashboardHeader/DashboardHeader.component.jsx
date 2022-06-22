@@ -246,7 +246,7 @@ export default function DashboardHeader({ state }) {
           onClick={() => handleSave()}
           state={state}
         >
-          <ButtonSave />
+          {valid ? <ButtonSave /> : ''}
         </Link>
       ) : matchEdit ? (
         <Link

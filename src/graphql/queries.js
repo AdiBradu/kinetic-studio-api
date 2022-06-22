@@ -103,6 +103,7 @@ export const GET_ALL_PARTNERS = gql`
 export const GET_PARTNER_CURRENT_SCHEDULE = gql`
   query GetPartnerCurrentSchedule($id: Float) {
     getPartnerCurrentSchedule(id: $id) {
+      ps_id
       schedule_start
       schedule_end
     }

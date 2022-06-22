@@ -13,12 +13,16 @@ import {
 } from '../../../utils.js';
 import useGetTerapeutCalendarAndProgramari from '../../../hooks/useGetTerapeutCalendarAndProgramari';
 import useGetTimeslotsForDateAndTerapeut from '../../../hooks/useGetTimeslotsForDateAndTerapeut';
+import useGetTerapeutScheduleId from '../../../hooks/useGetTerapeutScheduleId';
 import useFilterHours from '../../../hooks/useFilterHours';
 import SelectTimeSlot from '../../Defaults/Select/SelectTimeSlot/SelectTimeSlot.component.jsx';
 import ButtonCustom from '../../Defaults/Buttons/CustomButton/ButtonCustom.component.jsx';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { CREATE_PARTNER_SCHEDULE } from '../../../graphql/mutations';
+import { useMutation, useQuery } from '@apollo/client';
+import {
+  CREATE_PARTNER_SCHEDULE,
+  DELETE_PARTNER_SCHEDULE,
+} from '../../../graphql/mutations';
 import { GET_PARTNER_CURRENT_SCHEDULE } from '../../../graphql/queries';
 import User from '../User/User.component';
 
@@ -26,7 +30,7 @@ export default function Item({ item }) {
   const location = useLocation();
   const navlink = location.state;
   const [displayClass, setDisplayClass] = useState();
-
+  console.log(item.id);
   //Datepicker
   const [startDate, setStartDate] = useState(new Date());
 
@@ -40,6 +44,12 @@ export default function Item({ item }) {
   const [timeSlotError, setTimeSlotError] = useState(false);
 
   const [createPSchd, createPSchdObj] = useMutation(CREATE_PARTNER_SCHEDULE);
+  const [deletePSchd, deletePSchdObj] = useMutation(DELETE_PARTNER_SCHEDULE);
+
+  const currentSchedule = useQuery(GET_PARTNER_CURRENT_SCHEDULE, {
+    variables: { id: parseFloat(item.id) },
+  });
+  console.log(currentSchedule.data);
 
   const handleChangeTimeSlotStart = (e) => {
     setStartTime(e.target.value);
@@ -79,6 +89,20 @@ export default function Item({ item }) {
     }
   };
 
+  const handleStergeProgram = async () => {
+    let newPSchd = await deletePSchd({
+      variables: {
+        id: parseFloat(item.id),
+      },
+      refetchQueries: [
+        {
+          query: GET_PARTNER_CURRENT_SCHEDULE,
+          variables: { id: parseFloat(item.id) },
+        },
+      ],
+    });
+  };
+
   const { terapeutCalendar, terapeutProgramari } =
     useGetTerapeutCalendarAndProgramari({ terapeut: item.id });
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
@@ -87,6 +111,11 @@ export default function Item({ item }) {
       terapeutCalendar,
       terapeutProgramari,
     );
+  const { terapeutScheduleId } = useGetTerapeutScheduleId(
+    startDate,
+    terapeutCalendar,
+    terapeutProgramari,
+  );
   const { filteredHours } = useFilterHours(
     calendarTimeslotsForDate,
     programariTimeslotsForDate,
@@ -146,11 +175,17 @@ export default function Item({ item }) {
           {!programariTimeslotsForDate.start ? (
             <>
               {calendarTimeslotsForDate.start && (
-                <p className="info-message">{`Exista un program stabilit pentru aceasta zi. ${timestampToHoursAndMinutes(
-                  calendarTimeslotsForDate.start,
-                )} - ${timestampToHoursAndMinutes(
-                  calendarTimeslotsForDate.end,
-                )}`}</p>
+                <>
+                  <p className="info-message">
+                    Exista un program stabilit pentru aceasta zi.
+                  </p>
+                  <p>{`${timestampToHoursAndMinutes(
+                    calendarTimeslotsForDate.start,
+                  )} - ${timestampToHoursAndMinutes(
+                    calendarTimeslotsForDate.end,
+                  )}`}</p>
+                  <p>remove</p>
+                </>
               )}
               {timeSlotSuccess && (
                 <p className="success-message">{`Adaugat cu succes`}</p>
