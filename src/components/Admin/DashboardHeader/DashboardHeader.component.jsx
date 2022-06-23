@@ -186,11 +186,11 @@ export default function DashboardHeader({ state }) {
           variables: {
             id: parseFloat(e.id),
             service_name: createItem.denumire,
-            type: parseFloat(createItem.specializare),
+            type: parseFloat(createItem.specializareId),
             appointments_number: parseInt(createItem.sedinte),
             appointment_duration: parseInt(createItem.durata),
             service_cost: parseFloat(createItem.tarif),
-            profile_picture_url: createItem.profile_picture_url,
+            profile_picture_url: createItem.thumbnail,
           },
           refetchQueries: [{ query: GET_ALL_SERVICES }],
         });

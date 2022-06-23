@@ -12,9 +12,9 @@ const useGetTerapeutScheduleId = (
   terapeutProgramari,
 ) => {
   const [terapuetScheduleId, setTerapeutScheduleId] = useState({});
-  console.log(terapuetScheduleId);
-  console.log(startDate);
-  console.log(terapeutCalendar.length);
+  // console.log(terapuetScheduleId);
+  // console.log(startDate);
+  // console.log(terapeutCalendar.length);
   const { calendarTimeslotsForDate, programariTimeslotsForDate } =
     useGetTimeslotsForDateAndTerapeut(
       startDate,
@@ -32,7 +32,7 @@ const useGetTerapeutScheduleId = (
           // console.log(dateToTimestampZeroHours(startDate));
           // console.log(terapeutCalendar[i].timeSlotStart);
           // console.log(terapeutCalendar[i].timeSlotEnd);
-          console.log(true, startDate);
+          // console.log(true, startDate);
         }
         // console.log(timestampToDate(startDate));
         // console.log(timestampToDate(terapeutCalendar[i].timeSlotStart));

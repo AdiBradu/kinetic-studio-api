@@ -13,12 +13,14 @@ export default function InputsServicii() {
   const setCreateItem = createItemObj[1];
 
   const [state, setState] = useState({
-    denumire: item?.denumire || '',
-    specializare: item?.specializare || '',
-    sedinte: item?.sedinte || '',
-    durata: item?.durata || '',
-    tarif: item?.tarif || '',
-    thumbnail: item?.thumbnail || '',
+    id: item?.id,
+    denumire: item?.denumire,
+    specializare: item?.specializare,
+    specializareId: '',
+    sedinte: item?.sedinte,
+    durata: item?.durata,
+    tarif: item?.tarif,
+    thumbnail: item?.thumbnail,
   });
 
   const [mTypes, setMYpes] = useState([]);
@@ -36,6 +38,19 @@ export default function InputsServicii() {
     }
   }, [queryData]);
 
+  useEffect(() => {
+    if (mTypes) {
+      mTypes.forEach((el) => {
+        if (el.denumire.toLowerCase() === item.specializare.toLowerCase()) {
+          setState({
+            ...state,
+            specializareId: el.id,
+          });
+        }
+      });
+    }
+  }, [mTypes, item.specializare]);
+
   const handleChange = (e) => {
     const value = e.target.value;
     setState({
@@ -47,7 +62,7 @@ export default function InputsServicii() {
   const photoUpload = (value) => {
     setState({
       ...state,
-      profile_picture_url: value,
+      thumbnail: value,
     });
   };
 

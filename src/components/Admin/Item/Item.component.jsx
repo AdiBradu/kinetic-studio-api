@@ -10,6 +10,9 @@ import {
   checkIfCalendar,
   minutesToTimestamp,
   timestampToHoursAndMinutes,
+  dateToTimestampZeroHours,
+  timestampToDayAndMonth,
+  dateToDayAndMonth,
 } from '../../../utils.js';
 import useGetTerapeutCalendarAndProgramari from '../../../hooks/useGetTerapeutCalendarAndProgramari';
 import useGetTimeslotsForDateAndTerapeut from '../../../hooks/useGetTimeslotsForDateAndTerapeut';
@@ -30,7 +33,7 @@ export default function Item({ item }) {
   const location = useLocation();
   const navlink = location.state;
   const [displayClass, setDisplayClass] = useState();
-  console.log(item.id);
+
   //Datepicker
   const [startDate, setStartDate] = useState(new Date());
 
@@ -49,7 +52,6 @@ export default function Item({ item }) {
   const currentSchedule = useQuery(GET_PARTNER_CURRENT_SCHEDULE, {
     variables: { id: parseFloat(item.id) },
   });
-  console.log(currentSchedule.data);
 
   const handleChangeTimeSlotStart = (e) => {
     setStartTime(e.target.value);
@@ -90,17 +92,37 @@ export default function Item({ item }) {
   };
 
   const handleStergeProgram = async () => {
-    let newPSchd = await deletePSchd({
-      variables: {
-        id: parseFloat(item.id),
-      },
-      refetchQueries: [
-        {
-          query: GET_PARTNER_CURRENT_SCHEDULE,
-          variables: { id: parseFloat(item.id) },
-        },
-      ],
-    });
+    if (currentSchedule.data) {
+      for (
+        let i = 0;
+        i < currentSchedule.data.getPartnerCurrentSchedule.length;
+        i++
+      ) {
+        if (
+          (dateToDayAndMonth(startDate)[0] ===
+            timestampToDayAndMonth(
+              currentSchedule.data.getPartnerCurrentSchedule[i].schedule_start,
+            )[0]) &
+          (dateToDayAndMonth(startDate)[1] ===
+            timestampToDayAndMonth(
+              currentSchedule.data.getPartnerCurrentSchedule[i].schedule_start,
+            )[1])
+        ) {
+          const ps_id = currentSchedule.data.getPartnerCurrentSchedule[i].ps_id;
+          let newPSchd = await deletePSchd({
+            variables: {
+              id: parseFloat(ps_id),
+            },
+            refetchQueries: [
+              {
+                query: GET_PARTNER_CURRENT_SCHEDULE,
+                variables: { id: parseFloat(item.id) },
+              },
+            ],
+          });
+        }
+      }
+    }
   };
 
   const { terapeutCalendar, terapeutProgramari } =
@@ -184,7 +206,12 @@ export default function Item({ item }) {
                   )} - ${timestampToHoursAndMinutes(
                     calendarTimeslotsForDate.end,
                   )}`}</p>
-                  <p>remove</p>
+                  <p
+                    className="remove-schedule"
+                    onClick={() => handleStergeProgram()}
+                  >
+                    Sterge program
+                  </p>
                 </>
               )}
               {timeSlotSuccess && (

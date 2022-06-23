@@ -219,9 +219,6 @@
   @media (min-width: $md) {
     max-width: 400px;
   }
-  @media (min-width: $xxl) {
-    max-width: 480px;
-  }
   label {
     width: 100%;
     color: $textDark;
@@ -246,6 +243,14 @@
     color: $succes;
     margin-top: $unit;
     font-weight: 500;
+  }
+  p.remove-schedule {
+    color: $warning;
+    font-weight: 500;
+    text-transform: capitalize;
+    &:hover {
+      cursor: pointer;
+    }
   }
   p.start-end-time {
     margin-top: calc(1.5 * #{$unit});
