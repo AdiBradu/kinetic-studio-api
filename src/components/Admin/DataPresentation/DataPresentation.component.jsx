@@ -138,121 +138,127 @@ export default function DataPresentation({ state }) {
 
   return (
     <Suspense fallback={<Spinner />}>
-      {dataP && (
+      {currentQObj.loading ? (
+        <Spinner />
+      ) : (
         <>
-          {isDesktop ? (
-            <div className="table">
-              <div className={`table-header ${displayClass}`}>
-                {Object.keys(dataP[0]).map((key, index) => (
-                  <DataCell key={index}>{key}</DataCell>
-                ))}
-                <DataCell>{'Actions'}</DataCell>
-              </div>
-              {dataP.map((el, index) => (
-                <div className={`table-row ${displayClass}`} key={index}>
-                  {Object.values(el).map((e, i) => (
-                    <DataCell key={i}>{e}</DataCell>
-                  ))}
-                  <DataCellActions>
-                    {state !== 'admin' ? (
-                      <Link
-                        to={`/dashboard/${state}/editeaza`}
-                        state={state}
-                        onClick={() => {
-                          handleView(el);
-                        }}
-                      >
-                        <EditIcon
-                          color={variables.textDark}
-                          bgColor={variables.backgroundLight}
-                        />
-                      </Link>
-                    ) : (
-                      ''
-                    )}
-                    <Link
-                      to={`/dashboard/${navlink}/${dataP[index].id}`}
-                      state={navlink}
-                      onClick={() => {
-                        handleView(el);
-                      }}
-                    >
-                      <ViewIcon
-                        color={variables.textDark}
-                        bgColor={variables.backgroundLight}
-                      />
-                    </Link>
-                    <Link
-                      to={`/dashboard/${navlink}`}
-                      state={navlink}
-                      onClick={() => handleDelete(el)}
-                    >
-                      <DeleteIcon
-                        color={variables.textDark}
-                        bgColor={variables.backgroundLight}
-                      />
-                    </Link>
-                  </DataCellActions>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="card-list">
-              {dataP.map((el, index) => (
-                <div className="card" key={index}>
-                  {Object.keys(el).map((key, i) => (
-                    <div className={`card-row ${displayClass}`} key={i}>
-                      <DataCell>{key}</DataCell>
-                      <DataCell>{Object.values(el)[i]}</DataCell>
-                    </div>
-                  ))}
-                  <div className={`card-row ${displayClass}`}>
-                    <DataCell>{'actions'}</DataCell>
-                    <DataCellActions>
-                      {state !== 'admin' ? (
+          {dataP && (
+            <>
+              {isDesktop ? (
+                <div className="table">
+                  <div className={`table-header ${displayClass}`}>
+                    {Object.keys(dataP[0]).map((key, index) => (
+                      <DataCell key={index}>{key}</DataCell>
+                    ))}
+                    <DataCell>{'Actions'}</DataCell>
+                  </div>
+                  {dataP.map((el, index) => (
+                    <div className={`table-row ${displayClass}`} key={index}>
+                      {Object.values(el).map((e, i) => (
+                        <DataCell key={i}>{e}</DataCell>
+                      ))}
+                      <DataCellActions>
+                        {state !== 'admin' ? (
+                          <Link
+                            to={`/dashboard/${state}/editeaza`}
+                            state={state}
+                            onClick={() => {
+                              handleView(el);
+                            }}
+                          >
+                            <EditIcon
+                              color={variables.textDark}
+                              bgColor={variables.backgroundLight}
+                            />
+                          </Link>
+                        ) : (
+                          ''
+                        )}
                         <Link
-                          to={`/dashboard/${state}/editeaza`}
-                          state={state}
+                          to={`/dashboard/${navlink}/${dataP[index].id}`}
+                          state={navlink}
                           onClick={() => {
                             handleView(el);
                           }}
                         >
-                          <EditIcon
-                            color={variables.primaryColor}
+                          <ViewIcon
+                            color={variables.textDark}
                             bgColor={variables.backgroundLight}
                           />
                         </Link>
-                      ) : (
-                        ''
-                      )}
-                      <Link
-                        to={`/dashboard/${navlink}/${dataP[index].id}`}
-                        state={navlink}
-                        onClick={() => handleView(el)}
-                      >
-                        <ViewIcon
-                          color={variables.primaryColor}
-                          bgColor={variables.backgroundLight}
-                        />
-                      </Link>
-                      <Link
-                        to={`/dashboard/${navlink}`}
-                        state={navlink}
-                        onClick={() => handleDelete(el)}
-                      >
-                        <DeleteIcon
-                          color={variables.primaryColor}
-                          bgColor={variables.backgroundLight}
-                        />
-                      </Link>
-                    </DataCellActions>
-                  </div>
+                        <Link
+                          to={`/dashboard/${navlink}`}
+                          state={navlink}
+                          onClick={() => handleDelete(el)}
+                        >
+                          <DeleteIcon
+                            color={variables.textDark}
+                            bgColor={variables.backgroundLight}
+                          />
+                        </Link>
+                      </DataCellActions>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              ) : (
+                <div className="card-list">
+                  {dataP.map((el, index) => (
+                    <div className="card" key={index}>
+                      {Object.keys(el).map((key, i) => (
+                        <div className={`card-row ${displayClass}`} key={i}>
+                          <DataCell>{key}</DataCell>
+                          <DataCell>{Object.values(el)[i]}</DataCell>
+                        </div>
+                      ))}
+                      <div className={`card-row ${displayClass}`}>
+                        <DataCell>{'actions'}</DataCell>
+                        <DataCellActions>
+                          {state !== 'admin' ? (
+                            <Link
+                              to={`/dashboard/${state}/editeaza`}
+                              state={state}
+                              onClick={() => {
+                                handleView(el);
+                              }}
+                            >
+                              <EditIcon
+                                color={variables.primaryColor}
+                                bgColor={variables.backgroundLight}
+                              />
+                            </Link>
+                          ) : (
+                            ''
+                          )}
+                          <Link
+                            to={`/dashboard/${navlink}/${dataP[index].id}`}
+                            state={navlink}
+                            onClick={() => handleView(el)}
+                          >
+                            <ViewIcon
+                              color={variables.primaryColor}
+                              bgColor={variables.backgroundLight}
+                            />
+                          </Link>
+                          <Link
+                            to={`/dashboard/${navlink}`}
+                            state={navlink}
+                            onClick={() => handleDelete(el)}
+                          >
+                            <DeleteIcon
+                              color={variables.primaryColor}
+                              bgColor={variables.backgroundLight}
+                            />
+                          </Link>
+                        </DataCellActions>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {empty && <Modal />}
+              {showMore && <LoadMoreButton onClick={loadMore} />}
+            </>
           )}
-          {empty && <Modal />}
-          {showMore && <LoadMoreButton onClick={loadMore} />}
         </>
       )}
     </Suspense>

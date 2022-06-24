@@ -17,15 +17,14 @@ export const AppProvider = (props) => {
   const [item, setItem] = useState(
     JSON.parse(sessionStorage.getItem('item')) || null,
   );
-  // console.log('item', item);
   const [createItem, setCreateItem] = useState({});
-  // console.log('createItem', createItem);
   const [deleteItem, setDeleteItem] = useState();
   const [comanda, setComanda] = useState();
   const [user, setUser] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState();
   const loginQObj = useQuery(MY_DATA);
   const loginData = loginQObj?.data ? loginQObj.data['me'] : [];
+
   const itemReset = (value) => {
     setItem(value);
     sessionStorage.setItem('item', JSON.stringify(value));
@@ -34,7 +33,6 @@ export const AppProvider = (props) => {
   useEffect(() => {
     if (loginData?.u_id) {
       setIsLoggedIn(loginData);
-      /* setIsLoggedIn(true); */
     }
   }, [loginData]);
 

@@ -42,40 +42,44 @@ export default function Login() {
 
   return (
     <Suspense fallback={<Spinner />}>
-      <div className="login" id="login">
-        <Input
-          value={credentials.email}
-          handleChange={handleChange}
-          name="email"
-          label={'email'}
-          type={'email'}
-          placeholder={'email'}
-        />
-        <Input
-          value={credentials.password}
-          handleChange={handleChange}
-          name="password"
-          label={'password'}
-          type={'password'}
-          placeholder={'password'}
-        />
-        <Link
-          to={`/dashboard`}
-          onClick={async (e) => {
-            e.preventDefault();
-            let zzz = await loginUsr({
-              variables: {
-                email: credentials.email,
-                password: credentials.password,
-              },
-            });
-            setIsLoggedIn(zzz?.data?.login ? zzz?.data?.login : false);
-            navigate('/dashboard');
-          }}
-        >
-          <ButtonLogin />
-        </Link>
-      </div>
+      {loginUsrObj.loading ? (
+        <Spinner />
+      ) : (
+        <div className="login" id="login">
+          <Input
+            value={credentials.email}
+            handleChange={handleChange}
+            name="email"
+            label={'email'}
+            type={'email'}
+            placeholder={'email'}
+          />
+          <Input
+            value={credentials.password}
+            handleChange={handleChange}
+            name="password"
+            label={'password'}
+            type={'password'}
+            placeholder={'password'}
+          />
+          <Link
+            to={`/dashboard`}
+            onClick={async (e) => {
+              e.preventDefault();
+              let zzz = await loginUsr({
+                variables: {
+                  email: credentials.email,
+                  password: credentials.password,
+                },
+              });
+              setIsLoggedIn(zzz?.data?.login ? zzz?.data?.login : false);
+              navigate('/dashboard');
+            }}
+          >
+            <ButtonLogin />
+          </Link>
+        </div>
+      )}
     </Suspense>
   );
 }
