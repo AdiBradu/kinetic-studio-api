@@ -22,7 +22,7 @@ export const AppProvider = (props) => {
   const [comanda, setComanda] = useState();
   const [user, setUser] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState();
-  const loginQObj = useQuery(MY_DATA);
+  const loginQObj = useQuery(MY_DATA, { errorPolicy: 'all' });
   const loginData = loginQObj?.data ? loginQObj.data['me'] : [];
 
   const itemReset = (value) => {

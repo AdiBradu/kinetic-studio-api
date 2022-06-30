@@ -13,4 +13,10 @@
     width: 100%;
     max-width: 400px;
   }
+  p.login-error {
+    color: $warning;
+    font-size: 0.875rem;
+    margin-top: $unit;
+    font-weight: 500;
+  }
 }

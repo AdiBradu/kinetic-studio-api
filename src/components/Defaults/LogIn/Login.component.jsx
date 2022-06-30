@@ -15,6 +15,7 @@ export default function Login() {
   const setIsLoggedIn = isLoggedInObj[1];
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loginUsr, loginUsrObj] = useMutation(LOGIN);
+  const [loginErr, setLoginErr] = useState(false);
   let navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,19 +27,29 @@ export default function Login() {
   };
 
   const handleLogin = async () => {
-    let asd = await loginUsr({
-      variables: {
-        email: credentials.email,
-        password: credentials.password,
-      },
-    });
-    return asd;
+    try {
+      let usr = await loginUsr({
+        variables: {
+          email: credentials.email,
+          password: credentials.password,
+        },
+      });
+      if (usr?.data?.login) {
+        setIsLoggedIn(usr?.data?.login ? usr?.data?.login : false);
+        navigate('/dashboard');
+      } else {
+        setIsLoggedIn(false);
+        setLoginErr(true);
+      }
+    } catch (e) {
+      setIsLoggedIn(false);
+      setLoginErr(true);
+    }
   };
 
   useEffect(() => {
     setDashboardHeight();
-    resizeRadar(setDashboardHeight);
-  }, []);
+  });
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -66,18 +77,16 @@ export default function Login() {
             to={`/dashboard`}
             onClick={async (e) => {
               e.preventDefault();
-              let zzz = await loginUsr({
-                variables: {
-                  email: credentials.email,
-                  password: credentials.password,
-                },
-              });
-              setIsLoggedIn(zzz?.data?.login ? zzz?.data?.login : false);
-              navigate('/dashboard');
+              await handleLogin();
             }}
           >
             <ButtonLogin />
           </Link>
+          {loginErr ? (
+            <p className="login-error">Email sau parola incorecte.</p>
+          ) : (
+            ''
+          )}
         </div>
       )}
     </Suspense>

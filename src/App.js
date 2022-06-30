@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Defaults/Navbar/Navbar.component.jsx';
 import Dashboard from './components/Admin/Pages/Dashboard/Dashboard.component.jsx';
 import Logout from './components/Admin/Pages/Logout/Logout.component';
-import { documentHeight } from './utils.js';
+import { documentHeight, resizeRadar, setDashboardHeight } from './utils.js';
 import Login from './components/Defaults/LogIn/Login.component';
 
-documentHeight();
-
 function App() {
+  useEffect(() => {
+    documentHeight();
+    resizeRadar(setDashboardHeight);
+  });
+
   return (
     <div className="App">
       <Navbar />
